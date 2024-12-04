@@ -1,0 +1,61 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.EmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Employee Panel" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <materialDesign:Card Style="{StaticResource WindowCardStyle}">
+        <Border Style="{StaticResource MainBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Panel -->
+                <Border Grid.Column="0" Style="{StaticResource LeftPanelStyle}">
+                    <StackPanel>
+                        <!--<Button Content="{DynamicResource Employees}" Style="{StaticResource LoginButtonStyle}" Margin="10"/>
+                        <Button Content="{DynamicResource Companies}" Style="{StaticResource LoginButtonStyle}" Margin="10"/>
+                        <Button Content="{DynamicResource Settings}" Style="{StaticResource LoginButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>-->
+                    </StackPanel>
+                </Border>
+
+                <!-- Right Panel -->
+                <Border Grid.Column="1" Style="{StaticResource RightPanelStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Top Bar -->
+                        <Grid Grid.Row="0" Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button Style="{StaticResource CloseButtonStyle}" Click="CloseButton_Click" Margin="0,0,10,0">
+                                    <materialDesign:PackIcon Kind="Close" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Main Content Area -->
+                        <ContentControl x:Name="MainContentControl" Grid.Row="1" Margin="20" Content="{Binding CurrentPage}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </materialDesign:Card>
+</Window>

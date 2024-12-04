@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Welcome">Dobro došli</system:String>
+    <system:String x:Key="SignInToContinue">Prijavite se da biste nastavili</system:String>
+    <system:String x:Key="Login">Prijava</system:String>
+    <system:String x:Key="Username">Korisničko ime</system:String>
+    <system:String x:Key="Password">Lozinka</system:String>
+    <system:String x:Key="LoginButton">PRIJAVA</system:String>
+    <system:String x:Key="LoginSuccessful">Uspešna prijava!</system:String>
+    <system:String x:Key="LoginFailed">Neuspešna prijava. Proverite korisničko ime i lozinku.</system:String>
+    <system:String x:Key="Dashboard">Kontrolna tabla</system:String>
+    <system:String x:Key="Employees">Zaposleni</system:String>
+    <system:String x:Key="Companies">Kompanije</system:String>
+    <system:String x:Key="Reports">Izveštaji</system:String>
+    <system:String x:Key="Settings">Podešavanja</system:String>
+    <system:String x:Key="WelcomeAdministrator">Dobrodošli, administratoru</system:String>
+    <system:String x:Key="Logout">Odjava</system:String>
+    <system:String x:Key="Info">Obavještenje</system:String>
+    <system:String x:Key="Warning">Upozorenje</system:String>
+</ResourceDictionary>

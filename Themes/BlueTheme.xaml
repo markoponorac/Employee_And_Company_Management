@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Base/BaseTheme.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Blue theme colors -->
+    <Color x:Key="PrimaryColor">#FF4B79A1</Color>
+    <Color x:Key="SecondaryColor">#FF283E51</Color>
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+</ResourceDictionary>

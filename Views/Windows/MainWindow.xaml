@@ -1,0 +1,93 @@
+﻿<Window x:Class="Employee_And_Company_Management.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Employee_And_Company_Management"
+        mc:Ignorable="d"
+        Title="Login" Height="500" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <materialDesign:Card Style="{StaticResource WindowCardStyle}">
+        <Border Style="{StaticResource MainBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Levi panel -->
+                <Border Style="{StaticResource LeftPanelStyle}">
+                    <Grid>
+                        <!-- Dekorativni elementi -->
+                        <Canvas>
+                            <Polygon Points="0,20 230,140 0,270" Fill="#4eb186" Opacity="0.1"/>
+                            <Polygon Points="100,400 200,370 180,470" Fill="White" Opacity="0.05"/>
+                            <Ellipse Canvas.Left="250" Canvas.Top="450" Width="40" Height="40" Fill="White" Opacity="0.05"/>
+                            <Ellipse Canvas.Left="50" Canvas.Top="400" Width="20" Height="20" Fill="White" Opacity="0.05"/>
+                        </Canvas>
+
+                        <!-- Tekst dobrodošlice -->
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{DynamicResource Welcome}" Style="{StaticResource WelcomeTextStyle}"/>
+                            <TextBlock Text="{DynamicResource SignInToContinue}" Style="{StaticResource WelcomeTextStyle}" FontSize="16" Margin="0,10,0,0"/>
+                        </StackPanel>
+
+                        <!-- Dugmad za promenu jezika -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                            <Button x:Name="SerbianButton" Style="{StaticResource FlagButtonStyle}" Click="SerbianButton_Click">
+                                <Image Source="/Images/serbian_flag.png"/>
+                            </Button>
+                            <Button x:Name="EnglishButton" Style="{StaticResource FlagButtonStyle}" Click="EnglishButton_Click">
+                                <Image Source="/Images/english_flag.png"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Desni panel (Login forma) -->
+                <Border Grid.Column="1" Style="{StaticResource RightPanelStyle}">
+                    <Grid>
+                        <Button Style="{StaticResource CloseButtonStyle}"
+                                Click="CloseButton_Click"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="0 5 5 0">
+                            <materialDesign:PackIcon Kind="Close" />
+                        </Button>
+
+                        <StackPanel VerticalAlignment="Center" Margin="30,0">
+                            <TextBlock Text="{DynamicResource Login}" Style="{StaticResource HeaderTextStyle}"/>
+
+                            <TextBox x:Name="UsernameTextBox"
+                                     materialDesign:HintAssist.Hint="{DynamicResource Username}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Tag="{StaticResource InputStyle}"
+                                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="0,10"/>
+
+                            <PasswordBox x:Name="PasswordBox"
+                                         materialDesign:HintAssist.Hint="{DynamicResource Password}"
+                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                         Tag="{StaticResource InputStyle}"
+                                         Margin="0,10"
+                                         PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                            <Button Content="{DynamicResource LoginButton}" 
+                                    Style="{StaticResource LoginButtonStyle}"
+                                    Command="{Binding LoginCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </materialDesign:Card>
+</Window>
