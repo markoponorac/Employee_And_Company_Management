@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Employee_And_Company_Management.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +12,38 @@ namespace Employee_And_Company_Management.Util
 {
     public class ThemeUtil
     {
-        public static void ChangeTheme(string cultureName)
-        {
-            ResourceDictionary dict = new ResourceDictionary();
-            dict.Source = new Uri($"/Theme/{cultureName}Theme.xaml", UriKind.Relative);
+        private static readonly String PATH = "Themes";
 
-            if (Application.Current.Resources.MergedDictionaries.Count > 0)
+        public static List<Theme> GetThemes()
+        {
+            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
+            string projectPath = Path.GetFullPath(Path.Combine(executablePath, @"..\..\.."));
+            string themesFolderPath = Path.Combine(projectPath, "Themes");
+            var files = Directory.GetFiles(themesFolderPath);
+            var list = new List<Theme>();
+            foreach (var file in files)
             {
-                Application.Current.Resources.MergedDictionaries.Clear();
+                var name = Path.GetFileNameWithoutExtension(file);
+                Theme theme = new Theme { Name = name, Path = file };
+                list.Add(theme);
             }
-            Application.Current.Resources.MergedDictionaries.Add(dict);
+            return list;
+        }
+
+        public static void ChangeTheme(String uri)
+        {
+            var theme = GetThemes();
+            var result = theme.FirstOrDefault(theme => theme.Name == uri);
+            ResourceDictionary resourceDictionary = new ResourceDictionary { Source = new Uri(result.Path) };
+            foreach (DictionaryEntry entry in resourceDictionary)
+                App.Current.Resources[entry.Key] = entry.Value;
+        }
+
+        public static void ChangeTheme(Uri uri)
+        {
+            ResourceDictionary resourceDictionary = new ResourceDictionary { Source = uri };
+            foreach (DictionaryEntry entry in resourceDictionary)
+                App.Current.Resources[entry.Key] = entry.Value;
         }
     }
 }

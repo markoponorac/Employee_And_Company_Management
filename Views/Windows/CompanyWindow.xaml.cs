@@ -18,6 +18,7 @@ namespace Employee_And_Company_Management.Views.Windows
             InitializeComponent();
             _loginDTO = loginDTO;
             LanguageUtil.ChangeLanguage(_loginDTO.Language); 
+            ThemeUtil.ChangeTheme(_loginDTO.Theme);
             //var viewModel = new AdministratorViewModel();
             //viewModel.CurrentPage = new EmployeeControl();
             //DataContext = viewModel;
