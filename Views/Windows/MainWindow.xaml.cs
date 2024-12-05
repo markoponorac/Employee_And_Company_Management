@@ -40,12 +40,12 @@ namespace Employee_And_Company_Management
 
         private void SerbianButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageUtil.ChangeLanguage("sr-Latn-RS");
+            LanguageUtil.ChangeLanguage(LanguageConstants.SERBIAN_LATIN);
         }
 
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageUtil.ChangeLanguage("en-US");
+            LanguageUtil.ChangeLanguage(LanguageConstants.ENGLISH);
         }
 
     }

@@ -7,7 +7,7 @@ public partial class Employee
 {
     public DateOnly DateOfBirth { get; set; }
 
-    public sbyte IsEmployed { get; set; }
+    public bool IsEmployed { get; set; }
 
     public int QualificationLevelId { get; set; }
 

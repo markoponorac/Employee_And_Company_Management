@@ -18,4 +18,11 @@
     <system:String x:Key="Logout">Logout</system:String>
     <system:String x:Key="Info">Info</system:String>
     <system:String x:Key="Warning">Warning</system:String>
+    <system:String x:Key="ProfileDeleted">Your profile has been deleted!</system:String>
+    <system:String x:Key="ProfileSuspended">Your profile has been suspended!</system:String>
+    <system:String x:Key="BlueTheme">Blue theme</system:String>
+    <system:String x:Key="GreenTheme">Green theme</system:String>
+    <system:String x:Key="OrangeTheme">Orange theme</system:String>
+    <system:String x:Key="PurpleTheme">Purple theme</system:String>
+    <system:String x:Key="GeneralSetting">General Setting</system:String>
 </ResourceDictionary>

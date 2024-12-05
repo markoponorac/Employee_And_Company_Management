@@ -7,13 +7,11 @@
         mc:Ignorable="d"
         Title="Administrator Panel" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        AllowsTransparency="True"
         Background="Transparent"
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
 
-    <materialDesign:Card Style="{StaticResource WindowCardStyle}">
-        <Border Style="{StaticResource MainBorderStyle}">
+    <materialDesign:Card >
+        <Border>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250"/>
@@ -21,35 +19,21 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Left Panel -->
-                <Border Grid.Column="0" Style="{StaticResource LeftPanelStyle}">
+                <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
                     <StackPanel>
-                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10"/>
+                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
                         <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10"/>
                         <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Right Panel -->
-                <Border Grid.Column="1" Style="{StaticResource RightPanelStyle}">
+                <Border Grid.Column="1" Style="{StaticResource RightPanel}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <!-- Top Bar -->
-                        <Grid Grid.Row="0" Height="50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                <Button Style="{StaticResource CloseButtonStyle}" Click="CloseButton_Click" Margin="0,0,10,0">
-                                    <materialDesign:PackIcon Kind="Close" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
 
                         <!-- Main Content Area -->
                         <ContentControl x:Name="MainContentControl" Grid.Row="1" Margin="20" Content="{Binding CurrentPage}"/>

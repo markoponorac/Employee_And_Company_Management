@@ -15,6 +15,8 @@ namespace Employee_And_Company_Management.Models
         public string Language {  get; set; }
         public string Theme { get; set; }
         public bool Success { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

@@ -14,6 +14,8 @@ public partial class Profile
     public string Theme { get; set; } = null!;
 
     public string Language { get; set; } = null!;
+    public bool IsDeleted { get; set; } 
+    public bool IsActive { get; set; }
 
     public virtual Company? Company { get; set; }
 

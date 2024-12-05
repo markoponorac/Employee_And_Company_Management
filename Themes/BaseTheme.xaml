@@ -42,9 +42,24 @@
         <Setter Property="CornerRadius" Value="10 0 0 10"/>
     </Style>
 
+    <Style x:Key="MenuStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource SecondaryColor}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="RightPanelStyle" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
         <Setter Property="CornerRadius" Value="0 10 10 0"/>
+    </Style>
+
+    <Style x:Key="RightPanel" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
     </Style>
 
     <!-- Text Styles -->

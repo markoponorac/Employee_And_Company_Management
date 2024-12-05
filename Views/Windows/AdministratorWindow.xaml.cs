@@ -17,16 +17,13 @@ namespace Employee_And_Company_Management.Views.Windows
         {
             InitializeComponent();
             _loginDTO = loginDTO;
-            LanguageUtil.ChangeLanguage(_loginDTO.Language); 
-            var viewModel = new AdministratorViewModel();
+            LanguageUtil.ChangeLanguage(_loginDTO.Language);
+            ThemeUtil.ChangeTheme(_loginDTO.Theme);
+            var viewModel = new AdministratorViewModel(_loginDTO);
             viewModel.CurrentPage = new EmployeeControl();
             DataContext = viewModel;
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Employee_And_Company_Management.Commands;
 using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
-using Employee_And_Company_Management.Services.Login;
+using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.Views.Windows;
 using System.Windows;
@@ -39,6 +39,16 @@ namespace Employee_And_Company_Management.ViewModels
             var responseLoginDTO = _loginService.LoginAsync(Username, Password);
             if (responseLoginDTO.Success)
             {
+                if (responseLoginDTO.IsDeleted)
+                {
+                    MessageBox.Show(LanguageUtil.Translate("ProfileDeleted"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (!responseLoginDTO.IsActive)
+                {
+                    MessageBox.Show(LanguageUtil.Translate("ProfileSuspended"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 if (RoleConstants.ADMINISTRATOR.Equals(responseLoginDTO.Role))
                 {
                     AdministratorWindow administratorWindow = new AdministratorWindow(responseLoginDTO);

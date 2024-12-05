@@ -7,15 +7,23 @@
     <system:String x:Key="Username">Korisničko ime</system:String>
     <system:String x:Key="Password">Lozinka</system:String>
     <system:String x:Key="LoginButton">PRIJAVA</system:String>
-    <system:String x:Key="LoginSuccessful">Uspešna prijava!</system:String>
-    <system:String x:Key="LoginFailed">Neuspešna prijava. Proverite korisničko ime i lozinku.</system:String>
+    <system:String x:Key="LoginSuccessful">Uspješna prijava!</system:String>
+    <system:String x:Key="LoginFailed">Neuspješna prijava. Provjerite korisničko ime i lozinku.</system:String>
     <system:String x:Key="Dashboard">Kontrolna tabla</system:String>
     <system:String x:Key="Employees">Zaposleni</system:String>
     <system:String x:Key="Companies">Kompanije</system:String>
-    <system:String x:Key="Reports">Izveštaji</system:String>
+    <system:String x:Key="Reports">Izvještaji</system:String>
     <system:String x:Key="Settings">Podešavanja</system:String>
-    <system:String x:Key="WelcomeAdministrator">Dobrodošli, administratoru</system:String>
+    <system:String x:Key="WelcomeAdministrator">Dobrodošli</system:String>
     <system:String x:Key="Logout">Odjava</system:String>
     <system:String x:Key="Info">Obavještenje</system:String>
     <system:String x:Key="Warning">Upozorenje</system:String>
+    <system:String x:Key="ProfileDeleted">Vaš profil je obrisan!</system:String>
+    <system:String x:Key="ProfileSuspended">Vaš profil je suspendovan!</system:String>
+    <system:String x:Key="BlueTheme">Plava tema</system:String>
+    <system:String x:Key="GreenTheme">Zelena tema</system:String>
+    <system:String x:Key="OrangeTheme">Narandžasta tema</system:String>
+    <system:String x:Key="PurpleTheme">Ljubičasta tema</system:String>
+    <system:String x:Key="GeneralSetting">Opšta podešavanja</system:String>
+
 </ResourceDictionary>

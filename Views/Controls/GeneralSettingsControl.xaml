@@ -5,22 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     <StackPanel Margin="10">
-        <TextBlock Text="General Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <TextBlock Text="{DynamicResource GeneralSetting}" Style="{Binding HeaderTextStyle}"/>
 
         <!-- Theme Settings -->
         <TextBlock Text="Change Theme:" Margin="0,5"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Blue" Tag="Blue" Click="ChangeTheme_Click" Margin="5"/>
-            <Button Content="Green" Tag="Green" Click="ChangeTheme_Click" Margin="5"/>
-            <Button Content="Purple" Tag="Purple" Click="ChangeTheme_Click" Margin="5"/>
-            <Button Content="Orange" Tag="Orange" Click="ChangeTheme_Click" Margin="5"/>
+            <Button Content="{DynamicResource BlueTheme}" Style="{StaticResource ButtonStyle}"  Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="BlueTheme"/>
+            <Button Content="{DynamicResource GreenTheme}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="GreenTheme"/>
+            <Button Content="{DynamicResource OrangeTheme}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="OrangeTheme"/>
+            <Button Content="{DynamicResource PurpleTheme}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="PurpleTheme"/>
         </StackPanel>
 
         <!-- Language Settings -->
         <TextBlock Text="Change Language:" Margin="10,20,0,5"/>
-        <ComboBox Width="150" Name="LanguageComboBox" SelectionChanged="LanguageComboBox_SelectionChanged">
-            <ComboBoxItem Content="English" Tag="en"/>
-            <ComboBoxItem Content="Serbian" Tag="sr"/>
-        </ComboBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,5">
+            <Button x:Name="SerbianButton" Style="{StaticResource FlagButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="sr-Latn-RS">
+                <Image Source="/Images/serbian_flag.png"/>
+            </Button>
+            <Button x:Name="EnglishButton" Style="{StaticResource FlagButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="en-US">
+                <Image Source="/Images/english_flag.png"/>
+            </Button>
+        </StackPanel>
     </StackPanel>
 </UserControl>

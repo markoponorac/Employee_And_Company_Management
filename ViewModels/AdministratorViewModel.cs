@@ -1,4 +1,5 @@
 ﻿using Employee_And_Company_Management.Commands;
+using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Views.Controls.Admin;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,17 +16,27 @@ namespace Employee_And_Company_Management.ViewModels
         }
 
         public ICommand NavigateToSettingsCommand { get; set; }
+        public ICommand NavigateToEmployeesCommand { get; set; }
 
-        public AdministratorViewModel()
+        public LoginDTO LoginDTO { get; set; }
+
+        public AdministratorViewModel(LoginDTO loginDTO)
         {
             NavigateToSettingsCommand = new RelayCommand(ExecuteNavigateToSettings, CanExecuteNavigateToSettings);
+            NavigateToEmployeesCommand = new RelayCommand(ExecuteNavigateToEmployees, CanExecuteNavigateToEmployees);
+            LoginDTO = loginDTO;
         }
 
         private bool CanExecuteNavigateToSettings(object obj) => true;
+        private bool CanExecuteNavigateToEmployees(object obj) => true;
 
         private void ExecuteNavigateToSettings(object obj)
         {
             CurrentPage = new AdministratorSettingsControl();
+        }
+        private void ExecuteNavigateToEmployees(object obj)
+        {
+            CurrentPage = new EmployeeControl();
         }
     }
 
