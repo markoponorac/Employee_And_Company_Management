@@ -47,7 +47,9 @@ namespace Employee_And_Company_Management.ViewModels
                 }
                 if (RoleConstants.COMPANY.Equals(responseLoginDTO.Role))
                 {
-                    //TODO otvaranje prozora za kompaniju
+                    CompanyWindow companyWindow = new CompanyWindow(responseLoginDTO);
+                    companyWindow.Show();
+                    _currentWindow.Close();
                 }
                 if (RoleConstants.EMPLOYEE.Equals(responseLoginDTO.Role))
                 {

@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Windows\CompanyWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Windows\EmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
