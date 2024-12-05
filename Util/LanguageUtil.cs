@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Employee_And_Company_Management.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,23 +12,41 @@ namespace Employee_And_Company_Management.Util
 {
     public class LanguageUtil
     {
-        public static string? CurrentLanguage {  get; set; }
-
-        public static string? Translate(string? key)
+        public static List<Language> GetLanguages()
         {
-            return Application.Current.Resources[key] as String;
+            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
+            string projectPath = Path.GetFullPath(Path.Combine(executablePath, @"..\..\.."));
+            string themesFolderPath = Path.Combine(projectPath, "Resources");
+            var files = Directory.GetFiles(themesFolderPath);
+            var list = new List<Language>();
+            foreach (var file in files)
+            {
+                var name = Path.GetFileNameWithoutExtension(file);
+                Language theme = new Language { Name = name, Path = file };
+                list.Add(theme);
+            }
+            return list;
         }
 
-        public static void ChangeLanguage(string cultureName)
+        public static String Translate(String key)
         {
-            ResourceDictionary dict = new ResourceDictionary();
-            dict.Source = new Uri($"/Resources/StringResources.{cultureName}.xaml", UriKind.Relative);
+            return App.Current.Resources[key] as String;
+        }
 
-            if (Application.Current.Resources.MergedDictionaries.Count > 0)
-            {
-                Application.Current.Resources.MergedDictionaries.Clear();
-            }
-            Application.Current.Resources.MergedDictionaries.Add(dict);
+        public static void ChangeLanguage(Language language)
+        {
+            ResourceDictionary resourceDictionary = new ResourceDictionary { Source = new Uri(language.Path) };
+            foreach (DictionaryEntry entry in resourceDictionary)
+                App.Current.Resources[entry.Key] = entry.Value;
+        }
+
+        public static void ChangeLanguage(String uri)
+        {
+            var languages = GetLanguages();
+            var result = languages.FirstOrDefault(lng => lng.Name == uri);
+            ResourceDictionary resourceDictionary = new ResourceDictionary { Source = new Uri(result.Path) };
+            foreach (DictionaryEntry entry in resourceDictionary)
+                App.Current.Resources[entry.Key] = entry.Value;
         }
     }
 }

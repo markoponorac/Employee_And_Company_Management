@@ -23,9 +23,9 @@
                 <!-- Left Panel -->
                 <Border Grid.Column="0" Style="{StaticResource LeftPanelStyle}">
                     <StackPanel>
-                        <Button Content="{DynamicResource Employees}" Style="{StaticResource LoginButtonStyle}" Margin="10"/>
-                        <Button Content="{DynamicResource Companies}" Style="{StaticResource LoginButtonStyle}" Margin="10"/>
-                        <Button Content="{DynamicResource Settings}" Style="{StaticResource LoginButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
+                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10"/>
+                        <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10"/>
+                        <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
                     </StackPanel>
                 </Border>
 

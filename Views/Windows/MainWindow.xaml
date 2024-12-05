@@ -82,7 +82,7 @@
                                          PasswordChanged="PasswordBox_PasswordChanged"/>
 
                             <Button Content="{DynamicResource LoginButton}" 
-                                    Style="{StaticResource LoginButtonStyle}"
+                                    Style="{StaticResource ButtonStyle}"
                                     Command="{Binding LoginCommand}"/>
                         </StackPanel>
                     </Grid>

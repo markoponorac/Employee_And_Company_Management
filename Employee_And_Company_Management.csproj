@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Folder Include="Styles\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Views\Windows\EmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
