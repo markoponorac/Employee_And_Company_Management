@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Employee_And_Company_Management.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Employee_And_Company_Management.Views.Controls.Admin
         public EmployeeControl()
         {
             InitializeComponent();
+            var viewModel=new EmployeesAdminViewModel();
+            DataContext = viewModel;
         }
     }
 }

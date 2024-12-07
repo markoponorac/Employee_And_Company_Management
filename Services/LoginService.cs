@@ -42,7 +42,10 @@ namespace Employee_And_Company_Management.Services
                             Theme = profile.Theme,
                             Success = true,
                             IsActive = profile.IsActive,
-                            IsDeleted = profile.IsDeleted
+                            IsDeleted = profile.IsDeleted,
+                            Firstname = person.FirstName,
+                            Lastname = person.LastName,
+                            Jmb = person.Jmb
                         };
                     }
                     var admin = _context.Administrators.FirstOrDefault(i => i.PersonProfileId.Equals(person.ProfileId));
@@ -57,7 +60,10 @@ namespace Employee_And_Company_Management.Services
                             Theme = profile.Theme,
                             Success = true,
                             IsActive = profile.IsActive,
-                            IsDeleted = profile.IsDeleted
+                            IsDeleted = profile.IsDeleted,
+                            Firstname = person.FirstName,
+                            Lastname = person.LastName,
+                            Jmb = person.Jmb
                         };
                     }
                     return new LoginDTO()

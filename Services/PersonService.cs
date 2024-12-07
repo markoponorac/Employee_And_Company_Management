@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.Services
 {
-    class EmoloyeeViewModel
+    class PersonService
     {
     }
 }

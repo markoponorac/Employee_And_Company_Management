@@ -11,35 +11,33 @@
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
 
     <materialDesign:Card >
-        <Border>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <!-- Left Panel -->
-                <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
-                    <StackPanel>
-                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                        <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10"/>
-                        <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
-                    </StackPanel>
-                </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Right Panel -->
-                <Border Grid.Column="1" Style="{StaticResource RightPanel}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+            <!-- Left Panel -->
+            <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
+                <StackPanel>
+                    <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
+                    <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10"/>
+                    <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
+                </StackPanel>
+            </Border>
 
-                        <!-- Main Content Area -->
-                        <ContentControl x:Name="MainContentControl" Grid.Row="1" Margin="20" Content="{Binding CurrentPage}"/>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
+            <!-- Right Panel -->
+            <Border Grid.Column="1" Style="{StaticResource RightPanel}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Main Content Area -->
+                    <ContentControl x:Name="MainContentControl" Grid.Row="0" Margin="20" Content="{Binding CurrentPage}"/>
+                </Grid>
+            </Border>
+        </Grid>
     </materialDesign:Card>
 </Window>

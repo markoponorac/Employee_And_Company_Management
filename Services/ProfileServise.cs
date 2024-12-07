@@ -38,5 +38,24 @@ namespace Employee_And_Company_Management.Services
                 }
             }
         }
+
+        public bool ChangePassword(int id, string oldPassword, string newPassword)
+        {
+            using (var _context = new EmployeeAndCompanyManagementContext())
+            {
+                var profile = _context.Profiles.FirstOrDefault(p => p.Id.Equals(id));
+                if (profile != null)
+                {
+                    if (!profile.Password.Equals(oldPassword) || oldPassword.Equals(newPassword))
+                    {
+                        return false;
+                    }
+                    profile.Password = newPassword;
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

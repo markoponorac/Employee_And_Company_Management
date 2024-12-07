@@ -32,7 +32,7 @@ namespace Employee_And_Company_Management.ViewModels
 
         private void ExecuteNavigateToSettings(object obj)
         {
-            CurrentPage = new AdministratorSettingsControl();
+            CurrentPage = new AdministratorSettingsControl(LoginDTO);
         }
         private void ExecuteNavigateToEmployees(object obj)
         {

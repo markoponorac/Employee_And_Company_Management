@@ -2,8 +2,6 @@
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.ViewModels;
 using Employee_And_Company_Management.Views.Controls.Admin;
-using Employee_And_Company_Management.Views.Pages;
-using Employee_And_Company_Management.Views.Pages.Admin;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +18,6 @@ namespace Employee_And_Company_Management.Views.Windows
             LanguageUtil.ChangeLanguage(_loginDTO.Language);
             ThemeUtil.ChangeTheme(_loginDTO.Theme);
             var viewModel = new AdministratorViewModel(_loginDTO);
-            viewModel.CurrentPage = new EmployeeControl();
             DataContext = viewModel;
         }
 

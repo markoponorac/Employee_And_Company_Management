@@ -1,14 +1,68 @@
 ﻿<UserControl x:Class="Employee_And_Company_Management.Views.Controls.Admin.EmployeeControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Admin"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d">
     <Grid>
-        <TabControl>
-            <Button Margin="30">Dugme</Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+            <Button Content="{DynamicResource AddEmployee}" 
+                    Command="{Binding AddEmployeeCommand}" 
+                    Style="{StaticResource ButtonStyle}" Margin="0" />
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="{DynamicResource ActiveEmployees}">
+                <DataGrid ItemsSource="{Binding ActiveEmployees}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns> 
+                        <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding PersonProfile.Profile.Username}" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
+                                        <Button Content="{DynamicResource Block}" Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="{DynamicResource BlockedEmployees}">
+                <DataGrid ItemsSource="{Binding BlockedEmployees}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding PersonProfile.Profile.Username}" IsReadOnly="True" />
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource Active}" Command="{Binding DataContext.ActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        <Button Content="{DynamicResource Delete}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="{DynamicResource DeletedEmployees}">
+                <DataGrid ItemsSource="{Binding DeletedEmployees}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding PersonProfile.Profile.Username}" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

@@ -1,9 +1,5 @@
 ﻿using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Util;
-using Employee_And_Company_Management.ViewModels;
-using Employee_And_Company_Management.Views.Controls.Admin;
-using Employee_And_Company_Management.Views.Pages;
-using Employee_And_Company_Management.Views.Pages.Admin;
 using System;
 using System.Windows;
 using System.Windows.Controls;
