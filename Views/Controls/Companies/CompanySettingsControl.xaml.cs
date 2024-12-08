@@ -1,5 +1,6 @@
 ﻿using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.ViewModels.Admin;
+using Employee_And_Company_Management.ViewModels.Companies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,32 +9,24 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Employee_And_Company_Management.Views.Controls.Admin
+namespace Employee_And_Company_Management.Views.Controls.Companies
 {
     /// <summary>
-    /// Interaction logic for AdministratorSettingsControl.xaml
+    /// Interaction logic for CompanySettingsControl.xaml
     /// </summary>
-    public partial class AdministratorSettingsControl : UserControl
+    public partial class CompanySettingsControl : UserControl
     {
-        public LoginDTO LoginDTO { get; set; }
-        public AdministratorSettingsControl(LoginDTO loginDTO)
+        public CompanySettingsControl(LoginDTO loginDTO)
         {
             InitializeComponent();
-            this.LoginDTO = loginDTO;
-            var viewModel = new AdministratorSettingsViewModel(LoginDTO);
+            var viewModel=new CompanySettingsViewModel(loginDTO);
             DataContext = viewModel;
         }
 
         private void UserPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (DataContext is AdministratorSettingsViewModel viewModel)
+            if (DataContext is CompanySettingsViewModel viewModel)
             {
                 viewModel.OldPassword = (sender as PasswordBox)?.Password;
             }
@@ -41,19 +34,20 @@ namespace Employee_And_Company_Management.Views.Controls.Admin
 
         private void UserNewAgainPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (DataContext is AdministratorSettingsViewModel viewModel)
+            if (DataContext is CompanySettingsViewModel viewModel)
             {
                 viewModel.NewConfirmedPassword = (sender as PasswordBox)?.Password;
             }
 
         }
-
         private void UserNewPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (DataContext is AdministratorSettingsViewModel viewModel)
+            if (DataContext is CompanySettingsViewModel viewModel)
             {
                 viewModel.NewPassword = (sender as PasswordBox)?.Password;
             }
         }
+
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Employee_And_Company_Management.Commands;
-using Employee_And_Company_Management.Data.Entities;
+
 using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Helpers;
 using Employee_And_Company_Management.Services;
@@ -13,8 +13,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Employee_And_Company_Management.Data.Entities;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.ViewModels.Admin
 {
     public class CompaniesAdminViewModel : BaseViewModel
     {

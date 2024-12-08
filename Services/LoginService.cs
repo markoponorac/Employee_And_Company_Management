@@ -83,7 +83,12 @@ namespace Employee_And_Company_Management.Services
                         Theme = profile.Theme,
                         Success = true,
                         IsActive = profile.IsActive,
-                        IsDeleted = profile.IsDeleted
+                        IsDeleted = profile.IsDeleted,
+                        DateOfEstablish = company.DateOfEstablishment,
+                        Name = company.Name,
+                        Jib= company.Jib,
+                        Address = company.Address
+
                     };
                 }
                 return new LoginDTO()

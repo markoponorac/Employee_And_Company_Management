@@ -17,7 +17,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.ViewModels.Admin
 {
     public class QualificationAdminViewModel : BaseViewModel
     {
@@ -66,7 +66,7 @@ namespace Employee_And_Company_Management.ViewModels
 
         private async void ExecuteSaveQualification(object parameter)
         {
-            if (string.IsNullOrEmpty(QualificationTitle) || string.IsNullOrEmpty(QualificationCode) )
+            if (string.IsNullOrEmpty(QualificationTitle) || string.IsNullOrEmpty(QualificationCode))
             {
                 MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

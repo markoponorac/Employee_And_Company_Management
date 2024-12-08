@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.ViewModels.Admin
 {
     public class EmployeesAdminViewModel : BaseViewModel
     {
@@ -175,7 +175,7 @@ namespace Employee_And_Company_Management.ViewModels
         private async void SaveNewEmployee(object parameter)
         {
             if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Jmb) ||
-                string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || SelectedQualificationId==0 || DateOfBirth ==null)
+                string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || SelectedQualificationId == 0 || DateOfBirth == null)
             {
                 MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -190,14 +190,14 @@ namespace Employee_And_Company_Management.ViewModels
                 MessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if(Jmb.Length !=13 || !Jmb.All(char.IsDigit))
+            if (Jmb.Length != 13 || !Jmb.All(char.IsDigit))
             {
                 MessageBox.Show(LanguageUtil.Translate("JmbIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             Employee employee = new Employee()
             {
-                DateOfBirth = (DateOnly) DateConverter.ConvertToDateOnly(DateOfBirth),
+                DateOfBirth = (DateOnly)DateConverter.ConvertToDateOnly(DateOfBirth),
                 IsEmployed = false,
                 QualificationLevelId = SelectedQualificationId,
                 PersonProfile = new Person()

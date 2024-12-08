@@ -1,10 +1,9 @@
 ﻿using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Util;
-using System;
+using Employee_And_Company_Management.ViewModels.Companies;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace Employee_And_Company_Management.Views.Windows
+namespace Employee_And_Company_Management.Views.Windows.Companies
 {
     public partial class CompanyWindow : Window
     {
@@ -15,15 +14,10 @@ namespace Employee_And_Company_Management.Views.Windows
             _loginDTO = loginDTO;
             LanguageUtil.ChangeLanguage(_loginDTO.Language); 
             ThemeUtil.ChangeTheme(_loginDTO.Theme);
-            //var viewModel = new AdministratorViewModel();
-            //viewModel.CurrentPage = new EmployeeControl();
-            //DataContext = viewModel;
+            var viewModel = new CompanyViewModel(loginDTO);
+            DataContext = viewModel;
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
     }
 }

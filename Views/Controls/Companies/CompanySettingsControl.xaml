@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Employee_And_Company_Management.Views.Controls.Companies.CompanySettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Companies"
+             mc:Ignorable="d" 
+              d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TabControl>
+            <!-- General Settings Tab -->
+            <TabItem Header="{DynamicResource GeneralSetting}" >
+                <StackPanel Margin="10">
+
+                    <!-- Theme Settings -->
+                    <TextBlock Text="{DynamicResource ChangeTheme}" Style="{DynamicResource TitleTextStyle}" Margin="10,0,0,5"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Content="{DynamicResource BlueTheme}" Style="{StaticResource ButtonStyle}"   Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="BlueTheme"/>
+                        <Button Content="{DynamicResource GreenTheme}" Style="{StaticResource ButtonStyle}"  Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="GreenTheme"/>
+                        <Button Content="{DynamicResource OrangeTheme}" Style="{StaticResource ButtonStyle}"  Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="OrangeTheme"/>
+                        <Button Content="{DynamicResource PurpleTheme}" Style="{StaticResource ButtonStyle}"  Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="PurpleTheme"/>
+                    </StackPanel>
+
+                    <!-- Language Settings -->
+                    <TextBlock Text="{DynamicResource ChangeLanguage}" Style="{DynamicResource TitleTextStyle}" Margin="10,20,0,5"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,5">
+                        <Button x:Name="SerbianButton" Style="{StaticResource FlagButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="sr-Latn-RS">
+                            <Image Source="/Images/serbian_flag.png"/>
+                        </Button>
+                        <Button x:Name="EnglishButton" Style="{StaticResource FlagButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="en-US">
+                            <Image Source="/Images/english_flag.png"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Administrator Specific Settings Tab -->
+            <TabItem Header="{DynamicResource CompanySettings}">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource Username}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <TextBlock Text="{Binding Username}" Style="{DynamicResource ParameterTextSyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource Name}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <TextBlock Text="{Binding Name}" Style="{DynamicResource ParameterTextSyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource DateOfEstablish}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <TextBlock Text="{Binding DateOfEstablish}" Style="{DynamicResource ParameterTextSyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource Jib}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <TextBlock Text="{Binding Jib}" Style="{DynamicResource ParameterTextSyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="{DynamicResource Address}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <TextBox x:Name="LastnameTextBox"
+                        Style="{StaticResource ParameterTextBoxSyle}"
+                        Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                    </StackPanel>
+
+                    <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding UpdateProfileCommand}" />
+
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{DynamicResource PasswordSettings}">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource OldPassword}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <PasswordBox x:Name="UserPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" PasswordChanged="UserPasswordBox_PasswordChanged"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="{DynamicResource NewPassword}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <PasswordBox x:Name="UserNewPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" PasswordChanged="UserNewPasswordBox_PasswordChanged" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                        <PasswordBox x:Name="UserNewAgainPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" PasswordChanged="UserNewAgainPasswordBox_PasswordChanged"/>
+                    </StackPanel>
+
+                    <Button Content="{DynamicResource SavePassword}" Style="{StaticResource SubbmitButton}" Command="{Binding ChangePasswordCommand}" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

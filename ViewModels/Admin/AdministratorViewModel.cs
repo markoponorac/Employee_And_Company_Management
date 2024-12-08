@@ -4,7 +4,7 @@ using Employee_And_Company_Management.Views.Controls.Admin;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.ViewModels.Admin
 {
     public class AdministratorViewModel : BaseViewModel
     {

@@ -83,5 +83,6 @@
     <system:String x:Key="DateOfEstablish">Datum otvaranja</system:String>
     <system:String x:Key="AddQualification">Dodaj stručnu spemu</system:String>
     <system:String x:Key="QualificationCode">Oznaka stručne spreme</system:String>
+    <system:String x:Key="CompanySettings">Podešavanje kompanije</system:String>
 
 </ResourceDictionary>

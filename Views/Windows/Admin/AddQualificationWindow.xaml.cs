@@ -1,4 +1,4 @@
-﻿using Employee_And_Company_Management.ViewModels;
+﻿using Employee_And_Company_Management.ViewModels.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;

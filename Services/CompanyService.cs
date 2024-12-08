@@ -67,5 +67,26 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
+        public async Task Update(Company company)
+        {
+            if (company == null)
+            {
+                return;
+            }
+            using (var _context = new EmployeeAndCompanyManagementContext())
+            {
+                Company tempCompany = await _context.Companies.FirstOrDefaultAsync(i => i.ProfileId.Equals(company.ProfileId));
+                if (tempCompany != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(company.Address))
+                    {
+                        tempCompany.Address = company.Address;
+                    }
+                }
+                await _context.SaveChangesAsync();
+
+            }
+        }
+
     }
 }

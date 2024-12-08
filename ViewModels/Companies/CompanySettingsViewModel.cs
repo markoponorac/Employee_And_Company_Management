@@ -12,62 +12,72 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Employee_And_Company_Management.ViewModels
+namespace Employee_And_Company_Management.ViewModels.Companies
 {
-    public class AdministratorSettingsViewModel : BaseViewModel
+    public class CompanySettingsViewModel : BaseViewModel
     {
         public ICommand ChangeThemeCommand { get; set; }
         public ICommand ChangeLanguageCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
         public ICommand UpdateProfileCommand { get; set; }
 
-        public ProfileServise ProfileServise { get; set; }
-        public AdminService AdminService { get; set; }
+        private ProfileServise _profileServise;
+        private CompanyService _companyService;
+
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         public string NewConfirmedPassword { get; set; }
 
         private string _username;
-        private string _firstname;
-        private string _lastname;
-        private string _jmb;
+        private string _name;
+        private string _address;
+        private string _jib;
+        private string _dateOfEstablish;
 
         public string Username
         {
             get => _username;
             set => SetProperty(ref _username, value);
         }
-        public string Firstname
+        public string DateOfEstablish
         {
-            get => _firstname;
-            set => SetProperty(ref _firstname, value);
+            get => _dateOfEstablish;
+            set => SetProperty(ref _dateOfEstablish, value);
         }
-        public string Lastname
+        public string Name
         {
-            get => _lastname;
-            set => SetProperty(ref _lastname, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
-        public string Jmb
+        public string Address
         {
-            get => _jmb;
-            set => SetProperty(ref _jmb, value);
+            get => _address;
+            set => SetProperty(ref _address, value);
+        }
+        public string Jib
+        {
+            get => _jib;
+            set => SetProperty(ref _jib, value);
         }
         public LoginDTO LoginDTO { get; set; }
 
-        public AdministratorSettingsViewModel(LoginDTO loginDTO)
+        public CompanySettingsViewModel(LoginDTO loginDTO)
         {
+            LoginDTO = loginDTO;
+            _profileServise = new ProfileServise();
+            _companyService = new CompanyService();
             ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage, CanExecuteChangeLanguage);
             ChangeThemeCommand = new RelayCommand(ExecuteChangeTheme, CanExecuteChangeTheme);
             ChangePasswordCommand = new RelayCommand(ExecuteChangePassword, CanExecuteChangePassword);
             UpdateProfileCommand = new RelayCommand(ExecuteUpdateProfile, CanExecuteUpdateProfile);
-            ProfileServise = new ProfileServise();
-            AdminService = new AdminService();
-            LoginDTO = loginDTO;
-            Username = LoginDTO.UserName;
-            Firstname = loginDTO.Firstname;
-            Lastname= loginDTO.Lastname;
-            Jmb = loginDTO.Jmb;
+            Username = loginDTO.UserName;
+            Name = loginDTO.Name;
+            Jib = loginDTO.Jib;
+            Address = loginDTO.Address;
+            DateOfEstablish = loginDTO.DateOfEstablish.ToString();
+
         }
+
 
         private bool CanExecuteChangeLanguage(object obj) => true;
         private bool CanExecuteChangeTheme(object obj) => true;
@@ -80,51 +90,50 @@ namespace Employee_And_Company_Management.ViewModels
             //}
             return true;
         }
+
         private void ExecuteChangeLanguage(object obj)
         {
             string languageName = obj as string;
             if (!string.IsNullOrEmpty(languageName))
             {
                 LanguageUtil.ChangeLanguage(languageName);
-                ProfileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
+                _profileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
+               
             }
         }
-
         private async void ExecuteUpdateProfile(object obj)
         {
-            if(string.IsNullOrEmpty(Firstname) || string.IsNullOrEmpty(Lastname))
+            if (string.IsNullOrEmpty(Address))
             {
                 MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            var admin = new Administrator()
+            var company = new Company()
             {
-                PersonProfileId = LoginDTO.ProfileId,
-                PersonProfile = new Person()
-                {
-                    FirstName = Firstname,
-                    LastName = Lastname
-                }
+                ProfileId = LoginDTO.ProfileId,
+                Address = Address
             };
-            await AdminService.UpdateAdmin(admin);
+            await _companyService.Update(company);
             MessageBox.Show(LanguageUtil.Translate("UpdateSuccess"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-            if(!string.IsNullOrEmpty(Firstname))
-            LoginDTO.Firstname= Firstname;
-            if(!string.IsNullOrEmpty(Lastname))
-            LoginDTO.Lastname= Lastname;
+            if (!string.IsNullOrEmpty(Address))
+                LoginDTO.Address = Address;
+           
         }
+
+
         private void ExecuteChangeTheme(object obj)
         {
             string themeName = obj as string;
             if (!string.IsNullOrEmpty(themeName))
             {
                 ThemeUtil.ChangeTheme(themeName);
-                ProfileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
+                _profileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
             }
         }
+
         private void ExecuteChangePassword(object obj)
         {
-            if (String.IsNullOrEmpty(OldPassword) || String.IsNullOrEmpty(NewPassword) || String.IsNullOrEmpty(NewConfirmedPassword))
+            if (string.IsNullOrEmpty(OldPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(NewConfirmedPassword))
             {
                 MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -140,7 +149,7 @@ namespace Employee_And_Company_Management.ViewModels
             {
                 MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (ProfileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
+            else if (_profileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
             {
                 MessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -149,5 +158,6 @@ namespace Employee_And_Company_Management.ViewModels
                 MessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
     }
 }

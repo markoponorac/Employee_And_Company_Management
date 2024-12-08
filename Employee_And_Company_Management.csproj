@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Windows\CompanyWindow.xaml.cs">
+    <Compile Update="Views\Windows\Companies\CompanyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Windows\Admin\CompanyDetailsWindow.xaml.cs">
@@ -39,10 +39,6 @@
     <Compile Update="Views\Windows\EmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Pages\" />
   </ItemGroup>
 
 </Project>

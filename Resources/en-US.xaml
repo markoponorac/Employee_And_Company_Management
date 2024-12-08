@@ -83,5 +83,6 @@
     <system:String x:Key="DateOfEstablish">Date of establish</system:String>
     <system:String x:Key="AddQualification">Add Qualification</system:String>
     <system:String x:Key="QualificationCode">Qualification Code</system:String>
+    <system:String x:Key="CompanySettings">Company Settings</system:String>
 
 </ResourceDictionary>
