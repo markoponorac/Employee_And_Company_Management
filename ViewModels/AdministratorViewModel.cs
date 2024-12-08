@@ -18,6 +18,7 @@ namespace Employee_And_Company_Management.ViewModels
         public ICommand NavigateToSettingsCommand { get; set; }
         public ICommand NavigateToEmployeesCommand { get; set; }
         public ICommand NavigateToCompaniesCommand { get; set; }
+        public ICommand NavigateToQualificationCommand { get; set; }
 
         public LoginDTO LoginDTO { get; set; }
 
@@ -26,6 +27,7 @@ namespace Employee_And_Company_Management.ViewModels
             NavigateToSettingsCommand = new RelayCommand(ExecuteNavigateToSettings, CanExecuteNavigateToSettings);
             NavigateToEmployeesCommand = new RelayCommand(ExecuteNavigateToEmployees, CanExecuteNavigateToEmployees);
             NavigateToCompaniesCommand = new RelayCommand(ExecuteNavigateToCompanies, CanExecuteNavigateToCompanies);
+            NavigateToQualificationCommand = new RelayCommand(ExecuteNavigateToQualification, CanExecuteNavigateToCompanies);
             LoginDTO = loginDTO;
         }
 
@@ -44,6 +46,10 @@ namespace Employee_And_Company_Management.ViewModels
         private void ExecuteNavigateToCompanies(object obj)
         {
             CurrentPage = new CompaniesControl();
+        }
+        private void ExecuteNavigateToQualification(object obj)
+        {
+            CurrentPage = new QualificationControl();
         }
     }
 

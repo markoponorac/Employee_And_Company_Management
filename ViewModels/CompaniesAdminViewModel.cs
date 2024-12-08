@@ -158,7 +158,8 @@ namespace Employee_And_Company_Management.ViewModels
                 MessageBox.Show(LanguageUtil.Translate("CompanyNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
-
+            windowAddCompany.Close();
+            windowAddCompany = null;
         }
         private bool CanModifyCompanye(object parameter) => true;
 
@@ -209,10 +210,11 @@ namespace Employee_And_Company_Management.ViewModels
                 window.ShowDialog();
             }
         }
+        Window windowAddCompany;
         private void AddCompany(object parameter)
         {
-            Window window = new AddNewCompanyeeWindow(this);
-            window.ShowDialog();
+            windowAddCompany = new AddNewCompanyeeWindow(this);
+            windowAddCompany.ShowDialog();
         }
         private async Task ReloadCompaniesAsync()
         {

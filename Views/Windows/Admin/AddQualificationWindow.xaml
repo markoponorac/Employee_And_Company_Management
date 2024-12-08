@@ -1,0 +1,25 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Admin.AddQualificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Admin"
+        mc:Ignorable="d"
+        Title="{DynamicResource AddQualification}" Height="250" Width="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource Name}" Style="{DynamicResource ParameterTextSyle}" Width="200"/>
+                <TextBox x:Name="TitleTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black"  Width="200" Text="{Binding QualificationTitle}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource QualificationCode}" Style="{DynamicResource ParameterTextSyle}" Width="200"/>
+                <TextBox x:Name="CodeTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding QualificationCode}" />
+            </StackPanel>
+
+            <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding SaveQualification}" />
+        </StackPanel>
+    </Grid>
+</Window>

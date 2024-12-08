@@ -69,6 +69,8 @@
     <system:String x:Key="JibIncorect">JIB nije ispravan</system:String>
     <system:String x:Key="JmbIncorect">JMB nije ispravan</system:String>
     <system:String x:Key="CompanyNotAdded">Kompanija nije dodata</system:String>
+    <system:String x:Key="QualificationAdded">Dodata stručna sprema</system:String>
+    <system:String x:Key="QualificationNotAdded">Stručna sprema nije dodata</system:String>
     <system:String x:Key="CompanyAdded">Kopanija dodata</system:String>
     <system:String x:Key="EmployeeAdded">Zaposleni dodat</system:String>
     <system:String x:Key="EmployeeNotAdded">Zaposleni nije dodat</system:String>
@@ -79,5 +81,7 @@
     <system:String x:Key="Jib">JIB</system:String>
     <system:String x:Key="Address">Adresa</system:String>
     <system:String x:Key="DateOfEstablish">Datum otvaranja</system:String>
+    <system:String x:Key="AddQualification">Dodaj stručnu spemu</system:String>
+    <system:String x:Key="QualificationCode">Oznaka stručne spreme</system:String>
 
 </ResourceDictionary>

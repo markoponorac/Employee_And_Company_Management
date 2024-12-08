@@ -163,10 +163,10 @@ namespace Employee_And_Company_Management.ViewModels
                 window.ShowDialog();
             }
         }
-
+        Window window;
         private void AddEmployee(object parameter)
         {
-            Window window = new AddNewEmployeeWindow(this);
+            window = new AddNewEmployeeWindow(this);
             window.ShowDialog();
         }
 
@@ -228,7 +228,8 @@ namespace Employee_And_Company_Management.ViewModels
                 MessageBox.Show(LanguageUtil.Translate("EmployeeNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
-
+            window.Close();
+            window = null;
         }
 
         private bool CanModifyEmployee(object parameter) => true;

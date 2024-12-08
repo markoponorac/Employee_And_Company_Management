@@ -70,6 +70,8 @@
     <system:String x:Key="JibIncorect">UIN incorect</system:String>
     <system:String x:Key="EmployeeAdded">Employee added</system:String>
     <system:String x:Key="CompanyAdded">Company added</system:String>
+    <system:String x:Key="QualificationAdded">Qualification added</system:String>
+    <system:String x:Key="QualificationNotAdded">Qualification not added</system:String>
     <system:String x:Key="EmployeeNotAdded">Employee not added</system:String>
     <system:String x:Key="CompanyNotAdded">Company not added</system:String>
     <system:String x:Key="AddCompany">Add Company</system:String>
@@ -79,5 +81,7 @@
     <system:String x:Key="Jib">UIN</system:String>
     <system:String x:Key="Address">Address</system:String>
     <system:String x:Key="DateOfEstablish">Date of establish</system:String>
+    <system:String x:Key="AddQualification">Add Qualification</system:String>
+    <system:String x:Key="QualificationCode">Qualification Code</system:String>
 
 </ResourceDictionary>

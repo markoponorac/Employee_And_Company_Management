@@ -33,7 +33,7 @@
     <Compile Update="Views\Windows\CompanyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Windows\CompanyDetailsWindow.xaml.cs">
+    <Compile Update="Views\Windows\Admin\CompanyDetailsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Windows\EmployeeWindow.xaml.cs">

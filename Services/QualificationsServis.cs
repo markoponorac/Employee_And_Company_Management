@@ -22,5 +22,24 @@ namespace Employee_And_Company_Management.Services
                 return await context.QualificationLevels.ToListAsync();
             }
         }
+
+        public async Task<bool> AddQualification(QualificationLevel qualification)
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                if (qualification != null)
+                {
+                    QualificationLevel temp = await context.QualificationLevels.FirstOrDefaultAsync(i => i.Title.Equals(qualification.Title));
+                    if (temp != null)
+                    {
+                        return false;
+                    }
+                    context.QualificationLevels.Add(qualification);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }
