@@ -55,16 +55,29 @@
     <system:String x:Key="Active">Aktive</system:String>
     <system:String x:Key="DeleteCofirm">Delete confirmation</system:String>
     <system:String x:Key="DeleteEmployeeCofirmMessage">Are you sure you want to delete the employee?</system:String>
+    <system:String x:Key="DeleteCompanyCofirmMessage">Are you sure you want to delete the company?</system:String>
     <system:String x:Key="BlockCofirm">Block confirmation</system:String>
     <system:String x:Key="BlockEmployeeCofirmMessage">Are you sure you want to block employee?</system:String>
+    <system:String x:Key="BlockCompanyCofirmMessage">Are you sure you want to block company?</system:String>
     <system:String x:Key="ActiveCofirm">Activate confirmation</system:String>
     <system:String x:Key="ActiveEmployeeCofirmMessage">Are you sure you want to activate employee?</system:String>
+    <system:String x:Key="ActiveCompanyCofirmMessage">Are you sure you want to activate company?</system:String>
     <system:String x:Key="EmployeeDetails">Employee Details</system:String>
     <system:String x:Key="AddEmployee">Add Employee</system:String>
     <system:String x:Key="DateOfBirth">Date of birth</system:String>
     <system:String x:Key="Qualification">Qualification</system:String>
     <system:String x:Key="JmbIncorect">UIN incorect</system:String>
+    <system:String x:Key="JibIncorect">UIN incorect</system:String>
     <system:String x:Key="EmployeeAdded">Employee added</system:String>
+    <system:String x:Key="CompanyAdded">Company added</system:String>
     <system:String x:Key="EmployeeNotAdded">Employee not added</system:String>
+    <system:String x:Key="CompanyNotAdded">Company not added</system:String>
+    <system:String x:Key="AddCompany">Add Company</system:String>
+    <system:String x:Key="ActiveCompanies">Active companies</system:String>
+    <system:String x:Key="BlockedCompanies">Blocked companies</system:String>
+    <system:String x:Key="DeletedCompanies">Deleted companies</system:String>
+    <system:String x:Key="Jib">UIN</system:String>
+    <system:String x:Key="Address">Address</system:String>
+    <system:String x:Key="DateOfEstablish">Date of establish</system:String>
 
 </ResourceDictionary>

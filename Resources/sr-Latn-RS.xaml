@@ -54,17 +54,30 @@
     <system:String x:Key="Delete">Obriši</system:String>
     <system:String x:Key="Active">Aktiviraj</system:String>
     <system:String x:Key="DeleteCofirm">Potvrda brisanja</system:String>
+    <system:String x:Key="DeleteCompanyCofirmMessage">Da li ste sigurni da želite obrisati kompaniju?</system:String>
     <system:String x:Key="DeleteEmployeeCofirmMessage">Da li ste sigurni da želite obrisati zaposlenog?</system:String>
     <system:String x:Key="BlockCofirm">Potvrda blokiranja</system:String>
     <system:String x:Key="BlockEmployeeCofirmMessage">Da li ste sigurni da želite blokirati zaposlenog?</system:String>
+    <system:String x:Key="BlockCompanyCofirmMessage">Da li ste sigurni da želite blokirati kompaniju?</system:String>
     <system:String x:Key="ActiveCofirm">Potvrda aktivacije</system:String>
+    <system:String x:Key="ActiveCompanyCofirmMessage">Da li ste sigurni da želite aktivirati kompaniju?</system:String>
     <system:String x:Key="ActiveEmployeeCofirmMessage">Da li ste sigurni da želite aktivirati zaposlenog?</system:String>
     <system:String x:Key="EmployeeDetails">Detalji o zaposlenom</system:String>
     <system:String x:Key="AddEmployee">Dodaj zaposlenog</system:String>
     <system:String x:Key="DateOfBirth">Datum rođenja</system:String>
     <system:String x:Key="Qualification">Stručna sprema</system:String>
+    <system:String x:Key="JibIncorect">JIB nije ispravan</system:String>
     <system:String x:Key="JmbIncorect">JMB nije ispravan</system:String>
+    <system:String x:Key="CompanyNotAdded">Kompanija nije dodata</system:String>
+    <system:String x:Key="CompanyAdded">Kopanija dodata</system:String>
     <system:String x:Key="EmployeeAdded">Zaposleni dodat</system:String>
     <system:String x:Key="EmployeeNotAdded">Zaposleni nije dodat</system:String>
+    <system:String x:Key="AddCompany">Dodaj kompaniju</system:String>
+    <system:String x:Key="ActiveCompanies">Aktivne kompanije</system:String>
+    <system:String x:Key="BlockedCompanies">Blokirane kompanije</system:String>
+    <system:String x:Key="DeletedCompanies">Obrisane kompanije</system:String>
+    <system:String x:Key="Jib">JIB</system:String>
+    <system:String x:Key="Address">Adresa</system:String>
+    <system:String x:Key="DateOfEstablish">Datum otvaranja</system:String>
 
 </ResourceDictionary>

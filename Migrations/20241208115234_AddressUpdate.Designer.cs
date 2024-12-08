@@ -4,6 +4,7 @@ using Employee_And_Company_Management.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_And_Company_Management.Migrations
 {
     [DbContext(typeof(EmployeeAndCompanyManagementContext))]
-    partial class EmployeeAndCompanyManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20241208115234_AddressUpdate")]
+    partial class AddressUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,10 +44,6 @@ namespace Employee_And_Company_Management.Migrations
                     b.Property<int>("ProfileId")
                         .HasColumnType("int")
                         .HasColumnName("PROFILE_ID");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<DateOnly>("DateOfEstablishment")
                         .HasColumnType("date")

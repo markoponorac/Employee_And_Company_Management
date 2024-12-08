@@ -103,7 +103,7 @@ namespace Employee_And_Company_Management.ViewModels
             ActiveCommand = new RelayCommand(ActiveEmployee, CanModifyEmployee);
             SaveCommand = new RelayCommand(SaveNewEmployee, CanSaveNewEmployee);
             LoadEmployees();
-
+            Thread.Sleep(100);
         }
 
         private async void LoadEmployees()
@@ -144,7 +144,6 @@ namespace Employee_And_Company_Management.ViewModels
 
         private async void DeleteEmployee(object parameter)
         {
-            MessageBox.Show("sadasd");
             if (parameter is Employee employee)
             {
                 var result = MessageBox.Show(LanguageUtil.Translate("DeleteEmployeeCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);

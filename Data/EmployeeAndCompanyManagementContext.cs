@@ -17,8 +17,6 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
     {
     }
 
-    public virtual DbSet<Address> Addresses { get; set; }
-
     public virtual DbSet<Administrator> Administrators { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
@@ -49,18 +47,6 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
             .UseCollation("utf8mb3_general_ci")
             .HasCharSet("utf8mb3");
 
-        modelBuilder.Entity<Address>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("address");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.City).HasMaxLength(45);
-            entity.Property(e => e.Country).HasMaxLength(45);
-            entity.Property(e => e.Number).HasMaxLength(45);
-            entity.Property(e => e.Street).HasMaxLength(45);
-        });
 
         modelBuilder.Entity<Administrator>(entity =>
         {
@@ -88,12 +74,10 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
             entity.HasIndex(e => e.ProfileId, "fk_COMPANY_PROFILE1_idx");
 
-            entity.HasIndex(e => e.AddressId, "fk_KOMPANIJA_ADDRESS1_idx");
 
             entity.Property(e => e.ProfileId)
                 .ValueGeneratedNever()
                 .HasColumnName("PROFILE_ID");
-            entity.Property(e => e.AddressId).HasColumnName("ADDRESS_ID");
             entity.Property(e => e.DateOfEstablishment).HasColumnName("Date_of_establishment");
             entity.Property(e => e.Jib)
                 .HasMaxLength(12)
@@ -101,10 +85,6 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
                 .HasColumnName("JIB");
             entity.Property(e => e.Name).HasMaxLength(45);
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Companies)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_KOMPANIJA_ADDRESS1");
 
             entity.HasOne(d => d.Profile).WithOne(p => p.Company)
                 .HasForeignKey<Company>(d => d.ProfileId)
