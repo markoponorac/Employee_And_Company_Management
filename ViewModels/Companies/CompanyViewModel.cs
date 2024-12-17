@@ -49,7 +49,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         }
         private void ExecuteNavigateToDepartments(object obj)
         {
-            CurrentPage = new EmployeeCompanyControl(LoginDTO);
+            CurrentPage = new DepartmentsCompanyControl(LoginDTO);
         }
 
     }

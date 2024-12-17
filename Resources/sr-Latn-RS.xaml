@@ -56,6 +56,8 @@
     <system:String x:Key="DeleteCofirm">Potvrda brisanja</system:String>
     <system:String x:Key="DeleteCompanyCofirmMessage">Da li ste sigurni da želite obrisati kompaniju?</system:String>
     <system:String x:Key="DeleteEmployeeCofirmMessage">Da li ste sigurni da želite obrisati zaposlenog?</system:String>
+    <system:String x:Key="RestoreDepartmentCofirmMessage">Da li ste sigurni da želite obnoviti odjeljenje?</system:String>
+    <system:String x:Key="DeleteDepartmentCofirmMessage">Da li ste sigurni da želite obrisati odjeljenje?</system:String>
     <system:String x:Key="BlockCofirm">Potvrda blokiranja</system:String>
     <system:String x:Key="BlockEmployeeCofirmMessage">Da li ste sigurni da želite blokirati zaposlenog?</system:String>
     <system:String x:Key="BlockCompanyCofirmMessage">Da li ste sigurni da želite blokirati kompaniju?</system:String>
@@ -72,7 +74,9 @@
     <system:String x:Key="QualificationAdded">Dodata stručna sprema</system:String>
     <system:String x:Key="QualificationNotAdded">Stručna sprema nije dodata</system:String>
     <system:String x:Key="CompanyAdded">Kopanija dodata</system:String>
+    <system:String x:Key="DepartmentAdded">Odjeljenje dodato</system:String>
     <system:String x:Key="EmployeeAdded">Zaposleni dodat</system:String>
+    <system:String x:Key="DepartmentNotAdded">Odjeljenje nije dodato</system:String>
     <system:String x:Key="EmployeeNotAdded">Zaposleni nije dodat</system:String>
     <system:String x:Key="AddCompany">Dodaj kompaniju</system:String>
     <system:String x:Key="ActiveCompanies">Aktivne kompanije</system:String>
@@ -91,5 +95,9 @@
     <system:String x:Key="Departments">Odjeljenja</system:String>
     <system:String x:Key="WrokPlaces">Radna mjesta</system:String>
     <system:String x:Key="Plate">Salaries</system:String>
+    <system:String x:Key="AddDepartment">Dodaj odjeljenje</system:String>
+    <system:String x:Key="DepartmentName">Naziv odjeljenja</system:String>
+    <system:String x:Key="DeletedDepartments">Obrisana odjeljenja</system:String>
+    <system:String x:Key="Restore">Obnovi</system:String>
 
 </ResourceDictionary>

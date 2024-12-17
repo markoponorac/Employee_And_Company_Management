@@ -55,6 +55,8 @@
     <system:String x:Key="Active">Aktive</system:String>
     <system:String x:Key="DeleteCofirm">Delete confirmation</system:String>
     <system:String x:Key="DeleteEmployeeCofirmMessage">Are you sure you want to delete the employee?</system:String>
+    <system:String x:Key="DeleteDepartmentCofirmMessage">Are you sure you want to delete the department?</system:String>
+    <system:String x:Key="RestoreDepartmentCofirmMessage">Are you sure you want to restore the department?</system:String>
     <system:String x:Key="DeleteCompanyCofirmMessage">Are you sure you want to delete the company?</system:String>
     <system:String x:Key="BlockCofirm">Block confirmation</system:String>
     <system:String x:Key="BlockEmployeeCofirmMessage">Are you sure you want to block employee?</system:String>
@@ -69,10 +71,12 @@
     <system:String x:Key="JmbIncorect">UIN incorect</system:String>
     <system:String x:Key="JibIncorect">UIN incorect</system:String>
     <system:String x:Key="EmployeeAdded">Employee added</system:String>
+    <system:String x:Key="DepartmentAdded">Department added</system:String>
     <system:String x:Key="CompanyAdded">Company added</system:String>
     <system:String x:Key="QualificationAdded">Qualification added</system:String>
     <system:String x:Key="QualificationNotAdded">Qualification not added</system:String>
     <system:String x:Key="EmployeeNotAdded">Employee not added</system:String>
+    <system:String x:Key="DepartmentNotAdded">Department not added</system:String>
     <system:String x:Key="CompanyNotAdded">Company not added</system:String>
     <system:String x:Key="AddCompany">Add Company</system:String>
     <system:String x:Key="ActiveCompanies">Active companies</system:String>
@@ -91,6 +95,10 @@
     <system:String x:Key="Departments">Departments</system:String>
     <system:String x:Key="WrokPlaces">Work places</system:String>
     <system:String x:Key="Salaries">Salaries</system:String>
+    <system:String x:Key="AddDepartment">Add Department</system:String>
+    <system:String x:Key="DepartmentName">Department Name</system:String>
+    <system:String x:Key="DeletedDepartments">Deleted Departments</system:String>
+    <system:String x:Key="Restore">Restore</system:String>
 
 
 </ResourceDictionary>

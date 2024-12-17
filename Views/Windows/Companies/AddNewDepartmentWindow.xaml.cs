@@ -1,5 +1,4 @@
-﻿using Employee_And_Company_Management.Models;
-using Employee_And_Company_Management.ViewModels.Companies;
+﻿using Employee_And_Company_Management.ViewModels.Companies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +11,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Employee_And_Company_Management.Views.Controls.Companies
+namespace Employee_And_Company_Management.Views.Windows.Companies
 {
     /// <summary>
-    /// Interaction logic for DepartmentsCompanyControl.xaml
+    /// Interaction logic for AddNewDepartmentWindow.xaml
     /// </summary>
-    public partial class DepartmentsCompanyControl : UserControl
+    public partial class AddNewDepartmentWindow : Window
     {
-        public DepartmentsCompanyControl(LoginDTO loginDTO)
+        public AddNewDepartmentWindow(DepartmentCompanyViewModel viewModel)
         {
             InitializeComponent();
-            var viewModel = new DepartmentCompanyViewModel(loginDTO);
             DataContext = viewModel;
         }
     }

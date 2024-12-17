@@ -11,6 +11,8 @@ public partial class Department
 
     public int CompanyProfileId { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual Company CompanyProfile { get; set; } = null!;
 
     public virtual ICollection<WorkPlace> WorkPlaces { get; set; } = new List<WorkPlace>();
