@@ -14,6 +14,7 @@ public partial class Company
     public DateOnly DateOfEstablishment { get; set; }
 
     public string Address { get; set; } = null!;
+
     public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
 
     public virtual ICollection<Employment> Employments { get; set; } = new List<Employment>();

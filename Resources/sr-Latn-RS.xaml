@@ -84,5 +84,12 @@
     <system:String x:Key="AddQualification">Dodaj stručnu spemu</system:String>
     <system:String x:Key="QualificationCode">Oznaka stručne spreme</system:String>
     <system:String x:Key="CompanySettings">Podešavanje kompanije</system:String>
+    <system:String x:Key="Company">Kompanija</system:String>
+    <system:String x:Key="CurrentlyEmployed">Tenutno zaposleni</system:String>
+    <system:String x:Key="Dismiss">Otpusti zaposlenog</system:String>
+    <system:String x:Key="FormerEmployees">Bivši zaposleni</system:String>
+    <system:String x:Key="Departments">Odjeljenja</system:String>
+    <system:String x:Key="WrokPlaces">Radna mjesta</system:String>
+    <system:String x:Key="Plate">Salaries</system:String>
 
 </ResourceDictionary>

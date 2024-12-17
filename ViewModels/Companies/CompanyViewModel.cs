@@ -22,19 +22,35 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         }
 
         public ICommand NavigateToSettingsCommand { get; set; }
+        public ICommand NavigateToEmployeesCommand { get; set; }
+        public ICommand NavigateToDepartmentsCommand { get; set; }
 
         public LoginDTO LoginDTO { get; set; }
 
         public CompanyViewModel(LoginDTO loginDTO)
         {
             NavigateToSettingsCommand = new RelayCommand(ExecuteNavigateToSettings, CanExecuteNavigateToSettings);
+            NavigateToEmployeesCommand = new RelayCommand(ExecuteNavigateToEmployees, CanExecuteNavigateToEmployees);
+            NavigateToDepartmentsCommand = new RelayCommand(ExecuteNavigateToDepartments, CanExecuteNavigateToDepartments);
             LoginDTO = loginDTO;
         }
         private bool CanExecuteNavigateToSettings(object obj) => true;
+        private bool CanExecuteNavigateToEmployees(object obj) => true;
+        private bool CanExecuteNavigateToDepartments(object obj) => true;
 
         private void ExecuteNavigateToSettings(object obj)
         {
             CurrentPage = new CompanySettingsControl(LoginDTO);
         }
+
+        private void ExecuteNavigateToEmployees(object obj)
+        {
+            CurrentPage = new EmployeeCompanyControl(LoginDTO);
+        }
+        private void ExecuteNavigateToDepartments(object obj)
+        {
+            CurrentPage = new EmployeeCompanyControl(LoginDTO);
+        }
+
     }
 }

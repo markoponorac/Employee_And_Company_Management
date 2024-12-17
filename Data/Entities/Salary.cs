@@ -19,9 +19,9 @@ public partial class Salary
 
     public int EmploymentWorkPlaceId { get; set; }
 
-    public string EmploymentEmployeePersonJmb { get; set; } = null!;
-
     public int EmploymentCompanyProfileId { get; set; }
+
+    public int EmploymentEmployeePersonProfileId { get; set; }
 
     public virtual Employment Employment { get; set; } = null!;
 }

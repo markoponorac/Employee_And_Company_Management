@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Employee_And_Company_Management.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
-namespace Employee_And_Company_Management.Data;
+namespace Employee_And_Company_Management.Data.Entities;
 
 public partial class EmployeeAndCompanyManagementContext : DbContext
 {
@@ -38,7 +37,7 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
     public virtual DbSet<WorkPlace> WorkPlaces { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySql("server=localhost;database=staff_and_structure_DB;user=root;password=marko", ServerVersion.Parse("8.0.36-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,7 +45,6 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
         modelBuilder
             .UseCollation("utf8mb3_general_ci")
             .HasCharSet("utf8mb3");
-
 
         modelBuilder.Entity<Administrator>(entity =>
         {
@@ -74,17 +72,16 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
             entity.HasIndex(e => e.ProfileId, "fk_COMPANY_PROFILE1_idx");
 
-
             entity.Property(e => e.ProfileId)
                 .ValueGeneratedNever()
                 .HasColumnName("PROFILE_ID");
+            entity.Property(e => e.Address).HasMaxLength(45);
             entity.Property(e => e.DateOfEstablishment).HasColumnName("Date_of_establishment");
             entity.Property(e => e.Jib)
                 .HasMaxLength(12)
                 .IsFixedLength()
                 .HasColumnName("JIB");
             entity.Property(e => e.Name).HasMaxLength(45);
-
 
             entity.HasOne(d => d.Profile).WithOne(p => p.Company)
                 .HasForeignKey<Company>(d => d.ProfileId)
@@ -138,7 +135,7 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
         modelBuilder.Entity<Employment>(entity =>
         {
-            entity.HasKey(e => new { e.EmployedFrom, e.WorkPlaceId, e.EmployeePersonJmb, e.CompanyProfileId })
+            entity.HasKey(e => new { e.EmployedFrom, e.WorkPlaceId, e.CompanyProfileId, e.EmployeePersonProfileId })
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
 
@@ -146,15 +143,14 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
             entity.HasIndex(e => e.CompanyProfileId, "fk_EMPLOYMENT_COMPANY1_idx");
 
+            entity.HasIndex(e => e.EmployeePersonProfileId, "fk_EMPLOYMENT_EMPLOYEE1_idx");
+
             entity.HasIndex(e => e.WorkPlaceId, "fk_EMPLOYMENT_WORK_PLACE1_idx");
 
             entity.Property(e => e.EmployedFrom).HasColumnName("Employed_from");
             entity.Property(e => e.WorkPlaceId).HasColumnName("WORK_PLACE_ID");
-            entity.Property(e => e.EmployeePersonJmb)
-                .HasMaxLength(13)
-                .IsFixedLength()
-                .HasColumnName("EMPLOYEE_PERSON_JMB");
             entity.Property(e => e.CompanyProfileId).HasColumnName("COMPANY_PROFILE_ID");
+            entity.Property(e => e.EmployeePersonProfileId).HasColumnName("EMPLOYEE_PERSON_PROFILE_ID");
             entity.Property(e => e.EmployedTo).HasColumnName("Employed_to");
             entity.Property(e => e.NumberOfDaysOff).HasColumnName("Number_of_days_off");
             entity.Property(e => e.PriceOfWork)
@@ -165,6 +161,11 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
                 .HasForeignKey(d => d.CompanyProfileId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_EMPLOYMENT_COMPANY1");
+
+            entity.HasOne(d => d.EmployeePersonProfile).WithMany(p => p.Employments)
+                .HasForeignKey(d => d.EmployeePersonProfileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_EMPLOYMENT_EMPLOYEE1");
 
             entity.HasOne(d => d.WorkPlace).WithMany(p => p.Employments)
                 .HasForeignKey(d => d.WorkPlaceId)
@@ -234,23 +235,20 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
             entity.ToTable("salary");
 
-            entity.HasIndex(e => new { e.EmploymentEmployedFrom, e.EmploymentWorkPlaceId, e.EmploymentEmployeePersonJmb, e.EmploymentCompanyProfileId }, "fk_SALARY_EMPLOYMENT1_idx");
+            entity.HasIndex(e => new { e.EmploymentEmployedFrom, e.EmploymentWorkPlaceId, e.EmploymentCompanyProfileId, e.EmploymentEmployeePersonProfileId }, "fk_SALARY_EMPLOYMENT1_idx");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Amount).HasPrecision(4);
             entity.Property(e => e.EmploymentCompanyProfileId).HasColumnName("EMPLOYMENT_COMPANY_PROFILE_ID");
             entity.Property(e => e.EmploymentEmployedFrom).HasColumnName("EMPLOYMENT_Employed_from");
-            entity.Property(e => e.EmploymentEmployeePersonJmb)
-                .HasMaxLength(13)
-                .IsFixedLength()
-                .HasColumnName("EMPLOYMENT_EMPLOYEE_PERSON_JMB");
+            entity.Property(e => e.EmploymentEmployeePersonProfileId).HasColumnName("EMPLOYMENT_EMPLOYEE_PERSON_PROFILE_ID");
             entity.Property(e => e.EmploymentWorkPlaceId).HasColumnName("EMPLOYMENT_WORK_PLACE_ID");
             entity.Property(e => e.ForMonth).HasColumnName("For_month");
             entity.Property(e => e.ForYear).HasColumnName("For_year");
             entity.Property(e => e.PaymentDate).HasColumnName("Payment_date");
 
             entity.HasOne(d => d.Employment).WithMany(p => p.Salaries)
-                .HasForeignKey(d => new { d.EmploymentEmployedFrom, d.EmploymentWorkPlaceId, d.EmploymentEmployeePersonJmb, d.EmploymentCompanyProfileId })
+                .HasForeignKey(d => new { d.EmploymentEmployedFrom, d.EmploymentWorkPlaceId, d.EmploymentCompanyProfileId, d.EmploymentEmployeePersonProfileId })
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_SALARY_EMPLOYMENT1");
         });

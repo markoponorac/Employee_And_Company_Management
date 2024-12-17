@@ -15,11 +15,13 @@ public partial class Employment
 
     public int WorkPlaceId { get; set; }
 
-    public string EmployeePersonJmb { get; set; } = null!;
-
     public int CompanyProfileId { get; set; }
 
+    public int EmployeePersonProfileId { get; set; }
+
     public virtual Company CompanyProfile { get; set; } = null!;
+
+    public virtual Employee EmployeePersonProfile { get; set; } = null!;
 
     public virtual ICollection<Salary> Salaries { get; set; } = new List<Salary>();
 

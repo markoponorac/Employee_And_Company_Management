@@ -84,5 +84,13 @@
     <system:String x:Key="AddQualification">Add Qualification</system:String>
     <system:String x:Key="QualificationCode">Qualification Code</system:String>
     <system:String x:Key="CompanySettings">Company Settings</system:String>
+    <system:String x:Key="Company">Company</system:String>
+    <system:String x:Key="CurrentlyEmployed">Currently employed</system:String>
+    <system:String x:Key="Dismiss">Fire an employee</system:String>
+    <system:String x:Key="FormerEmployees">Former employees</system:String>
+    <system:String x:Key="Departments">Departments</system:String>
+    <system:String x:Key="WrokPlaces">Work places</system:String>
+    <system:String x:Key="Salaries">Salaries</system:String>
+
 
 </ResourceDictionary>

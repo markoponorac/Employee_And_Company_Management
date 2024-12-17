@@ -22,8 +22,9 @@
             <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
                 <StackPanel>
                     <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                    <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToCompaniesCommand}"/>
-                    <Button Content="{DynamicResource Qualification}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToQualificationCommand}"/>
+                    <Button Content="{DynamicResource Departments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}"/>
+                    <Button Content="{DynamicResource WrokPlaces}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}"/>
+                    <Button Content="{DynamicResource Salaries}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSalariesCommand}"/>
                     <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
                 </StackPanel>
             </Border>

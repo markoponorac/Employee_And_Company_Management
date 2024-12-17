@@ -1,4 +1,5 @@
-﻿using Employee_And_Company_Management.Data;
+﻿
+using Employee_And_Company_Management.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
-﻿using Employee_And_Company_Management.Data;
+﻿
+using Employee_And_Company_Management.Data.Entities;
 using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
 using Microsoft.EntityFrameworkCore;

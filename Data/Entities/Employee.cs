@@ -13,6 +13,8 @@ public partial class Employee
 
     public int PersonProfileId { get; set; }
 
+    public virtual ICollection<Employment> Employments { get; set; } = new List<Employment>();
+
     public virtual Person PersonProfile { get; set; } = null!;
 
     public virtual QualificationLevel QualificationLevel { get; set; } = null!;
