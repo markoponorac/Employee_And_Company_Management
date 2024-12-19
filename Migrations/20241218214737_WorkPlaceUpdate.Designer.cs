@@ -4,6 +4,7 @@ using Employee_And_Company_Management.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_And_Company_Management.Migrations
 {
     [DbContext(typeof(EmployeeAndCompanyManagementContext))]
-    partial class EmployeeAndCompanyManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20241218214737_WorkPlaceUpdate")]
+    partial class WorkPlaceUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,9 +343,6 @@ namespace Employee_And_Company_Management.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(45)
                         .HasColumnType("varchar(45)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
                         .IsRequired()

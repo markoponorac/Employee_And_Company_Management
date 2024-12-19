@@ -11,7 +11,11 @@ public partial class WorkPlace
 
     public string? Description { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual ICollection<Employment> Employments { get; set; } = new List<Employment>();
 
-    public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
+    public int DepartmentId { get; set; }
+
+    public virtual Department Department { get; set; } = null!;
 }

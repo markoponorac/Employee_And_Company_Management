@@ -263,28 +263,11 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(45);
             entity.Property(e => e.Title).HasMaxLength(45);
 
-            entity.HasMany(d => d.Departments).WithMany(p => p.WorkPlaces)
-                .UsingEntity<Dictionary<string, object>>(
-                    "WorkPlaceHasDepartment",
-                    r => r.HasOne<Department>().WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_WORK_PLACE_has_DEPARTMENT_DEPARTMENT1"),
-                    l => l.HasOne<WorkPlace>().WithMany()
-                        .HasForeignKey("WorkPlaceId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_WORK_PLACE_has_DEPARTMENT_WORK_PLACE1"),
-                    j =>
-                    {
-                        j.HasKey("WorkPlaceId", "DepartmentId")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("work_place_has_department");
-                        j.HasIndex(new[] { "DepartmentId" }, "fk_WORK_PLACE_has_DEPARTMENT_DEPARTMENT1_idx");
-                        j.HasIndex(new[] { "WorkPlaceId" }, "fk_WORK_PLACE_has_DEPARTMENT_WORK_PLACE1_idx");
-                        j.IndexerProperty<int>("WorkPlaceId").HasColumnName("WORK_PLACE_ID");
-                        j.IndexerProperty<int>("DepartmentId").HasColumnName("DEPARTMENT_ID");
-                    });
+            entity.HasOne(wp => wp.Department)
+            .WithMany(d => d.WorkPlaces)
+            .HasForeignKey(wp => wp.DepartmentId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("fk_WORK_PLACE_DEPARTMENT");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Employee_And_Company_Management.Views.Controls.Companies.WorkPlacesCompanyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Companies"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <TextBlock Text="{DynamicResource SelectDepartment}" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,10,0"/>
+            <ComboBox ItemsSource="{Binding Departments}"
+                      SelectedItem="{Binding SelectedDepartment}"
+                      DisplayMemberPath="Name"
+                      Width="200"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,0,10">
+            <Button Content="{DynamicResource AddWorkPlace}" 
+                    Command="{Binding AddWorkPlaceCommand}" 
+                    Style="{StaticResource ButtonStyle}" 
+                    Margin="0,0,10,0" />
+        </StackPanel>
+
+        <TabControl Grid.Row="2">
+            <TabItem Header="{DynamicResource ActiveWorkPlaces}">
+                <DataGrid ItemsSource="{Binding ActiveWorkPlaces}" 
+                          AutoGenerateColumns="False" 
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" 
+                                            Binding="{Binding Title}" 
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource WorkPlaceDescription}" 
+                                            Binding="{Binding Description}"
+                                            IsReadOnly="True"/>
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" 
+                                                Background="Transparent" 
+                                                HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource Delete}" 
+                                                Command="{Binding DataContext.DeleteWorkPlaceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                CommandParameter="{Binding}" 
+                                                Style="{StaticResource ButtonStyle}" 
+                                                Margin="0,0,10,0" 
+                                                Height="30"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="{DynamicResource DeletedWorkPlaces}">
+                <DataGrid ItemsSource="{Binding DeletedWorkPlaces}" 
+                          AutoGenerateColumns="False" 
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" 
+                                            Binding="{Binding Title}" 
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="{DynamicResource WorkPlaceDescription}" 
+                                            Binding="{Binding Description}" 
+                                            IsReadOnly="True"/>
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" 
+                                                Background="Transparent" 
+                                                HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource Restore}" 
+                                                Command="{Binding DataContext.RestoreWorkPlaceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                CommandParameter="{Binding}" 
+                                                Style="{StaticResource ButtonStyle}" 
+                                                Margin="0,0,10,0" 
+                                                Height="30"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

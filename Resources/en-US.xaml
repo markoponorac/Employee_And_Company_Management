@@ -99,6 +99,15 @@
     <system:String x:Key="DepartmentName">Department Name</system:String>
     <system:String x:Key="DeletedDepartments">Deleted Departments</system:String>
     <system:String x:Key="Restore">Restore</system:String>
-
+    <system:String x:Key="SelectDepartment">Select Department</system:String>
+    <system:String x:Key="AddWorkPlace">Add work place</system:String>
+    <system:String x:Key="ActiveWorkPlaces">Active work places</system:String>
+    <system:String x:Key="WorkPlaceName">Work place name</system:String>
+    <system:String x:Key="WorkPlaceDescription">Work place description</system:String>
+    <system:String x:Key="DeletedWorkPlaces">Deleted work places</system:String>
+    <system:String x:Key="WorkPlaceAdded">Work place added</system:String>
+    <system:String x:Key="WorkPlaceNotAdded">Work place not added</system:String>
+    <system:String x:Key="DeleteWorkPlaceCofirmMessage">Are you sure you want to delete the work place?</system:String>
+    <system:String x:Key="RestoreWorkPlaceCofirmMessage">Are you sure you want to restore the work place?</system:String>
 
 </ResourceDictionary>

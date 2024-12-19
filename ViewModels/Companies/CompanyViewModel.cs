@@ -24,6 +24,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         public ICommand NavigateToSettingsCommand { get; set; }
         public ICommand NavigateToEmployeesCommand { get; set; }
         public ICommand NavigateToDepartmentsCommand { get; set; }
+        public ICommand NavigateToWrokPlacesCommand { get; set; }
 
         public LoginDTO LoginDTO { get; set; }
 
@@ -32,11 +33,13 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             NavigateToSettingsCommand = new RelayCommand(ExecuteNavigateToSettings, CanExecuteNavigateToSettings);
             NavigateToEmployeesCommand = new RelayCommand(ExecuteNavigateToEmployees, CanExecuteNavigateToEmployees);
             NavigateToDepartmentsCommand = new RelayCommand(ExecuteNavigateToDepartments, CanExecuteNavigateToDepartments);
+            NavigateToWrokPlacesCommand = new RelayCommand(ExecuteNavigateToWorkPlaces, CanExecuteNavigateToWorkPlaces);
             LoginDTO = loginDTO;
         }
         private bool CanExecuteNavigateToSettings(object obj) => true;
         private bool CanExecuteNavigateToEmployees(object obj) => true;
         private bool CanExecuteNavigateToDepartments(object obj) => true;
+        private bool CanExecuteNavigateToWorkPlaces(object obj) => true;
 
         private void ExecuteNavigateToSettings(object obj)
         {
@@ -50,6 +53,10 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         private void ExecuteNavigateToDepartments(object obj)
         {
             CurrentPage = new DepartmentsCompanyControl(LoginDTO);
+        }
+        private void ExecuteNavigateToWorkPlaces(object obj)
+        {
+            CurrentPage = new WorkPlacesCompanyControl(LoginDTO);
         }
 
     }

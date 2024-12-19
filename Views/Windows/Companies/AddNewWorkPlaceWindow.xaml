@@ -1,0 +1,60 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Companies.AddNewWorkPlaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
+        mc:Ignorable="d"
+        Title="{DynamicResource AddWorkPlace}" Height="450" Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <StackPanel Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="{DynamicResource SelectDepartment}" 
+                           Style="{DynamicResource ParameterTextSyle}" 
+                           Width="200"/>
+                <ComboBox x:Name="DepartmentComboBox" 
+                         
+                          Width="200" 
+                          ItemsSource="{Binding Departments}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedDepartmentAdd}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="{DynamicResource WorkPlaceName}" 
+                           Style="{DynamicResource ParameterTextSyle}" 
+                           Width="200"/>
+                <TextBox x:Name="WorkPlaceNameTextBox" 
+                         Style="{DynamicResource InputStyle}" 
+                         Foreground="Black"  
+                         Width="200" 
+                         Text="{Binding WorkPlaceName}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="{DynamicResource WorkPlaceDescription}" 
+                           Style="{DynamicResource ParameterTextSyle}" 
+                           Width="200"
+                           VerticalAlignment="Top"/>
+                <TextBox x:Name="WorkPlaceDescriptionTextBox" 
+                         Style="{DynamicResource InputStyle}" 
+                         Foreground="Black"  
+                         Width="200" 
+                         Height="100"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="{Binding WorkPlaceDescription}" />
+            </StackPanel>
+
+            <Button Content="{DynamicResource Save}" 
+                    Style="{StaticResource ButtonStyle}" 
+                    Command="{Binding SaveWorkPlaceCommand}" 
+                    HorizontalAlignment="Center"
+                    Width="150"/>
+        </StackPanel>
+    </Grid>
+</Window>
