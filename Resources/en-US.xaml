@@ -110,4 +110,17 @@
     <system:String x:Key="DeleteWorkPlaceCofirmMessage">Are you sure you want to delete the work place?</system:String>
     <system:String x:Key="RestoreWorkPlaceCofirmMessage">Are you sure you want to restore the work place?</system:String>
 
+    <system:String x:Key="AddNewEmployee">Add employee</system:String>
+    <system:String x:Key="Hire">Hire</system:String>
+    <system:String x:Key="VacationDays">Number of vacation days</system:String>
+    <system:String x:Key="HourlyRate">Hourly rate</system:String>
+    <system:String x:Key="HireDate">Hire Date</system:String>
+    <system:String x:Key="WorkPlace">Work place</system:String>
+    <system:String x:Key="EmployeeEmployed">Employee employed</system:String>
+    <system:String x:Key="Update">Update</system:String>
+    <system:String x:Key="EmployeedFrom">Employeed from</system:String>
+    <system:String x:Key="EmployeedTo">Employeed to</system:String>
+    <system:String x:Key="DeleteEmploymentCofirmMessage">Are you sure you want to finish employment?</system:String>
+
+
 </ResourceDictionary>

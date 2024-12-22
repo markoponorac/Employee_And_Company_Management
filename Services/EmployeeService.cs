@@ -23,6 +23,46 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
+        public async Task<List<Employee>> GetCurrentlyEmployedInCompany(int companyId)
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                return await context.Employments
+                    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo == null) // Trenutno zaposleni (EmployedTo je null)
+                    .Include(e => e.EmployeePersonProfile)
+                        .ThenInclude(emp => emp.PersonProfile)
+                    .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                    .Select(e => e.EmployeePersonProfile) // Dohvati samo zaposlene
+                    .Distinct() // Osiguraj jedinstvene zaposlene
+                    .ToListAsync();
+            }
+        }
+
+        public async Task<List<Employee>> GetFormerEmployeesInCompany(int companyId)
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                return await context.Employments
+                    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo != null) // Bivši zaposleni (EmployedTo nije null)
+                    .Include(e => e.EmployeePersonProfile)
+                        .ThenInclude(emp => emp.PersonProfile)
+                    .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                    .Select(e => e.EmployeePersonProfile) // Dohvati samo zaposlene
+                    .Distinct() // Osiguraj jedinstvene zaposlene
+                    .ToListAsync();
+            }
+        }
+
+
+
+        public async Task<List<Employee>> GetUnemployedEmployees()
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false). ToListAsync();
+            }
+        }
+
         public async Task ChangeActiveStatus(int employeeId)
         {
             using(var context = new EmployeeAndCompanyManagementContext())

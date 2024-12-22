@@ -1,0 +1,56 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Companies.AddNewEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
+        mc:Ignorable="d"
+        Title="{DynamicResource AddEmployee}" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding AvailableEmployees}" 
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{DynamicResource FirstName}" 
+                                    Binding="{Binding PersonProfile.FirstName}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource LastName}" 
+                                    Binding="{Binding PersonProfile.LastName}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource DateOfBirth}" 
+                                    Binding="{Binding DateOfBirth, StringFormat=d}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource Qualification}" 
+                                    Binding="{Binding QualificationLevel.Title}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{DynamicResource Hire}" 
+                                    Command="{Binding DataContext.OpenHireWindowCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Margin="5" 
+                                    Padding="10,5"
+                                    Width="120"
+                                    HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

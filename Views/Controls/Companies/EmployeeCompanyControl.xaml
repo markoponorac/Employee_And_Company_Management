@@ -22,12 +22,12 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding PersonProfile.Profile.Username}" IsReadOnly="True"/>
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
                                         <Button Content="{DynamicResource Dismiss}" Command="{Binding DataContext.DismissCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        
                                         <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
 
                                     </StackPanel>
@@ -42,7 +42,6 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding PersonProfile.Profile.Username}" IsReadOnly="True" />
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

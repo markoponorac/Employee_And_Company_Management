@@ -23,6 +23,15 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
+
+        public async Task<Company> GetCompany(int companyId)
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                return await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(i => i.ProfileId == companyId);
+            }
+        }
+
         public async Task ChangeActiveStatus(int companyId)
         {
             using (var context = new EmployeeAndCompanyManagementContext())

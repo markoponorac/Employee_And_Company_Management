@@ -23,6 +23,19 @@ namespace Employee_And_Company_Management.Services
         }
 
 
+        public async Task<List<WorkPlace>> GetFreeWorkPlacesInDepartment(int departmentID)
+        {
+            using (var context = new EmployeeAndCompanyManagementContext())
+            {
+                return await context.WorkPlaces
+                 .Where(workPlace =>
+                     workPlace.DepartmentId == departmentID &&
+                     !context.Employments.Any(employment =>
+                         employment.WorkPlaceId == workPlace.Id && employment.EmployedTo == null))
+                 .ToListAsync();
+            }
+        }
+
         public async Task<bool> AddWorkPlace(WorkPlace workPlace)
         {
             using (var contex = new EmployeeAndCompanyManagementContext())
