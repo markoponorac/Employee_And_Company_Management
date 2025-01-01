@@ -46,6 +46,7 @@
     <system:String x:Key="Save">Save</system:String>
     <system:String x:Key="Jmb">UIN</system:String>
     <system:String x:Key="UpdateSuccess">Data saved successfully!</system:String>
+    <system:String x:Key="UpdateNotSuccess">Data not saved!</system:String>
     <system:String x:Key="Block">Block</system:String>
     <system:String x:Key="Details">Details</system:String>
     <system:String x:Key="ActiveEmployees">Active employees</system:String>
@@ -109,7 +110,6 @@
     <system:String x:Key="WorkPlaceNotAdded">Work place not added</system:String>
     <system:String x:Key="DeleteWorkPlaceCofirmMessage">Are you sure you want to delete the work place?</system:String>
     <system:String x:Key="RestoreWorkPlaceCofirmMessage">Are you sure you want to restore the work place?</system:String>
-
     <system:String x:Key="AddNewEmployee">Add employee</system:String>
     <system:String x:Key="Hire">Hire</system:String>
     <system:String x:Key="VacationDays">Number of vacation days</system:String>
@@ -121,6 +121,33 @@
     <system:String x:Key="EmployeedFrom">Employeed from</system:String>
     <system:String x:Key="EmployeedTo">Employeed to</system:String>
     <system:String x:Key="DeleteEmploymentCofirmMessage">Are you sure you want to finish employment?</system:String>
+    <system:String x:Key="NoData">No data</system:String>
+    <system:String x:Key="EmployeeSalaries">Employee salaries</system:String>
+    <system:String x:Key="AddNewSalary">Add salary</system:String>
+    <system:String x:Key="Year">Year</system:String>
+    <system:String x:Key="Month">Month</system:String>
+    <system:String x:Key="PaymentDate">Payment date</system:String>
+    <system:String x:Key="SalaryAmount">Amount</system:String>
+    <system:String x:Key="Yes">Yes</system:String>
+    <system:String x:Key="No">No</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
+    <system:String x:Key="December">December</system:String>
+    <system:String x:Key="November">November</system:String>
+    <system:String x:Key="October">October</system:String>
+    <system:String x:Key="September">September</system:String>
+    <system:String x:Key="August">August</system:String>
+    <system:String x:Key="July">July</system:String>
+    <system:String x:Key="June">June</system:String>
+    <system:String x:Key="May">May</system:String>
+    <system:String x:Key="April">April</system:String>
+    <system:String x:Key="March">March</system:String>
+    <system:String x:Key="February">February</system:String>
+    <system:String x:Key="January">January</system:String>
+    <system:String x:Key="SalaryAdded">Salary added</system:String>
+    <system:String x:Key="SalaryNotAdded">Salary not added</system:String>
+    <system:String x:Key="Employments">Employments</system:String>
+    <system:String x:Key="EmployeeSettings">Employee settings</system:String>
+    <system:String x:Key="SearchEmployments">Search employments</system:String>
 
 
 </ResourceDictionary>

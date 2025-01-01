@@ -40,6 +40,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         private bool CanExecuteNavigateToEmployees(object obj) => true;
         private bool CanExecuteNavigateToDepartments(object obj) => true;
         private bool CanExecuteNavigateToWorkPlaces(object obj) => true;
+        private bool CanExecuteNavigateToSalaries(object obj) => true;
 
         private void ExecuteNavigateToSettings(object obj)
         {

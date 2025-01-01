@@ -27,6 +27,7 @@
                                     <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
                                         <Button Content="{DynamicResource Block}" Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
                                         <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        
 
                                     </StackPanel>
                                 </DataTemplate>

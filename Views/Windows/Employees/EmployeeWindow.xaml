@@ -1,11 +1,11 @@
-﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Companies.CompanyWindow"
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Employees.EmployeeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Employee Panel" Height="600" Width="1000"
+        Title="Employee Panel" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
@@ -21,9 +21,7 @@
             <!-- Left Panel -->
             <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
                 <StackPanel>
-                    <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                    <Button Content="{DynamicResource Departments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}"/>
-                    <Button Content="{DynamicResource WrokPlaces}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}"/>
+                    <Button Content="{DynamicResource Employments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmploymentsCommand}"/>
                     <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
                 </StackPanel>
             </Border>

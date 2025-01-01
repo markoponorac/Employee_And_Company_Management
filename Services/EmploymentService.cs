@@ -55,13 +55,14 @@ namespace Employee_And_Company_Management.Services
             using (var context = new EmployeeAndCompanyManagementContext())
             {
                 return await context.Employments
-                    .Include(e => e.WorkPlace) // Uključuje radno mesto
-                    .ThenInclude(wp => wp.Department) // Uključuje odeljenje radnog mesta
-                    .Include(e => e.CompanyProfile) // Uključuje kompaniju
-                    .Where(e => e.EmployeePersonProfileId == employeeId) // Filtrira prema ID zaposlenog
-                    .ToListAsync(); // Dohvata listu zaposlenja
+                    .Include(e => e.WorkPlace) 
+                    .ThenInclude(wp => wp.Department)
+                    .Include(e => e.CompanyProfile) 
+                    .Where(e => e.EmployeePersonProfileId == employeeId) 
+                    .ToListAsync(); 
             }
         }
+
 
     }
 }

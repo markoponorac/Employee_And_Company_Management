@@ -3,6 +3,7 @@ using Employee_And_Company_Management.Data.Entities;
 using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 
 namespace Employee_And_Company_Management.Services
@@ -31,7 +32,7 @@ namespace Employee_And_Company_Management.Services
                 var person = _context.People.FirstOrDefault(i => i.ProfileId.Equals(profile.Id));
                 if (person != null)
                 {
-                    var employee = _context.Employees.FirstOrDefault(i => i.PersonProfileId.Equals(person.ProfileId));
+                    var employee = _context.Employees.Include(p => p.QualificationLevel).FirstOrDefault(i => i.PersonProfileId.Equals(person.ProfileId));
                     if (employee != null)
                     {
                         return new LoginDTO()
@@ -46,7 +47,9 @@ namespace Employee_And_Company_Management.Services
                             IsDeleted = profile.IsDeleted,
                             Firstname = person.FirstName,
                             Lastname = person.LastName,
-                            Jmb = person.Jmb
+                            Jmb = person.Jmb,
+                            DateOfEstablish = employee.DateOfBirth,
+                            Qualification = employee.QualificationLevel.Title
                         };
                     }
                     var admin = _context.Administrators.FirstOrDefault(i => i.PersonProfileId.Equals(person.ProfileId));

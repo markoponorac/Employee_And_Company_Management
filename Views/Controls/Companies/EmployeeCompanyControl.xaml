@@ -27,8 +27,8 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
                                         <Button Content="{DynamicResource Dismiss}" Command="{Binding DataContext.DismissCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                        
                                         <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        <Button Content="{DynamicResource Salaries}" Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
 
                                     </StackPanel>
                                 </DataTemplate>
@@ -47,6 +47,8 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                         <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                        <Button Content="{DynamicResource Salaries}" Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

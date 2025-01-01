@@ -5,6 +5,7 @@ using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.Views.Windows;
 using Employee_And_Company_Management.Views.Windows.Companies;
+using Employee_And_Company_Management.Views.Windows.Employees;
 using System.Windows;
 using System.Windows.Input;
 

@@ -59,16 +59,16 @@ namespace Employee_And_Company_Management.Services
         {
             using (var context = new EmployeeAndCompanyManagementContext())
             {
-                return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false). ToListAsync();
+                return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false).ToListAsync();
             }
         }
 
         public async Task ChangeActiveStatus(int employeeId)
         {
-            using(var context = new EmployeeAndCompanyManagementContext())
+            using (var context = new EmployeeAndCompanyManagementContext())
             {
                 Employee employee = await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).FirstOrDefaultAsync(r => r.PersonProfileId.Equals(employeeId));
-                if(employee != null)
+                if (employee != null)
                 {
                     employee.PersonProfile.Profile.IsActive = !employee.PersonProfile.Profile.IsActive;
                     await context.SaveChangesAsync();
@@ -88,14 +88,14 @@ namespace Employee_And_Company_Management.Services
                 }
             }
         }
-        
+
         public async Task<bool> AddEmployee(Employee employee)
         {
             using (var context = new EmployeeAndCompanyManagementContext())
             {
                 if (employee != null)
                 {
-                    Employee temp= await context.Employees.FirstOrDefaultAsync(i => i.PersonProfile.Jmb.Equals(employee.PersonProfile.Jmb));
+                    Employee temp = await context.Employees.FirstOrDefaultAsync(i => i.PersonProfile.Jmb.Equals(employee.PersonProfile.Jmb));
                     if (temp != null)
                     {
                         return false;
@@ -104,6 +104,31 @@ namespace Employee_And_Company_Management.Services
                     await context.SaveChangesAsync();
                     return true;
                 }
+                return false;
+            }
+        }
+
+
+        public async Task<bool> UpdateEmployee(Employee employee)
+        {
+            try
+            {
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    Employee employeeTemp = await context.Employees.Include(p => p.PersonProfile).FirstOrDefaultAsync(i => i.PersonProfileId.Equals(employee.PersonProfileId));
+                    if (employeeTemp != null)
+                    {
+                        employeeTemp.PersonProfile.FirstName = employee.PersonProfile.FirstName;
+                        employeeTemp.PersonProfile.LastName = employee.PersonProfile.LastName;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }

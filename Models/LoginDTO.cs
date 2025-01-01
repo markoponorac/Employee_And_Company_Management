@@ -23,6 +23,7 @@ namespace Employee_And_Company_Management.Models
         public bool Success { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }
+        public string Qualification { get; set; }
 
         public DateOnly DateOfEstablish {  get; set; }
 

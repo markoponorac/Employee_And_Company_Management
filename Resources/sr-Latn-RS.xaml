@@ -46,6 +46,7 @@
     <system:String x:Key="Save">Sačuvaj</system:String>
     <system:String x:Key="Jmb">JMB</system:String>
     <system:String x:Key="UpdateSuccess">Podaci su uspješno sačuvani!</system:String>
+    <system:String x:Key="UpdateNotSuccess">Podaci nisu sačuvani!</system:String>
     <system:String x:Key="Block">Blokiraj</system:String>
     <system:String x:Key="Details">Detalji</system:String>
     <system:String x:Key="ActiveEmployees">Aktivni zaposleni</system:String>
@@ -109,5 +110,44 @@
     <system:String x:Key="WorkPlaceNotAdded">Radno mjesto nije dodano</system:String>
     <system:String x:Key="DeleteWorkPlaceCofirmMessage">Da li ste sigurni da želite obrisati radno mjesto?</system:String>
     <system:String x:Key="RestoreWorkPlaceCofirmMessage">Da li ste sigurni da želite obnoviti radno mjesto?</system:String>
-    
+    <system:String x:Key="AddNewEmployee">Dodaj zaposlenog</system:String>
+    <system:String x:Key="Hire">Zaposli</system:String>
+    <system:String x:Key="VacationDays">Broj dana odmora</system:String>
+    <system:String x:Key="HourlyRate">Satnica</system:String>
+    <system:String x:Key="HireDate">Datum zaposlenja</system:String>
+    <system:String x:Key="WorkPlace">Radno mjesto</system:String>
+    <system:String x:Key="EmployeeEmployed">Zaposleni je uspješno zaposlen</system:String>
+    <system:String x:Key="Update">Ažuriraj</system:String>
+    <system:String x:Key="EmployeedFrom">Zaposlen od</system:String>
+    <system:String x:Key="EmployeedTo">Zaposlen do</system:String>
+    <system:String x:Key="DeleteEmploymentCofirmMessage">Da li ste sigurni da želite da završite radni odnos?</system:String>
+    <system:String x:Key="NoData">Nema podataka</system:String>
+    <system:String x:Key="EmployeeSalaries">Plate zaposlenih</system:String>
+    <system:String x:Key="AddNewSalary">Dodaj platu</system:String>
+    <system:String x:Key="Year">Godina</system:String>
+    <system:String x:Key="Month">Mjesec</system:String>
+    <system:String x:Key="PaymentDate">Datum isplate</system:String>
+    <system:String x:Key="SalaryAmount">Iznos</system:String>
+    <system:String x:Key="Yes">Da</system:String>
+    <system:String x:Key="No">Ne</system:String>
+    <system:String x:Key="Cancel">Otkaži</system:String>
+    <system:String x:Key="December">Decembar</system:String>
+    <system:String x:Key="November">Novembar</system:String>
+    <system:String x:Key="October">Oktobar</system:String>
+    <system:String x:Key="September">Septembar</system:String>
+    <system:String x:Key="August">Avgust</system:String>
+    <system:String x:Key="July">Jul</system:String>
+    <system:String x:Key="June">Jun</system:String>
+    <system:String x:Key="May">Maj</system:String>
+    <system:String x:Key="April">April</system:String>
+    <system:String x:Key="March">Mart</system:String>
+    <system:String x:Key="February">Februar</system:String>
+    <system:String x:Key="January">Januar</system:String>
+    <system:String x:Key="SalaryAdded">Plata je uspjesno dodata</system:String>
+    <system:String x:Key="SalaryNotAdded">Plata nije dodata</system:String>
+    <system:String x:Key="Employments">Zaposlenja</system:String>
+    <system:String x:Key="EmployeeSettings">Podešavanja zaposlenog</system:String>
+    <system:String x:Key="SearchEmployments">Pretraži zaposlenja</system:String>
+
+
 </ResourceDictionary>

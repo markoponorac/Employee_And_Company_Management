@@ -1,0 +1,35 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Employees.SalariesEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Employees"
+        mc:Ignorable="d"
+        Title="{DynamicResource EmployeeSalaries}" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <DataGrid ItemsSource="{Binding Salaries}" 
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{DynamicResource Year}" 
+                                    Binding="{Binding ForYear}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource Month}" 
+                                    Binding="{Binding ForMonth}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource PaymentDate}" 
+                                    Binding="{Binding PaymentDate, StringFormat=d}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="{DynamicResource SalaryAmount}" 
+                                    Binding="{Binding Amount, StringFormat=C}" 
+                                    IsReadOnly="True"
+                                    Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
