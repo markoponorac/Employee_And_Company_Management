@@ -20,7 +20,6 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="1" 
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                     
                      Padding="5">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource InputStyle}">
@@ -48,42 +47,64 @@
                        Opacity="0.5"/>
         </Grid>
 
-        <!-- Employments DataGrid -->
-        <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding FilteredEmployments}" 
-                  AutoGenerateColumns="False" 
-                  CanUserAddRows="False" 
-                  Margin="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{DynamicResource Company}" 
-                                    Binding="{Binding CompanyProfile.Name}" 
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" 
-                                    Binding="{Binding WorkPlace.Title}" 
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource DepartmentName}" 
-                                    Binding="{Binding WorkPlace.Department.Name}" 
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource EmployeedFrom}" 
-                                    Binding="{Binding EmployedFrom, StringFormat={}{0:dd.MM.yyyy}}" 
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource EmployeedTo}" 
-                                    Binding="{Binding EmployedTo, StringFormat={}{0:dd.MM.yyyy}}" 
-                                    IsReadOnly="True"/>
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="{DynamicResource Salaries}" 
-                                    Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}"
-                                    Style="{StaticResource ButtonStyle}" 
-                                    Margin="5" 
-                                    Height="30"
-                                    HorizontalAlignment="Right"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Employments DataGrid with "No Data" Message -->
+        <ContentControl Grid.Row="1" Margin="10">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <DataGrid ItemsSource="{Binding FilteredEmployments}" 
+                                      AutoGenerateColumns="False" 
+                                      CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="{DynamicResource Company}" 
+                                                        Binding="{Binding CompanyProfile.Name}" 
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" 
+                                                        Binding="{Binding WorkPlace.Title}" 
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource DepartmentName}" 
+                                                        Binding="{Binding WorkPlace.Department.Name}" 
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource EmployeedFrom}" 
+                                                        Binding="{Binding EmployedFrom, StringFormat={}{0:dd.MM.yyyy}}" 
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource EmployeedTo}" 
+                                                        Binding="{Binding EmployedTo, StringFormat={}{0:dd.MM.yyyy}}" 
+                                                        IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="{DynamicResource Salaries}" 
+                                                        Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource ButtonStyle}" 
+                                                        Margin="5" 
+                                                        Height="30"
+                                                        HorizontalAlignment="Right"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding FilteredEmployments.Count}" Value="0">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock Text="{DynamicResource NoData}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center" 
+                                               FontSize="18" 
+                                               Margin="20" 
+                                               FontStyle="Italic"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </UserControl>

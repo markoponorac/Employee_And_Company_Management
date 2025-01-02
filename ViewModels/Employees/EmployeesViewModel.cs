@@ -32,6 +32,12 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             NavigateToEmploymentsCommand = new RelayCommand(ExecuteNavigateToEmployments, CanExecuteNavigateToEmployments);
         }
 
+
+        public void InitialNavigation()
+        {
+            ExecuteNavigateToEmployments(null);
+        }
+
         private bool CanExecuteNavigateToSettings(object obj) => true;
         private bool CanExecuteNavigateToEmployments(object obj) => true;
 

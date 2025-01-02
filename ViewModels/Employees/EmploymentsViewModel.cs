@@ -2,15 +2,8 @@
 using Employee_And_Company_Management.Data.Entities;
 using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Services;
-using Employee_And_Company_Management.Views.Controls.Employees;
 using Employee_And_Company_Management.Views.Windows.Employees;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 

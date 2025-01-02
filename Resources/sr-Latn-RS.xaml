@@ -158,5 +158,8 @@
     <system:String x:Key="SearchDepartments">Pretraži odjeljenja</system:String>
     <system:String x:Key="SearchWorkPlaces">Pretraži radna mjesta</system:String>
     <system:String x:Key="RestoreConfirm">Potvrda obnove</system:String>
+    <system:String x:Key="EmployeePanel">Zaposleni</system:String>
+    <system:String x:Key="CompanyDetails">Detalji o kompaniji</system:String>
+
 
 </ResourceDictionary>

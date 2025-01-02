@@ -22,11 +22,11 @@
                                     IsReadOnly="True"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="{DynamicResource PaymentDate}" 
-                                    Binding="{Binding PaymentDate, StringFormat=d}" 
+                                    Binding="{Binding PaymentDate, StringFormat={}{0:dd.MM.yyyy}}" 
                                     IsReadOnly="True"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="{DynamicResource SalaryAmount}" 
-                                    Binding="{Binding Amount, StringFormat=C}" 
+                                    Binding="{Binding Amount}" 
                                     IsReadOnly="True"
                                     Width="Auto"/>
             </DataGrid.Columns>

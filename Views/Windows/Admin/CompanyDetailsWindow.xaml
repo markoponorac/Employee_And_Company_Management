@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.CompanyDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource EmployeeDetails}" Height="300" Width="500"
+        Title="{DynamicResource CompanyDetails}" Height="300" Width="500"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
         
