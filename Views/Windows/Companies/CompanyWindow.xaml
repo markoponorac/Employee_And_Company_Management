@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Employee Panel" Height="600" Width="1000"
+        Title="{DynamicResource Company}" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
@@ -20,12 +20,21 @@
 
             <!-- Left Panel -->
             <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
-                <StackPanel>
-                    <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                    <Button Content="{DynamicResource Departments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}"/>
-                    <Button Content="{DynamicResource WrokPlaces}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}"/>
-                    <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
-                </StackPanel>
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!-- This row will take all the remaining space -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- This row will only take the height of the settings button -->
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
+                        <Button Content="{DynamicResource Departments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}"/>
+                        <Button Content="{DynamicResource WrokPlaces}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}"/>
+                    </StackPanel>
+
+                    <Button Grid.Row="1" Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
+                </Grid>
             </Border>
 
             <!-- Right Panel -->

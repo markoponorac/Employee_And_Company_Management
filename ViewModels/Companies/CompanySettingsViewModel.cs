@@ -4,6 +4,7 @@ using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
+using Employee_And_Company_Management.Views.Windows.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,10 +85,6 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         private bool CanExecuteUpdateProfile(object obj) => true;
         private bool CanExecuteChangePassword(object obj)
         {
-            //if(String.IsNullOrEmpty(OldPassword) || String.IsNullOrEmpty(NewPassword) || String.IsNullOrEmpty(NewConfirmedPassword))
-            //{
-            //    return false;
-            //}
             return true;
         }
 
@@ -105,7 +102,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (string.IsNullOrEmpty(Address))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             var company = new Company()
@@ -113,10 +110,17 @@ namespace Employee_And_Company_Management.ViewModels.Companies
                 ProfileId = LoginDTO.ProfileId,
                 Address = Address
             };
-            await _companyService.Update(company);
-            MessageBox.Show(LanguageUtil.Translate("UpdateSuccess"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-            if (!string.IsNullOrEmpty(Address))
-                LoginDTO.Address = Address;
+            var result = await _companyService.Update(company);
+            if (result)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("UpdateSuccess"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
+                if (!string.IsNullOrEmpty(Address))
+                    LoginDTO.Address = Address;
+            }
+            else
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
            
         }
 
@@ -135,27 +139,27 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (string.IsNullOrEmpty(OldPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(NewConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (NewPassword.Length <= UtilConstants.MIN_PASSWORD_LENGTH)
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (NewPassword.Equals(OldPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordsEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordsEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (!NewPassword.Equals(NewConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (await _profileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
         }
 

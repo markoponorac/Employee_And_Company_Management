@@ -5,12 +5,8 @@ using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.Views.Windows.Companies;
-using System;
-using System.Collections.Generic;
+using Employee_And_Company_Management.Views.Windows.Components;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -170,12 +166,27 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             set => SetProperty(ref _paymentDate, value);
         }
 
+
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                SetProperty(ref _searchText, value);
+                FilterEmployees();
+            }
+        }
+
+
         public ICommand ViewDetailsCommand { get; set; }
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand OpenHireWindowCommand { get; set; }
         public ICommand ConfirmHireCommand { get; set; }
         public ICommand DismissCommand { get; set; }
         public ICommand ViewSalariesCommand { get; set; }
+        public ICommand ViewFormerEmployeeSalariesCommand { get; set; }
         public ICommand AddNewSalaryCommand { get; set; }
         public ICommand SaveNewSalaryCommand { get; set; }
 
@@ -203,6 +214,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             ViewDetailsCommand = new RelayCommand(OpenDetailsWindow, CanModifyEmployee);
             DismissCommand = new RelayCommand(DissmisEmployment, CanModifyEmployee);
             ViewSalariesCommand = new RelayCommand(OpenSalariesWindow, CanModifyEmployee);
+            ViewFormerEmployeeSalariesCommand = new RelayCommand(OpenFormerEmployeeSalariesWindow, CanModifyEmployee);
             AddNewSalaryCommand = new RelayCommand(OpenAddSalariesWindow, CanModifyEmployee);
             SaveNewSalaryCommand = new RelayCommand(SaveNewSalary, CanModifyEmployee);
             LoadEmployees();
@@ -224,18 +236,41 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             FormerEmployees = new ObservableCollection<Employee>(filteredFormerEmployees);
         }
 
+
+        private async void FilterEmployees()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                LoadEmployees();
+            }
+            else
+            {
+                var employees = await _employeeService.GetUnemployedEmployees();
+                AvailableEmployees = new ObservableCollection<Employee>(employees.Where(e => e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+                var currentlyEmployed = await _employeeService.GetCurrentlyEmployedInCompany(loginDTO.ProfileId);
+                CurrentlyEmployed = new ObservableCollection<Employee>(currentlyEmployed.Where(e => e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+                
+                var tempFormerEmployees = await _employeeService.GetFormerEmployeesInCompany(loginDTO.ProfileId);
+                var currentlyEmployedIds = new HashSet<int>(currentlyEmployed.Select(e => e.PersonProfileId));
+                var filteredFormerEmployees = tempFormerEmployees.Where(e => !currentlyEmployedIds.Contains(e.PersonProfileId));
+
+                FormerEmployees = new ObservableCollection<Employee>(filteredFormerEmployees.Where(e => e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+
+            }
+        }
+
         private async Task LoadDepartments()
         {
             company = await companyService.GetCompany(loginDTO.ProfileId);
             var departments = await departmentsService.GetDepartmenentsForCompany(loginDTO.ProfileId);
-            Departments = new ObservableCollection<Department>(departments);
+            Departments = new ObservableCollection<Department>(departments.Where(i=> !i.IsDeleted));
         }
         private async Task LoadWorkPlaces()
         {
             if (selectedDepartment != null)
             {
                 var workplaces = await workPlacesService.GetFreeWorkPlacesInDepartment(selectedDepartment.Id);
-                WorkPlaces = new ObservableCollection<WorkPlace>(workplaces);
+                WorkPlaces = new ObservableCollection<WorkPlace>(workplaces.Where(i => !i.IsDeleted));
             }
         }
 
@@ -283,6 +318,20 @@ namespace Employee_And_Company_Management.ViewModels.Companies
 
         }
 
+        private void OpenFormerEmployeeSalariesWindow(object parameter)
+        {
+            if (parameter is Employee employee)
+            {
+                selectedEmployee = employee;
+
+                LoadSalaries();
+                salariesWindow = new FormerEmployeesSalariesWindow(this);
+                salariesWindow.ShowDialog();
+            }
+
+
+        }
+
         private void OpenAddSalariesWindow(object parameter)
         {
 
@@ -298,11 +347,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (Amount <= 0.0 || PaymentDate == null || _selectedMonthInt < 1 || _selectedMonthInt > 12 || Year > DateTime.Now.Year || Year == 0)
             {
-                MessageBox.Show(Amount.ToString());
-                MessageBox.Show(PaymentDate.ToString());
-                MessageBox.Show(_selectedMonthInt.ToString());
-                MessageBox.Show(Year.ToString());
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
 
@@ -316,13 +361,13 @@ namespace Employee_And_Company_Management.ViewModels.Companies
 
             bool result = await salariesService.AddSalaryForEmployeeAndCompany(salary, selectedEmployee.PersonProfileId, loginDTO.ProfileId);
             if (result) {
-                MessageBox.Show(LanguageUtil.Translate("SalaryAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("SalaryAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
 
                 LoadSalaries();
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("SalaryNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("SalaryNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             addSalariesWindow.Close();
 
@@ -351,7 +396,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             if (parameter is Employee employee)
             {
                 SelectedEmployeeDetails = employee;
-                var result = MessageBox.Show(LanguageUtil.Translate("DeleteEmploymentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteEmploymentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
                     await employmentService.EndEmployment(SelectedEmployeeDetails);
@@ -368,7 +413,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (selectedDepartment == null || selectedWorkPlace == null || hireDate == null || hourlyRate <= 0.0 || vacationDays <= 0)
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
 
@@ -388,11 +433,17 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             };
 
 
-            await employmentService.AddEmployment(employment);
-
-            MessageBox.Show(LanguageUtil.Translate("EmployeeEmployed"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-            await LoadEmployees();
-            await LoadWorkPlaces();
+            var result = await employmentService.AddEmployment(employment);
+            if(result)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("EmployeeEmployed"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
+                await LoadEmployees();
+                await LoadWorkPlaces();
+            }
+            else
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("EmployeeNotEmployed"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
 
 
 

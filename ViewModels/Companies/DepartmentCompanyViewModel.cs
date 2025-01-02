@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Employee_And_Company_Management.Views.Windows.Components;
 
 namespace Employee_And_Company_Management.ViewModels.Companies
 {
@@ -33,9 +34,29 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         public ICommand DeleteDepartmentCommand { get; set; }
         public ICommand RestoreDepartmentCommand { get; set; }
 
+        private ObservableCollection<Department> _departments;
+        public ObservableCollection<Department> Departments
+        {
+            get => _departments;
+            set => SetProperty(ref _departments, value);
+        }
+        private ObservableCollection<Department> _deletedDepartments;
+        public ObservableCollection<Department> DeletedDepartments
+        {
+            get => _deletedDepartments;
+            set => SetProperty(ref _deletedDepartments, value);
+        }
 
-        public ObservableCollection<Department> Departments { get; set; }
-        public ObservableCollection<Department> DeletedDepartments { get; set; }
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                SetProperty(ref _searchText, value);
+                FilterDepartments();
+            }
+        }
         public DepartmentCompanyViewModel(LoginDTO loginDTO)
         {
             this.loginDTO = loginDTO;
@@ -45,8 +66,6 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             SaveDepartmentCommand = new RelayCommand(SaveNewDepartment, CanSaveNewDepartment);
             DeleteDepartmentCommand = new RelayCommand(DeleteDepartment, CanModifyDepartment);
             RestoreDepartmentCommand = new RelayCommand(RestoreDepartment, CanModifyDepartment);
-
-            Thread.Sleep(200);
 
         }
 
@@ -58,15 +77,27 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             DeletedDepartments = new ObservableCollection<Department>(departments.Where(i => i.IsDeleted == true));
         }
 
+        private async void FilterDepartments()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                LoadDepartments();
+            }
+            else
+            {
+                var departments = await departmentsService.GetDepartmenentsForCompany(loginDTO.ProfileId);
+                Departments = new ObservableCollection<Department>(departments.Where(i => i.IsDeleted == false && i.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+                DeletedDepartments = new ObservableCollection<Department>(departments.Where(i => i.IsDeleted == true && i.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+            }
+        }
+
+
 
         private bool CanModifyDepartment(object parameter) => true;
 
         private bool CanSaveNewDepartment(object parameter)
         {
-            //if(string.IsNullOrEmpty(DepartmentName))
-            //{
-            //    return false;
-            //}
+
             return true;
         }
 
@@ -78,15 +109,16 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         }
 
 
-        private async void DeleteDepartment (object parameter)
+        private async void DeleteDepartment(object parameter)
         {
             if (parameter is Department department)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("DeleteDepartmentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteDepartmentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await departmentsService.DeleteDepartment(department.Id);
-                    await ReloadDepartmentsAsync();
+                    var temp = await departmentsService.DeleteDepartment(department.Id);
+                    if (temp)
+                        await ReloadDepartmentsAsync();
                 }
             }
         }
@@ -95,11 +127,12 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (parameter is Department department)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("RestoreDepartmentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("RestoreDepartmentCofirmMessage"), LanguageUtil.Translate("RestoreConfirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await departmentsService.RestoreDepartment(department.Id);
-                    await ReloadDepartmentsAsync();
+                    var temp = await departmentsService.RestoreDepartment(department.Id);
+                    if (temp)
+                        await ReloadDepartmentsAsync();
                 }
             }
         }
@@ -109,7 +142,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         {
             if (string.IsNullOrEmpty(DepartmentName))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
 
@@ -125,12 +158,12 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             bool result = await departmentsService.AddDepartment(department);
             if (result)
             {
-                MessageBox.Show(LanguageUtil.Translate("DepartmentAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("DepartmentAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadDepartmentsAsync();
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("DepartmentNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("DepartmentNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
 
             DepartmentName = null;

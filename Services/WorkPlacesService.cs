@@ -16,62 +16,101 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<WorkPlace>> GetWorkPlacesInDepartment(int departmentID)
         {
-            using(var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.WorkPlaces.Where(i => i.DepartmentId== departmentID).ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.WorkPlaces.Where(i => i.DepartmentId == departmentID).ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<WorkPlace>();
             }
         }
 
 
         public async Task<List<WorkPlace>> GetFreeWorkPlacesInDepartment(int departmentID)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.WorkPlaces
-                 .Where(workPlace =>
-                     workPlace.DepartmentId == departmentID &&
-                     !context.Employments.Any(employment =>
-                         employment.WorkPlaceId == workPlace.Id && employment.EmployedTo == null))
-                 .ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.WorkPlaces
+                     .Where(workPlace =>
+                         workPlace.DepartmentId == departmentID &&
+                         !context.Employments.Any(employment =>
+                             employment.WorkPlaceId == workPlace.Id && employment.EmployedTo == null))
+                     .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<WorkPlace>();
             }
         }
 
         public async Task<bool> AddWorkPlace(WorkPlace workPlace)
         {
-            using (var contex = new EmployeeAndCompanyManagementContext())
+            try
             {
+                using (var contex = new EmployeeAndCompanyManagementContext())
+                {
 
-                contex.Entry(workPlace.Department).State = EntityState.Unchanged;
-                contex.WorkPlaces.Add(workPlace);
-                await contex.SaveChangesAsync();
-                return true;
+                    contex.Entry(workPlace.Department).State = EntityState.Unchanged;
+                    contex.WorkPlaces.Add(workPlace);
+                    await contex.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
 
-        public async Task DeleteWorkPlace(int workPlaceId)
+        public async Task<bool> DeleteWorkPlace(int workPlaceId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                WorkPlace workPlace = await context.WorkPlaces.FirstOrDefaultAsync(i => i.Id.Equals(workPlaceId));
-                if (workPlace != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    workPlace.IsDeleted = true;
-                    await context.SaveChangesAsync();
+                    WorkPlace workPlace = await context.WorkPlaces.FirstOrDefaultAsync(i => i.Id.Equals(workPlaceId));
+                    if (workPlace != null)
+                    {
+                        workPlace.IsDeleted = true;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
-        public async Task RestoreWorkPlace(int workPlaceId)
+        public async Task<bool> RestoreWorkPlace(int workPlaceId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                WorkPlace workPlace = await context.WorkPlaces.FirstOrDefaultAsync(i => i.Id.Equals(workPlaceId));
-                if (workPlace != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    workPlace.IsDeleted = false;
-                    await context.SaveChangesAsync();
+                    WorkPlace workPlace = await context.WorkPlaces.FirstOrDefaultAsync(i => i.Id.Equals(workPlaceId));
+                    if (workPlace != null)
+                    {
+                        workPlace.IsDeleted = false;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

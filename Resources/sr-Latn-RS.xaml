@@ -117,6 +117,7 @@
     <system:String x:Key="HireDate">Datum zaposlenja</system:String>
     <system:String x:Key="WorkPlace">Radno mjesto</system:String>
     <system:String x:Key="EmployeeEmployed">Zaposleni je uspješno zaposlen</system:String>
+    <system:String x:Key="EmployeeNotEmployed">Zaposleni ne može biti zaposlen</system:String>
     <system:String x:Key="Update">Ažuriraj</system:String>
     <system:String x:Key="EmployeedFrom">Zaposlen od</system:String>
     <system:String x:Key="EmployeedTo">Zaposlen do</system:String>
@@ -154,5 +155,8 @@
     <system:String x:Key="SearchEmployees">Pretraži zaposlene</system:String>
     <system:String x:Key="SearchCompanyes">Pretraži kompanije</system:String>
     <system:String x:Key="SearchQualifications">Pretraži stručne spreme</system:String>
+    <system:String x:Key="SearchDepartments">Pretraži odjeljenja</system:String>
+    <system:String x:Key="SearchWorkPlaces">Pretraži radna mjesta</system:String>
+    <system:String x:Key="RestoreConfirm">Potvrda obnove</system:String>
 
 </ResourceDictionary>

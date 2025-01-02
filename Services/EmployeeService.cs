@@ -31,14 +31,16 @@ namespace Employee_And_Company_Management.Services
             {
                 using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    return await context.Employments
-                        .Where(e => e.CompanyProfileId == companyId && e.EmployedTo == null)
-                        .Include(e => e.EmployeePersonProfile)
-                            .ThenInclude(emp => emp.PersonProfile)
-                        .Include(e => e.EmployeePersonProfile.QualificationLevel)
-                        .Select(e => e.EmployeePersonProfile)
-                        .Distinct()
-                        .ToListAsync();
+                    return await context.Employees.Include(e => e.PersonProfile).ThenInclude(pp => pp.Profile).Include(e => e.Employments).
+                        Where(e => e.Employments.Any(emp => emp.CompanyProfileId == companyId && emp.EmployedTo == null)).ToListAsync();
+                    //return await context.Employments
+                    //    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo == null)
+                    //    .Include(e => e.EmployeePersonProfile)
+                    //        .ThenInclude(emp => emp.PersonProfile)
+                    //    .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                    //    .Select(e => e.EmployeePersonProfile).Include(e => e.PersonProfile).ThenInclude(e => e.Profile)
+                    //    .Distinct()
+                    //    .ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -53,14 +55,16 @@ namespace Employee_And_Company_Management.Services
             {
                 using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    return await context.Employments
-                        .Where(e => e.CompanyProfileId == companyId && e.EmployedTo != null)
-                        .Include(e => e.EmployeePersonProfile)
-                            .ThenInclude(emp => emp.PersonProfile)
-                        .Include(e => e.EmployeePersonProfile.QualificationLevel)
-                        .Select(e => e.EmployeePersonProfile)
-                        .Distinct()
-                        .ToListAsync();
+                    return await context.Employees.Include(e => e.PersonProfile).ThenInclude(pp => pp.Profile).Include(e => e.Employments).
+                        Where(e => e.Employments.Any(emp => emp.CompanyProfileId == companyId && emp.EmployedTo != null)).ToListAsync();
+                    //return await context.Employments
+                    //    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo != null)
+                    //    .Include(e => e.EmployeePersonProfile)
+                    //    .ThenInclude(emp => emp.PersonProfile)
+                    //    .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                    //    .Select(e => e.EmployeePersonProfile).Include(e => e.PersonProfile).ThenInclude(e => e.Profile)
+                    //    .Distinct()
+                    //    .ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -77,7 +81,8 @@ namespace Employee_And_Company_Management.Services
             {
                 using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false && !i.PersonProfile.Profile.IsDeleted).ToListAsync();
+                    return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).
+                        Where(i => i.IsEmployed == false && !i.PersonProfile.Profile.IsDeleted && i.PersonProfile.Profile.IsActive).ToListAsync();
                 }
             }
             catch (Exception ex)

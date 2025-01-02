@@ -117,6 +117,7 @@
     <system:String x:Key="HireDate">Hire Date</system:String>
     <system:String x:Key="WorkPlace">Work place</system:String>
     <system:String x:Key="EmployeeEmployed">Employee employed</system:String>
+    <system:String x:Key="EmployeeNotEmployed">Employee can not be employed</system:String>
     <system:String x:Key="Update">Update</system:String>
     <system:String x:Key="EmployeedFrom">Employeed from</system:String>
     <system:String x:Key="EmployeedTo">Employeed to</system:String>
@@ -154,5 +155,8 @@
     <system:String x:Key="SearchEmployees">Search employees</system:String>
     <system:String x:Key="SearchCompanyes">Search companyes</system:String>
     <system:String x:Key="SearchQualifications">Search qualifications</system:String>
+    <system:String x:Key="SearchDepartments">Search departments</system:String>
+    <system:String x:Key="SearchWorkPlaces">Search work places</system:String>
+    <system:String x:Key="RestoreConfirm">Restore confirmation</system:String>
 
 </ResourceDictionary>

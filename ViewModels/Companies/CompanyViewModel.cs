@@ -36,6 +36,11 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             NavigateToWrokPlacesCommand = new RelayCommand(ExecuteNavigateToWorkPlaces, CanExecuteNavigateToWorkPlaces);
             LoginDTO = loginDTO;
         }
+
+        public void InitialNavigation()
+        {
+            ExecuteNavigateToEmployees(null);
+        }
         private bool CanExecuteNavigateToSettings(object obj) => true;
         private bool CanExecuteNavigateToEmployees(object obj) => true;
         private bool CanExecuteNavigateToDepartments(object obj) => true;

@@ -15,52 +15,84 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<Department>> GetDepartmenentsForCompany(int companyId)
         {
-            using(var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return context.Departments.Where(i => i.CompanyProfileId.Equals(companyId)).ToList();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return context.Departments.Where(i => i.CompanyProfileId.Equals(companyId)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Department>();
             }
         }
 
 
         public async Task<bool> AddDepartment(Department department)
         {
-            using(var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Department tempDep = await context.Departments.FirstOrDefaultAsync(i => i.CompanyProfileId.Equals(department.CompanyProfileId) && i.Name.Equals(department.Name));
-                if(tempDep != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
+                    Department tempDep = await context.Departments.FirstOrDefaultAsync(i => i.CompanyProfileId.Equals(department.CompanyProfileId) && i.Name.Equals(department.Name));
+                    if (tempDep != null)
+                    {
+                        return false;
+                    }
+                    context.Departments.Add(department);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+
+        public async Task<bool> DeleteDepartment(int departmentID)
+        {
+            try
+            {
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    Department department = await context.Departments.FirstOrDefaultAsync(i => i.Id.Equals(departmentID));
+                    if (department != null)
+                    {
+                        department.IsDeleted = true;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
                     return false;
                 }
-                context.Departments.Add(department);
-                await context.SaveChangesAsync();
-                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
-
-        public async Task DeleteDepartment(int departmentID)
+        public async Task<bool> RestoreDepartment(int departmentID)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Department department = await context.Departments.FirstOrDefaultAsync(i => i.Id.Equals(departmentID));
-                if (department != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    department.IsDeleted = true;
-                    await context.SaveChangesAsync();
+                    Department department = await context.Departments.FirstOrDefaultAsync(i => i.Id.Equals(departmentID));
+                    if (department != null)
+                    {
+                        department.IsDeleted = false;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
             }
-        }
-
-        public async Task RestoreDepartment(int departmentID)
-        {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            catch (Exception ex)
             {
-                Department department = await context.Departments.FirstOrDefaultAsync(i => i.Id.Equals(departmentID));
-                if (department != null)
-                {
-                    department.IsDeleted = false;
-                    await context.SaveChangesAsync();
-                }
+                return false;
             }
         }
     }

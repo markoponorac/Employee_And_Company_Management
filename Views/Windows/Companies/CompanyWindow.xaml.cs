@@ -16,6 +16,8 @@ namespace Employee_And_Company_Management.Views.Windows.Companies
             ThemeUtil.ChangeTheme(_loginDTO.Theme);
             var viewModel = new CompanyViewModel(loginDTO);
             DataContext = viewModel;
+
+            Loaded += (s, e) => viewModel.InitialNavigation();
         }
 
 

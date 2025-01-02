@@ -91,19 +91,26 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<bool> AddCompany(Company company)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                if (company != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    Company temp = await context.Companies.FirstOrDefaultAsync(i => i.Jib.Equals(company.Jib));
-                    if (temp != null)
+                    if (company != null)
                     {
-                        return false;
+                        Company temp = await context.Companies.FirstOrDefaultAsync(i => i.Jib.Equals(company.Jib));
+                        if (temp != null)
+                        {
+                            return false;
+                        }
+                        context.Companies.Add(company);
+                        await context.SaveChangesAsync();
+                        return true;
                     }
-                    context.Companies.Add(company);
-                    await context.SaveChangesAsync();
-                    return true;
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }

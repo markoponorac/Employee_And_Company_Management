@@ -15,19 +15,28 @@ namespace Employee_And_Company_Management.Services
         {
         }
 
-        public async Task AddEmployment(Employment employment)
+        public async Task<bool> AddEmployment(Employment employment)
         {
-            using(var contex = new EmployeeAndCompanyManagementContext())
+            try
             {
-                contex.Entry(employment.EmployeePersonProfile).State = EntityState.Unchanged;
-                contex.Entry(employment.CompanyProfile).State = EntityState.Unchanged;
-                contex.Entry(employment.WorkPlace).State = EntityState.Unchanged;
-                Employee employee = await contex.Employees.FirstOrDefaultAsync(i => i.PersonProfileId == employment.EmployeePersonProfile.PersonProfileId);
-                if (employee != null) { 
-                    employee.IsEmployed = true;
+                using (var contex = new EmployeeAndCompanyManagementContext())
+                {
+                    contex.Entry(employment.EmployeePersonProfile).State = EntityState.Unchanged;
+                    contex.Entry(employment.CompanyProfile).State = EntityState.Unchanged;
+                    contex.Entry(employment.WorkPlace).State = EntityState.Unchanged;
+                    Employee employee = await contex.Employees.FirstOrDefaultAsync(i => i.PersonProfileId == employment.EmployeePersonProfile.PersonProfileId);
+                    if (employee != null)
+                    {
+                        employee.IsEmployed = true;
+                    }
+                    contex.Employments.Add(employment);
+                    await contex.SaveChangesAsync();
+                    return true;
                 }
-                contex.Employments.Add(employment);
-                await contex.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
