@@ -37,7 +37,10 @@ namespace Employee_And_Company_Management
             }
         }
 
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UsernameTextBox.Focus();
+        }
         private void SerbianButton_Click(object sender, RoutedEventArgs e)
         {
             LanguageUtil.ChangeLanguage(LanguageConstants.SERBIAN_LATIN);

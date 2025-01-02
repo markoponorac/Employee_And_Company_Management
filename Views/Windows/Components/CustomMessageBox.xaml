@@ -3,20 +3,61 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="{Binding Title}" Height="Auto" Width="400" SizeToContent="Height"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MessageBox" 
+        Height="Auto" 
+        Width="400" 
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        WindowStyle="None">
 
-        <TextBlock Grid.Row="1" Text="{Binding Message}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{DynamicResource Yes}" Click="YesButton_Click" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Visibility="{Binding YesButtonVisibility}"/>
-            <Button Content="{DynamicResource No}" Click="NoButton_Click" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Visibility="{Binding NoButtonVisibility}"/>
-            <Button Content="{DynamicResource Cancel}" Click="CancelButton_Click" Style="{StaticResource ButtonStyle}" Visibility="{Binding CancelButtonVisibility}"/>
-        </StackPanel>
-    </Grid>
+    <materialDesign:Card Style="{StaticResource WindowCardStyle}" UniformCornerRadius="0">
+        <Border Style="{StaticResource MainBorderStyle}" CornerRadius="0" >
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Text="{Binding Title}" 
+                           Style="{StaticResource HeaderTextStyle}" 
+                           Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="1" 
+                           Text="{Binding Message}" 
+                           Style="{StaticResource ParameterTextSyle}" 
+                           TextWrapping="Wrap" 
+                           Margin="0,0,0,20"/>
+
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right">
+                    <Button Content="{DynamicResource Yes}" 
+                            Command="{Binding YesCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Margin="0,0,10,0" 
+                            Visibility="{Binding YesButtonVisibility}"/>
+                    <Button Content="{DynamicResource No}" 
+                            Command="{Binding NoCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Margin="0,0,10,0" 
+                            Visibility="{Binding NoButtonVisibility}"/>
+                    <Button Content="{DynamicResource Cancel}" 
+                            Command="{Binding CancelCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Margin="0,0,10,0" 
+                            Visibility="{Binding CancelButtonVisibility}"/>
+                    <Button Content="{DynamicResource OK}" 
+                            Command="{Binding OKCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Visibility="{Binding OKButtonVisibility}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </materialDesign:Card>
 </Window>

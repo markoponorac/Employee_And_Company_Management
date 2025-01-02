@@ -20,6 +20,7 @@ namespace Employee_And_Company_Management.Views.Windows
             ThemeUtil.ChangeTheme(_loginDTO.Theme);
             var viewModel = new AdministratorViewModel(_loginDTO);
             DataContext = viewModel;
+            Loaded += (s, e) => viewModel.InitialNavigation();
         }
 
     }

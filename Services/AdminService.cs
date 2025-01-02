@@ -15,28 +15,35 @@ namespace Employee_And_Company_Management.Services
         {
         }
 
-        public async Task UpdateAdmin(Administrator administrator)
+        public async Task<bool> UpdateAdmin(Administrator administrator)
         {
-            if (administrator == null)
+            try
             {
-                return;
-            }
-            using (var _context = new EmployeeAndCompanyManagementContext())
-            {
-                Person person = await _context.People.FirstOrDefaultAsync(i => i.ProfileId.Equals(administrator.PersonProfileId));
-                if (person != null)
+                if (administrator == null)
                 {
-                    if (!string.IsNullOrWhiteSpace(administrator.PersonProfile.FirstName))
-                    {
-                        person.FirstName = administrator.PersonProfile.FirstName;
-                    }
-                    if (!string.IsNullOrWhiteSpace(administrator.PersonProfile.LastName))
-                    {
-                        person.LastName = administrator.PersonProfile.LastName;
-                    }
+                    return false;
                 }
-                await _context.SaveChangesAsync();
-
+                using (var _context = new EmployeeAndCompanyManagementContext())
+                {
+                    Person person = await _context.People.FirstOrDefaultAsync(i => i.ProfileId.Equals(administrator.PersonProfileId));
+                    if (person != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(administrator.PersonProfile.FirstName))
+                        {
+                            person.FirstName = administrator.PersonProfile.FirstName;
+                        }
+                        if (!string.IsNullOrWhiteSpace(administrator.PersonProfile.LastName))
+                        {
+                            person.LastName = administrator.PersonProfile.LastName;
+                        }
+                    }
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

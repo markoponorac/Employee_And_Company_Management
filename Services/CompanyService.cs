@@ -17,43 +17,75 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<Company>> GetCompanies()
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Companies.Include(i => i.Profile).ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Companies.Include(i => i.Profile).ToListAsync();
+                }
+            }
+            catch (Exception e)
+            {
+               return new List<Company>();
             }
         }
 
 
         public async Task<Company> GetCompany(int companyId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(i => i.ProfileId == companyId);
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(i => i.ProfileId == companyId);
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
 
-        public async Task ChangeActiveStatus(int companyId)
+        public async Task<bool> ChangeActiveStatus(int companyId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Company company = await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(r => r.ProfileId.Equals(companyId));
-                if (company != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    company.Profile.IsActive = !company.Profile.IsActive;
-                    await context.SaveChangesAsync();
+                    Company company = await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(r => r.ProfileId.Equals(companyId));
+                    if (company != null)
+                    {
+                        company.Profile.IsActive = !company.Profile.IsActive;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
             }
-        }
-        public async Task DeleteCompany(int companyId)
-        {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            catch (Exception ex)
             {
-                Company company = await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(r => r.ProfileId.Equals(companyId));
-                if (company != null)
+                return false;
+            }
+        }
+        public async Task<bool> DeleteCompany(int companyId)
+        {
+            try
+            {
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    company.Profile.IsDeleted = true;
-                    await context.SaveChangesAsync();
+                    Company company = await context.Companies.Include(i => i.Profile).FirstOrDefaultAsync(r => r.ProfileId.Equals(companyId));
+                    if (company != null)
+                    {
+                        company.Profile.IsDeleted = true;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
@@ -76,24 +108,31 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task Update(Company company)
+        public async Task<bool> Update(Company company)
         {
-            if (company == null)
+            try
             {
-                return;
-            }
-            using (var _context = new EmployeeAndCompanyManagementContext())
-            {
-                Company tempCompany = await _context.Companies.FirstOrDefaultAsync(i => i.ProfileId.Equals(company.ProfileId));
-                if (tempCompany != null)
+                if (company == null)
                 {
-                    if (!string.IsNullOrWhiteSpace(company.Address))
-                    {
-                        tempCompany.Address = company.Address;
-                    }
+                    return false;
                 }
-                await _context.SaveChangesAsync();
-
+                using (var _context = new EmployeeAndCompanyManagementContext())
+                {
+                    Company tempCompany = await _context.Companies.FirstOrDefaultAsync(i => i.ProfileId.Equals(company.ProfileId));
+                    if (tempCompany != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(company.Address))
+                        {
+                            tempCompany.Address = company.Address;
+                        }
+                    }
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

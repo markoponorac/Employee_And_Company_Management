@@ -1,8 +1,10 @@
 ﻿using Employee_And_Company_Management.Commands;
 using Employee_And_Company_Management.Models;
+using Employee_And_Company_Management.ViewModels.Employees;
 using Employee_And_Company_Management.Views.Controls.Admin;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Employee_And_Company_Management.ViewModels.Admin
 {
@@ -29,6 +31,11 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             NavigateToCompaniesCommand = new RelayCommand(ExecuteNavigateToCompanies, CanExecuteNavigateToCompanies);
             NavigateToQualificationCommand = new RelayCommand(ExecuteNavigateToQualification, CanExecuteNavigateToCompanies);
             LoginDTO = loginDTO;
+        }
+
+        public void InitialNavigation()
+        {
+            ExecuteNavigateToEmployees(null);
         }
 
         private bool CanExecuteNavigateToSettings(object obj) => true;

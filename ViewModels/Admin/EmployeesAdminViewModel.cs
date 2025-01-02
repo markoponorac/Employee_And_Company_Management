@@ -5,6 +5,7 @@ using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.Views.Windows;
+using Employee_And_Company_Management.Views.Windows.Components;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -17,9 +18,27 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         private readonly EmployeeService _employeeService;
         private readonly QualificationsServis _qualificationsServis;
 
-        public ObservableCollection<Employee> ActiveEmployees { get; set; }
-        public ObservableCollection<Employee> BlockedEmployees { get; set; }
-        public ObservableCollection<Employee> DeletedEmployees { get; set; }
+
+        private ObservableCollection<Employee> _activeEmplpyees;
+        public ObservableCollection<Employee> ActiveEmployees
+        {
+            get => _activeEmplpyees;
+            set => SetProperty(ref _activeEmplpyees, value);
+        }
+
+        private ObservableCollection<Employee> _blockedEmployees;
+        public ObservableCollection<Employee> BlockedEmployees
+        {
+            get => _blockedEmployees;
+            set => SetProperty(ref _blockedEmployees, value);
+        }
+
+        private ObservableCollection<Employee> _deletedEmployees;
+        public ObservableCollection<Employee> DeletedEmployees
+        {
+            get => _deletedEmployees;
+            set => SetProperty(ref _deletedEmployees, value);
+        }
 
         public ICommand BlockCommand { get; set; }
         public ICommand ActiveCommand { get; set; }
@@ -36,6 +55,18 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         private string _password;
         private string _confirmedPassword;
         private ObservableCollection<QualificationLevel> _qualifications;
+
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                SetProperty(ref _searchText, value);
+                FilterEmployees();
+            }
+        }
 
         public string Username
         {
@@ -116,11 +147,31 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             Qualifications = new ObservableCollection<QualificationLevel>(qualifications);
         }
 
+
+        private async void FilterEmployees()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                LoadEmployees();
+            }
+            else
+            {
+                var employees = await _employeeService.getEmployees();
+                ActiveEmployees = new ObservableCollection<Employee>(employees.Where(e => !e.PersonProfile.Profile.IsDeleted && e.PersonProfile.Profile.IsActive 
+                && (e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
+                BlockedEmployees = new ObservableCollection<Employee>(employees.Where(e => !e.PersonProfile.Profile.IsDeleted && !e.PersonProfile.Profile.IsActive
+                && (e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
+                DeletedEmployees = new ObservableCollection<Employee>(employees.Where(e => e.PersonProfile.Profile.IsDeleted && (e.PersonProfile.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.PersonProfile.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
+
+            }
+        }
+
         private async void BlockEmployee(object parameter)
         {
             if (parameter is Employee employee)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("BlockEmployeeCofirmMessage"), LanguageUtil.Translate("BlockCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("BlockEmployeeCofirmMessage"), LanguageUtil.Translate("BlockCofirm"), MessageBoxButton.YesNoCancel);
+                
                 if (result == MessageBoxResult.Yes)
                 {
                     await _employeeService.ChangeActiveStatus(employee.PersonProfileId);
@@ -133,11 +184,14 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (parameter is Employee employee)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("ActiveEmployeeCofirmMessage"), LanguageUtil.Translate("ActiveCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("ActiveEmployeeCofirmMessage"), LanguageUtil.Translate("ActiveCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await _employeeService.ChangeActiveStatus(employee.PersonProfileId);
-                    await ReloadEmployeesAsync();
+                    bool temp = await _employeeService.ChangeActiveStatus(employee.PersonProfileId);
+                    if (temp)
+                    {
+                        await ReloadEmployeesAsync();
+                    }
                 }
             }
         }
@@ -146,11 +200,14 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (parameter is Employee employee)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("DeleteEmployeeCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteEmployeeCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await _employeeService.DeleteEmployee(employee.PersonProfileId);
-                    await ReloadEmployeesAsync();
+                    bool temp = await _employeeService.DeleteEmployee(employee.PersonProfileId);
+                    if (temp)
+                    {
+                        await ReloadEmployeesAsync();
+                    }
                 }
             }
         }
@@ -175,24 +232,24 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         private async void SaveNewEmployee(object parameter)
         {
             if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Jmb) ||
-                string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || SelectedQualificationId == 0 || DateOfBirth == null)
+                string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || SelectedQualificationId <= 0 || DateOfBirth == null)
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (!Password.Equals(ConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (Password.Length < UtilConstants.MIN_PASSWORD_LENGTH)
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (Jmb.Length != 13 || !Jmb.All(char.IsDigit))
             {
-                MessageBox.Show(LanguageUtil.Translate("JmbIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("JmbIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             Employee employee = new Employee()
@@ -220,14 +277,19 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             bool result = await _employeeService.AddEmployee(employee);
             if (result)
             {
-                MessageBox.Show(LanguageUtil.Translate("EmployeeAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("EmployeeAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadEmployeesAsync();
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("EmployeeNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("EmployeeNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
-
+            Username = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            DateOfBirth = null;
+            Jmb = string.Empty;
+            SelectedQualificationId = 0;
             window.Close();
             window = null;
         }
@@ -235,10 +297,6 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         private bool CanModifyEmployee(object parameter) => true;
         private bool CanSaveNewEmployee(object parameter)
         {
-            //if(string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Jmb))
-            //{
-            //    return false;
-            //}
             return true;
         }
 

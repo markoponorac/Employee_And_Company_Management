@@ -4,11 +4,7 @@ using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Employee_And_Company_Management.Views.Windows.Components;
 using System.Windows;
 using System.Windows.Input;
 
@@ -74,19 +70,15 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         private bool CanExecuteUpdateProfile(object obj) => true;
         private bool CanExecuteChangePassword(object obj)
         {
-            //if(String.IsNullOrEmpty(OldPassword) || String.IsNullOrEmpty(NewPassword) || String.IsNullOrEmpty(NewConfirmedPassword))
-            //{
-            //    return false;
-            //}
             return true;
         }
-        private void ExecuteChangeLanguage(object obj)
+        private async void ExecuteChangeLanguage(object obj)
         {
             string languageName = obj as string;
             if (!string.IsNullOrEmpty(languageName))
             {
                 LanguageUtil.ChangeLanguage(languageName);
-                ProfileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
+                await ProfileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
             }
         }
 
@@ -94,7 +86,7 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (string.IsNullOrEmpty(Firstname) || string.IsNullOrEmpty(Lastname))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             var admin = new Administrator()
@@ -106,47 +98,55 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                     LastName = Lastname
                 }
             };
-            await AdminService.UpdateAdmin(admin);
-            MessageBox.Show(LanguageUtil.Translate("UpdateSuccess"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-            if (!string.IsNullOrEmpty(Firstname))
-                LoginDTO.Firstname = Firstname;
-            if (!string.IsNullOrEmpty(Lastname))
-                LoginDTO.Lastname = Lastname;
+            var temp = await AdminService.UpdateAdmin(admin);
+            if (temp)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("UpdateSuccess"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
+                if (!string.IsNullOrEmpty(Firstname))
+                    LoginDTO.Firstname = Firstname;
+                if (!string.IsNullOrEmpty(Lastname))
+                    LoginDTO.Lastname = Lastname;
+            }
+            else
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
+           
         }
-        private void ExecuteChangeTheme(object obj)
+        private async void ExecuteChangeTheme(object obj)
         {
             string themeName = obj as string;
             if (!string.IsNullOrEmpty(themeName))
             {
-                ProfileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
+                await ProfileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
                 ThemeUtil.ChangeTheme(themeName);
             }
         }
-        private void ExecuteChangePassword(object obj)
+        private async void ExecuteChangePassword(object obj)
         {
             if (string.IsNullOrEmpty(OldPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(NewConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (NewPassword.Length <= UtilConstants.MIN_PASSWORD_LENGTH)
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (NewPassword.Equals(OldPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordsEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordsEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else if (!NewPassword.Equals(NewConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
-            else if (ProfileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
+            else if ( await ProfileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
         }
     }

@@ -1,11 +1,5 @@
-﻿using Employee_And_Company_Management.Data;
-using Employee_And_Company_Management.Data.Entities;
+﻿using Employee_And_Company_Management.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Employee_And_Company_Management.Services
 {
@@ -17,39 +11,61 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<Employee>> getEmployees()
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).ToListAsync();
+                }
             }
+            catch (Exception ex)
+            {
+                return new List<Employee>();
+            }
+        
         }
 
         public async Task<List<Employee>> GetCurrentlyEmployedInCompany(int companyId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Employments
-                    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo == null) // Trenutno zaposleni (EmployedTo je null)
-                    .Include(e => e.EmployeePersonProfile)
-                        .ThenInclude(emp => emp.PersonProfile)
-                    .Include(e => e.EmployeePersonProfile.QualificationLevel)
-                    .Select(e => e.EmployeePersonProfile) // Dohvati samo zaposlene
-                    .Distinct() // Osiguraj jedinstvene zaposlene
-                    .ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employments
+                        .Where(e => e.CompanyProfileId == companyId && e.EmployedTo == null)
+                        .Include(e => e.EmployeePersonProfile)
+                            .ThenInclude(emp => emp.PersonProfile)
+                        .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                        .Select(e => e.EmployeePersonProfile)
+                        .Distinct()
+                        .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Employee>();
             }
         }
 
         public async Task<List<Employee>> GetFormerEmployeesInCompany(int companyId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Employments
-                    .Where(e => e.CompanyProfileId == companyId && e.EmployedTo != null) // Bivši zaposleni (EmployedTo nije null)
-                    .Include(e => e.EmployeePersonProfile)
-                        .ThenInclude(emp => emp.PersonProfile)
-                    .Include(e => e.EmployeePersonProfile.QualificationLevel)
-                    .Select(e => e.EmployeePersonProfile) // Dohvati samo zaposlene
-                    .Distinct() // Osiguraj jedinstvene zaposlene
-                    .ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employments
+                        .Where(e => e.CompanyProfileId == companyId && e.EmployedTo != null)
+                        .Include(e => e.EmployeePersonProfile)
+                            .ThenInclude(emp => emp.PersonProfile)
+                        .Include(e => e.EmployeePersonProfile.QualificationLevel)
+                        .Select(e => e.EmployeePersonProfile)
+                        .Distinct()
+                        .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Employee>();
             }
         }
 
@@ -57,35 +73,60 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<Employee>> GetUnemployedEmployees()
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false).ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).Include(r => r.QualificationLevel).Where(i => i.IsEmployed == false && !i.PersonProfile.Profile.IsDeleted).ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Employee>();
             }
         }
 
-        public async Task ChangeActiveStatus(int employeeId)
+        public async Task<bool> ChangeActiveStatus(int employeeId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Employee employee = await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).FirstOrDefaultAsync(r => r.PersonProfileId.Equals(employeeId));
-                if (employee != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    employee.PersonProfile.Profile.IsActive = !employee.PersonProfile.Profile.IsActive;
-                    await context.SaveChangesAsync();
+                    Employee employee = await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).FirstOrDefaultAsync(r => r.PersonProfileId.Equals(employeeId));
+                    if (employee != null)
+                    {
+                        employee.PersonProfile.Profile.IsActive = !employee.PersonProfile.Profile.IsActive;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
-        public async Task DeleteEmployee(int employeeId)
+        public async Task<bool> DeleteEmployee(int employeeId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Employee employee = await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).FirstOrDefaultAsync(r => r.PersonProfileId.Equals(employeeId));
-                if (employee != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    employee.PersonProfile.Profile.IsDeleted = true;
-                    await context.SaveChangesAsync();
+                    Employee employee = await context.Employees.Include(i => i.PersonProfile).ThenInclude(p => p.Profile).FirstOrDefaultAsync(r => r.PersonProfileId.Equals(employeeId));
+                    if (employee != null)
+                    {
+                        employee.PersonProfile.Profile.IsDeleted = true;
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

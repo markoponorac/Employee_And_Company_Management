@@ -14,15 +14,47 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Employee_And_Company_Management.Data.Entities;
+using Employee_And_Company_Management.Views.Windows.Components;
 
 namespace Employee_And_Company_Management.ViewModels.Admin
 {
     public class CompaniesAdminViewModel : BaseViewModel
     {
 
-        public ObservableCollection<Company> ActiveCompanies { get; set; }
-        public ObservableCollection<Company> BlockedCompanies { get; set; }
-        public ObservableCollection<Company> DeletedCompanies { get; set; }
+        private ObservableCollection<Company> _activeCompanies;
+        public ObservableCollection<Company> ActiveCompanies
+        {
+            get => _activeCompanies;
+            set => SetProperty(ref _activeCompanies, value);
+        }
+
+        private ObservableCollection<Company> _blockedCompanies;
+        public ObservableCollection<Company> BlockedCompanies
+        {
+            get => _blockedCompanies;
+            set => SetProperty(ref _blockedCompanies, value);
+        }
+
+
+        private ObservableCollection<Company> _deletedCompanies;
+        public ObservableCollection<Company> DeletedCompanies
+        {
+            get => _deletedCompanies;
+            set => SetProperty(ref _deletedCompanies, value);
+        }
+
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                SetProperty(ref _searchText, value);
+                FilterCompanyes();
+            }
+        }
+
 
         public ICommand BlockCommand { get; set; }
         public ICommand ActiveCommand { get; set; }
@@ -93,7 +125,6 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             AddCompanyCommand = new RelayCommand(AddCompany, CanModifyCompanye);
             SaveCommand = new RelayCommand(SaveNewCompany, CanModifyCompanye);
             LoadCompanies();
-            Thread.Sleep(100);
         }
 
 
@@ -103,40 +134,59 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             ActiveCompanies = new ObservableCollection<Company>(companies.Where(e => !e.Profile.IsDeleted && e.Profile.IsActive));
             BlockedCompanies = new ObservableCollection<Company>(companies.Where(e => !e.Profile.IsDeleted && !e.Profile.IsActive));
             DeletedCompanies = new ObservableCollection<Company>(companies.Where(e => e.Profile.IsDeleted));
-           
+
         }
 
+        private async void FilterCompanyes()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                LoadCompanies();
+            }
+            else
+            {
+                var companies = await _companyService.GetCompanies();
+                ActiveCompanies = new ObservableCollection<Company>(companies.Where(e => !e.Profile.IsDeleted && e.Profile.IsActive
+                && (e.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
+                BlockedCompanies = new ObservableCollection<Company>(companies.Where(e => !e.Profile.IsDeleted && !e.Profile.IsActive
+                && (e.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
+                DeletedCompanies = new ObservableCollection<Company>(companies.Where(e => e.Profile.IsDeleted
+                && (e.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || e.Profile.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase))));
 
+
+
+            }
+        }
 
         private async void SaveNewCompany(object parameter)
         {
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Jib) ||
                 string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || DateOfEstablish == null)
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (!Password.Equals(ConfirmedPassword))
             {
-                MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (Password.Length < UtilConstants.MIN_PASSWORD_LENGTH)
             {
-                MessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("PasswordToShort"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             if (Jib.Length != 12 || !Jib.All(char.IsDigit))
             {
-                MessageBox.Show(LanguageUtil.Translate("JibIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("JibIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
             Company company = new Company()
             {
                 DateOfEstablishment = (DateOnly)DateConverter.ConvertToDateOnly(DateOfEstablish),
-                Jib= Jib,
+                Jib = Jib,
                 Address = Address,
-                Name= Name,
+                Name = Name,
                 Profile = new Profile()
                 {
                     Username = Username,
@@ -151,12 +201,12 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             bool result = await _companyService.AddCompany(company);
             if (result)
             {
-                MessageBox.Show(LanguageUtil.Translate("CompanyAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("CompanyAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadCompaniesAsync();
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("CompanyNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("CompanyNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
 
             windowAddCompany.Close();
@@ -169,11 +219,12 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (parameter is Company company)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("BlockCompanyCofirmMessage"), LanguageUtil.Translate("BlockCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("BlockCompanyCofirmMessage"), LanguageUtil.Translate("BlockCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await _companyService.ChangeActiveStatus(company.ProfileId);
-                    await ReloadCompaniesAsync();
+                    var temp = await _companyService.ChangeActiveStatus(company.ProfileId);
+                    if (temp)
+                        await ReloadCompaniesAsync();
                 }
             }
         }
@@ -181,11 +232,12 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (parameter is Company company)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("ActiveCompanyCofirmMessage"), LanguageUtil.Translate("ActiveCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("ActiveCompanyCofirmMessage"), LanguageUtil.Translate("ActiveCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await _companyService.ChangeActiveStatus(company.ProfileId);
-                    await ReloadCompaniesAsync();
+                    var temp = await _companyService.ChangeActiveStatus(company.ProfileId);
+                    if (temp)
+                        await ReloadCompaniesAsync();
                 }
             }
         }
@@ -194,11 +246,12 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (parameter is Company company)
             {
-                var result = MessageBox.Show(LanguageUtil.Translate("DeleteCompanyCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteCompanyCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await _companyService.DeleteCompany(company.ProfileId);
-                    await ReloadCompaniesAsync();
+                    var temp = await _companyService.DeleteCompany(company.ProfileId);
+                    if (temp)
+                        await ReloadCompaniesAsync();
                 }
             }
         }

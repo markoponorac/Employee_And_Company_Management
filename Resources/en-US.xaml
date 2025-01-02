@@ -129,6 +129,7 @@
     <system:String x:Key="PaymentDate">Payment date</system:String>
     <system:String x:Key="SalaryAmount">Amount</system:String>
     <system:String x:Key="Yes">Yes</system:String>
+    <system:String x:Key="OK">Ok</system:String>
     <system:String x:Key="No">No</system:String>
     <system:String x:Key="Cancel">Cancel</system:String>
     <system:String x:Key="December">December</system:String>
@@ -148,6 +149,10 @@
     <system:String x:Key="Employments">Employments</system:String>
     <system:String x:Key="EmployeeSettings">Employee settings</system:String>
     <system:String x:Key="SearchEmployments">Search employments</system:String>
-
+    <system:String x:Key="LoggingIn">Logging in...</system:String>
+    <system:String x:Key="AdministratorWindow">Administrator window</system:String>
+    <system:String x:Key="SearchEmployees">Search employees</system:String>
+    <system:String x:Key="SearchCompanyes">Search companyes</system:String>
+    <system:String x:Key="SearchQualifications">Search qualifications</system:String>
 
 </ResourceDictionary>

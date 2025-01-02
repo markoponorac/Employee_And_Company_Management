@@ -32,11 +32,11 @@
                 <TextBox x:Name="AddresTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding Address}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Password}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                <TextBlock Text="{DynamicResource Password}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
                 <PasswordBox x:Name="UserPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserPasswordBox_PasswordChanged" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
                 <PasswordBox x:Name="UserAgainPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserAgainPasswordBox_PasswordChanged" />
             </StackPanel>
             <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding SaveCommand}" />

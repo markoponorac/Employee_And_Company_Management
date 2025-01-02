@@ -11,69 +11,163 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
-            <Button Content="{DynamicResource AddCompany}" 
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="1" 
+               Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+               Margin="0,10,10,10"
+               Padding="5">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource InputStyle}">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="{DynamicResource SearchCompanyes}" Foreground="Gray" Padding="5"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock Grid.Column="0" 
+                 Text="🔍" 
+                 FontSize="20" 
+                 VerticalAlignment="Center" 
+                 Margin="5,0,5,0" 
+                 Opacity="0.5"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+                <Button Content="{DynamicResource AddCompany}" 
             Command="{Binding AddCompanyCommand}" 
             Style="{StaticResource ButtonStyle}" Margin="0" />
-        </StackPanel>
+            </StackPanel>
+        </Grid>
+
         <TabControl Grid.Row="1">
             <TabItem Header="{DynamicResource ActiveCompanies}">
-                <DataGrid ItemsSource="{Binding ActiveCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
-                                        <Button Content="{DynamicResource Block}" Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                        <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <DataGrid ItemsSource="{Binding ActiveCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
+                                            <DataGridTemplateColumn Width="*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
+                                                            <Button Content="{DynamicResource Block}" Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ActiveCompanies.Count}" Value="0">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="{DynamicResource NoData}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="20" FontStyle="Italic"/>
 
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </TabItem>
             <TabItem Header="{DynamicResource BlockedCompanies}">
-                <DataGrid ItemsSource="{Binding BlockedCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button Content="{DynamicResource Active}" Command="{Binding DataContext.ActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                        <Button Content="{DynamicResource Delete}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <DataGrid ItemsSource="{Binding BlockedCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
+                                            <DataGridTemplateColumn Width="*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                            <Button Content="{DynamicResource Active}" Command="{Binding DataContext.ActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Content="{DynamicResource Delete}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BlockedCompanies.Count}" Value="0">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="{DynamicResource NoData}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="20" FontStyle="Italic"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </TabItem>
             <TabItem Header="{DynamicResource DeletedCompanies}">
-                <DataGrid ItemsSource="{Binding DeletedCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
-                                        <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <DataGrid ItemsSource="{Binding DeletedCompanies}" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Jib}" Binding="{Binding Jib}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource Username}" Binding="{Binding Profile.Username}" IsReadOnly="True"/>
+                                            <DataGridTemplateColumn Width="*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
+                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DeletedCompanies.Count}" Value="0">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="{DynamicResource NoData}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="20" FontStyle="Italic"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </TabItem>
         </TabControl>
     </Grid>

@@ -14,47 +14,72 @@ namespace Employee_And_Company_Management.Services
         {
         }
 
-        public void ChangeLanguage(int id, string language)
+        public async Task<bool> ChangeLanguage(int id, string language)
         {
-            using (var _context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                var profile = _context.Profiles.FirstOrDefault(i => i.Id.Equals(id));
-                if(profile != null)
+                using (var _context = new EmployeeAndCompanyManagementContext())
                 {
-                    profile.Language = language;
-                    _context.SaveChanges();
-                }
-            }
-        }
-
-        public void ChangeTheme(int id, string theme)
-        {
-            using (var _context = new EmployeeAndCompanyManagementContext())
-            {
-                var profile = _context.Profiles.FirstOrDefault(i => i.Id.Equals(id));
-                if (profile != null)
-                {
-                    profile.Theme = theme;
-                    _context.SaveChanges();
-                }
-            }
-        }
-
-        public bool ChangePassword(int id, string oldPassword, string newPassword)
-        {
-            using (var _context = new EmployeeAndCompanyManagementContext())
-            {
-                var profile = _context.Profiles.FirstOrDefault(p => p.Id.Equals(id));
-                if (profile != null)
-                {
-                    if (!profile.Password.Equals(oldPassword) || oldPassword.Equals(newPassword))
+                    var profile = _context.Profiles.FirstOrDefault(i => i.Id.Equals(id));
+                    if (profile != null)
                     {
-                        return false;
+                        profile.Language = language;
+                        await _context.SaveChangesAsync();
+                        return true;
                     }
-                    profile.Password = newPassword;
-                    _context.SaveChanges();
-                    return true;
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangeTheme(int id, string theme)
+        {
+            try
+            {
+                using (var _context = new EmployeeAndCompanyManagementContext())
+                {
+                    var profile = _context.Profiles.FirstOrDefault(i => i.Id.Equals(id));
+                    if (profile != null)
+                    {
+                        profile.Theme = theme;
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangePassword(int id, string oldPassword, string newPassword)
+        {
+            try
+            {
+                using (var _context = new EmployeeAndCompanyManagementContext())
+                {
+                    var profile = _context.Profiles.FirstOrDefault(p => p.Id.Equals(id));
+                    if (profile != null)
+                    {
+                        if (!profile.Password.Equals(oldPassword) || oldPassword.Equals(newPassword))
+                        {
+                            return false;
+                        }
+                        profile.Password = newPassword;
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }

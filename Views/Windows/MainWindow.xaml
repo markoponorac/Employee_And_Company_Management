@@ -14,7 +14,8 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        FontFamily="{materialDesign:MaterialDesignFont}">
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Loaded="Window_Loaded">
 
     <materialDesign:Card Style="{StaticResource WindowCardStyle}">
         <Border Style="{StaticResource MainBorderStyle}">
@@ -23,6 +24,19 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
+
+                <Grid Grid.ColumnSpan="2" Panel.ZIndex="1000" 
+                  Background="#80000000" 
+                  Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                        <TextBlock Text="{DynamicResource LoggingIn}" 
+                       Foreground="White"
+                       FontSize="16"
+                       Margin="0,16,0,0"
+                       HorizontalAlignment="Center"/>   
+                    </StackPanel>
+                </Grid>
 
                 <!-- Levi panel -->
                 <Border Style="{StaticResource LeftPanelStyle}">
@@ -83,7 +97,9 @@
 
                             <Button Content="{DynamicResource LoginButton}" 
                                     Style="{StaticResource ButtonStyle}"
-                                    Command="{Binding LoginCommand}"/>
+                                    Command="{Binding LoginCommand}"
+                                    IsDefault="True"/>
+
                         </StackPanel>
                     </Grid>
                 </Border>

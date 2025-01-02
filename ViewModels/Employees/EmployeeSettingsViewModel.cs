@@ -97,13 +97,13 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             return true;
         }
 
-        private void ExecuteChangeLanguage(object obj)
+        private async void ExecuteChangeLanguage(object obj)
         {
             string languageName = obj as string;
             if (!string.IsNullOrEmpty(languageName))
             {
                 LanguageUtil.ChangeLanguage(languageName);
-                _profileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
+                await _profileServise.ChangeLanguage(LoginDTO.ProfileId, languageName);
 
             }
         }
@@ -140,17 +140,17 @@ namespace Employee_And_Company_Management.ViewModels.Employees
         }
 
 
-        private void ExecuteChangeTheme(object obj)
+        private async void ExecuteChangeTheme(object obj)
         {
             string themeName = obj as string;
             if (!string.IsNullOrEmpty(themeName))
             {
                 ThemeUtil.ChangeTheme(themeName);
-                _profileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
+                await _profileServise.ChangeTheme(LoginDTO.ProfileId, themeName);
             }
         }
 
-        private void ExecuteChangePassword(object obj)
+        private async void ExecuteChangePassword(object obj)
         {
             if (string.IsNullOrEmpty(OldPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(NewConfirmedPassword))
             {
@@ -168,7 +168,7 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             {
                 MessageBox.Show(LanguageUtil.Translate("NewPasswordsNotEquals"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (_profileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
+            else if (await _profileServise.ChangePassword(LoginDTO.ProfileId, OldPassword, NewPassword))
             {
                 MessageBox.Show(LanguageUtil.Translate("PasswordChanged"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }

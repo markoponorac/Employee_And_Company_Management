@@ -130,6 +130,7 @@
     <system:String x:Key="SalaryAmount">Iznos</system:String>
     <system:String x:Key="Yes">Da</system:String>
     <system:String x:Key="No">Ne</system:String>
+    <system:String x:Key="OK">U redu</system:String>
     <system:String x:Key="Cancel">Otkaži</system:String>
     <system:String x:Key="December">Decembar</system:String>
     <system:String x:Key="November">Novembar</system:String>
@@ -148,6 +149,10 @@
     <system:String x:Key="Employments">Zaposlenja</system:String>
     <system:String x:Key="EmployeeSettings">Podešavanja zaposlenog</system:String>
     <system:String x:Key="SearchEmployments">Pretraži zaposlenja</system:String>
-
+    <system:String x:Key="LoggingIn">Prijavljivanje...</system:String>
+    <system:String x:Key="AdministratorWindow">Administratorski prozor</system:String>
+    <system:String x:Key="SearchEmployees">Pretraži zaposlene</system:String>
+    <system:String x:Key="SearchCompanyes">Pretraži kompanije</system:String>
+    <system:String x:Key="SearchQualifications">Pretraži stručne spreme</system:String>
 
 </ResourceDictionary>

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.AddNewEmployeeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource AddEmployee}" Height="520" Width="430"
+        Title="{DynamicResource AddEmployee}" Height="520" Width="420"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
@@ -37,11 +37,11 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Password}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                <TextBlock Text="{DynamicResource Password}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
                 <PasswordBox x:Name="UserPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserPasswordBox_PasswordChanged" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
+                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
                 <PasswordBox x:Name="UserAgainPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserAgainPasswordBox_PasswordChanged" />
             </StackPanel>
             <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding SaveCommand}" />

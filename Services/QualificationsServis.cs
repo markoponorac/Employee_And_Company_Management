@@ -17,27 +17,41 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<List<QualificationLevel>> GetQualificationLevels()
         {
-            using(var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.QualificationLevels.ToListAsync();
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.QualificationLevels.ToListAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<QualificationLevel>();
             }
         }
 
         public async Task<bool> AddQualification(QualificationLevel qualification)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                if (qualification != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    QualificationLevel temp = await context.QualificationLevels.FirstOrDefaultAsync(i => i.Title.Equals(qualification.Title));
-                    if (temp != null)
+                    if (qualification != null)
                     {
-                        return false;
+                        QualificationLevel temp = await context.QualificationLevels.FirstOrDefaultAsync(i => i.Title.Equals(qualification.Title));
+                        if (temp != null)
+                        {
+                            return false;
+                        }
+                        context.QualificationLevels.Add(qualification);
+                        await context.SaveChangesAsync();
+                        return true;
                     }
-                    context.QualificationLevels.Add(qualification);
-                    await context.SaveChangesAsync();
-                    return true;
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }

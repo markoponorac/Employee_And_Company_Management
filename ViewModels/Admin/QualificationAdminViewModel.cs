@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
+using Employee_And_Company_Management.Views.Windows.Components;
 
 namespace Employee_And_Company_Management.ViewModels.Admin
 {
@@ -45,7 +46,25 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         }
 
         private readonly QualificationsServis qualificationsServis;
-        public ObservableCollection<QualificationLevel> Qualifications { get; set; }
+
+        private ObservableCollection<QualificationLevel> _qualifications;
+        public ObservableCollection<QualificationLevel> Qualifications
+        {
+            get => _qualifications;
+            set => SetProperty(ref _qualifications, value);
+        }
+
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                SetProperty(ref _searchText, value);
+                FilterQualifications();
+            }
+        }
         public QualificationAdminViewModel()
         {
             qualificationsServis = new QualificationsServis();
@@ -68,7 +87,7 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         {
             if (string.IsNullOrEmpty(QualificationTitle) || string.IsNullOrEmpty(QualificationCode))
             {
-                MessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
 
@@ -81,12 +100,12 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             bool result = await qualificationsServis.AddQualification(qualificationLevel);
             if (result)
             {
-                MessageBox.Show(LanguageUtil.Translate("QualificationAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show(LanguageUtil.Translate("QualificationAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadQualificationsAsync();
             }
             else
             {
-                MessageBox.Show(LanguageUtil.Translate("QualificationNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(LanguageUtil.Translate("QualificationNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             window.Close();
             window = null;
@@ -98,6 +117,23 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             Qualifications = new ObservableCollection<QualificationLevel>(qualifications);
 
         }
+
+
+        private async void FilterQualifications()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                LoadQualifications();
+            }
+            else
+            {
+                var qualifications = await qualificationsServis.GetQualificationLevels();
+                Qualifications = new ObservableCollection<QualificationLevel>(qualifications.Where(i => i.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+
+
+            }
+        }
+
         private async Task ReloadQualificationsAsync()
         {
             var qualifications = await qualificationsServis.GetQualificationLevels();

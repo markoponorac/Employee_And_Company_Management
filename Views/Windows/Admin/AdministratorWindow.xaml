@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Administrator Panel" Height="600" Width="1000"
+        Title="{DynamicResource AdministratorWindow}" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
@@ -20,13 +20,24 @@
 
             <!-- Left Panel -->
             <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
-                <StackPanel>
-                    <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                    <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToCompaniesCommand}"/>
-                    <Button Content="{DynamicResource Qualification}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToQualificationCommand}"/>
-                    <Button Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
-                </StackPanel>
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!-- This row will take all the remaining space -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- This row will only take the height of the settings button -->
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
+                        <Button Content="{DynamicResource Companies}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToCompaniesCommand}"/>
+                        <Button Content="{DynamicResource Qualification}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToQualificationCommand}"/>
+                    </StackPanel>
+
+                    <Button Grid.Row="1" Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
+                </Grid>
             </Border>
+
 
             <!-- Right Panel -->
             <Border Grid.Column="1" Style="{StaticResource RightPanel}">
