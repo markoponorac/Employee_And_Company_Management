@@ -40,38 +40,73 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task EndEmployment(Employee employee)
+        public async Task<bool> EndEmployment(Employee employee)
         {
-            using (var contex = new EmployeeAndCompanyManagementContext())
+            try
             {
-                Employment employment = await contex.Employments.FirstOrDefaultAsync(i => i.EmployeePersonProfileId == employee.PersonProfileId && i.EmployedTo == null);
-               
-                employment.EmployedTo = DateOnly.FromDateTime(DateTime.Now);
-
-                Employee tempEmployee = await contex.Employees.FirstOrDefaultAsync(i => i.PersonProfileId == employee.PersonProfileId);
-                if (tempEmployee != null)
+                using (var contex = new EmployeeAndCompanyManagementContext())
                 {
-                    tempEmployee.IsEmployed = false;
+                    Employment employment = await contex.Employments.FirstOrDefaultAsync(i => i.EmployeePersonProfileId == employee.PersonProfileId && i.EmployedTo == null);
+
+                    employment.EmployedTo = DateOnly.FromDateTime(DateTime.Now);
+
+                    Employee tempEmployee = await contex.Employees.FirstOrDefaultAsync(i => i.PersonProfileId == employee.PersonProfileId);
+                    if (tempEmployee != null)
+                    {
+                        tempEmployee.IsEmployed = false;
+                    }
+
+                    await contex.SaveChangesAsync();
+                    return true;
                 }
-                
-                await contex.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
 
         public async Task<List<Employment>> GetEmploymentsForEmployee(int employeeId)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                return await context.Employments
-                    .Include(e => e.WorkPlace) 
-                    .ThenInclude(wp => wp.Department)
-                    .Include(e => e.CompanyProfile) 
-                    .Where(e => e.EmployeePersonProfileId == employeeId) 
-                    .ToListAsync(); 
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employments
+                        .Include(e => e.WorkPlace)
+                        .ThenInclude(wp => wp.Department)
+                        .Include(e => e.CompanyProfile)
+                        .Where(e => e.EmployeePersonProfileId == employeeId)
+                        .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Employment>();
             }
         }
 
+
+        public async Task<List<Employment>> GetEmploymentsForEmployeeInCompany(int employeeId, int companyId)
+        {
+            try
+            {
+                using (var context = new EmployeeAndCompanyManagementContext())
+                {
+                    return await context.Employments
+                        .Include(e => e.WorkPlace)
+                        .ThenInclude(wp => wp.Department)
+                        .Include(e => e.CompanyProfile)
+                        .Where(e => e.EmployeePersonProfileId == employeeId && e.CompanyProfile.ProfileId == companyId)
+                        .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Employment>();
+            }
+        }
 
     }
 }

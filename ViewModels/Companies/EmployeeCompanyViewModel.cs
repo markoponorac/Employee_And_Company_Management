@@ -380,7 +380,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             {
                 SelectedEmployeeDetails = employee;
 
-                var employments = await employmentService.GetEmploymentsForEmployee(selectedEmployeeDetails.PersonProfileId);
+                var employments = await employmentService.GetEmploymentsForEmployeeInCompany(selectedEmployeeDetails.PersonProfileId, loginDTO.ProfileId);
                 EmploymentHistory = new ObservableCollection<Employment>(employments);
 
                 Window window2 = new EmployeeDetailsWindow(this);
@@ -396,7 +396,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             if (parameter is Employee employee)
             {
                 SelectedEmployeeDetails = employee;
-                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteEmploymentCofirmMessage"), LanguageUtil.Translate("DeleteCofirm"), MessageBoxButton.YesNoCancel);
+                var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteEmploymentCofirmMessage"), LanguageUtil.Translate("DissmisCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
                     await employmentService.EndEmployment(SelectedEmployeeDetails);

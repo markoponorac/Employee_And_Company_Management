@@ -50,7 +50,7 @@ namespace Employee_And_Company_Management.ViewModels
                 IsLoading = true;
                 var responseLoginDTO = await Task.Run(() => _loginService.LoginAsync(Username, Password));
 
-                if (responseLoginDTO.Success)
+                if (responseLoginDTO!=null && responseLoginDTO.Success)
                 {
                     if (responseLoginDTO.IsDeleted)
                     {

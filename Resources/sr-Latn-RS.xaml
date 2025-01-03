@@ -86,7 +86,7 @@
     <system:String x:Key="Jib">JIB</system:String>
     <system:String x:Key="Address">Adresa</system:String>
     <system:String x:Key="DateOfEstablish">Datum otvaranja</system:String>
-    <system:String x:Key="AddQualification">Dodaj stručnu spemu</system:String>
+    <system:String x:Key="AddQualification">Dodaj stručnu spremu</system:String>
     <system:String x:Key="QualificationCode">Oznaka stručne spreme</system:String>
     <system:String x:Key="CompanySettings">Podešavanje kompanije</system:String>
     <system:String x:Key="Company">Kompanija</system:String>
@@ -160,6 +160,7 @@
     <system:String x:Key="RestoreConfirm">Potvrda obnove</system:String>
     <system:String x:Key="EmployeePanel">Zaposleni</system:String>
     <system:String x:Key="CompanyDetails">Detalji o kompaniji</system:String>
+    <system:String x:Key="DissmisCofirm">Potvrda otpuštanja</system:String>
 
 
 </ResourceDictionary>

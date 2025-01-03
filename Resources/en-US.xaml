@@ -160,5 +160,6 @@
     <system:String x:Key="RestoreConfirm">Restore confirmation</system:String>
     <system:String x:Key="EmployeePanel">Employee</system:String>
     <system:String x:Key="CompanyDetails">Company details</system:String>
+    <system:String x:Key="DissmisCofirm">Dissmis confirm</system:String>
 
 </ResourceDictionary>
