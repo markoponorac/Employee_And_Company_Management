@@ -12,6 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Search and Add Section -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -19,51 +20,82 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-                    <TextBox Grid.Column="1" 
-          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-          Margin="0,10,10,10"
-          Padding="5">
-                        <TextBox.Resources>
-                            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource InputStyle}">
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="">
-                                        <Setter Property="Background">
-                                            <Setter.Value>
-                                                <VisualBrush AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <TextBlock Text="{DynamicResource SearchQualifications}" Foreground="Gray" Padding="5"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Resources>
-                    </TextBox>
-                    <TextBlock Grid.Column="0" 
-            Text="🔍" 
-            FontSize="20" 
-            VerticalAlignment="Center" 
-            Margin="5,0,5,0" 
-            Opacity="0.5"/>
+            <TextBox Grid.Column="1" 
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,10,10,10"
+                     Padding="5">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource InputStyle}">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="{DynamicResource SearchQualifications}" Foreground="Gray" Padding="5"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock Grid.Column="0" 
+                       Text="🔍" 
+                       FontSize="20" 
+                       VerticalAlignment="Center" 
+                       Margin="5,0,5,0" 
+                       Opacity="0.5"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                    <Button Content="{DynamicResource AddQualification}" 
-                     Command="{Binding AddQualificationCommand}" 
-                     Style="{StaticResource ButtonStyle}" Margin="0" />
+                <Button Content="{DynamicResource AddQualification}" 
+                        Command="{Binding AddQualificationCommand}" 
+                        Style="{StaticResource ButtonStyle}" 
+                        Margin="0"/>
             </StackPanel>
-
         </Grid>
 
+        <!-- TabControl Section -->
         <TabControl Grid.Row="1">
             <TabItem Header="{DynamicResource Qualification}">
-                <DataGrid ItemsSource="{Binding Qualifications}" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Title}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="{DynamicResource QualificationCode}" Binding="{Binding QualificationCode}" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <DataGrid ItemsSource="{Binding Qualifications}" 
+                                              AutoGenerateColumns="False" 
+                                              CanUserAddRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="{DynamicResource Name}" 
+                                                                Binding="{Binding Title}" 
+                                                                IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="{DynamicResource QualificationCode}" 
+                                                                Binding="{Binding QualificationCode}" 
+                                                                IsReadOnly="True"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Qualifications.Count}" Value="0">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="{DynamicResource NoData}" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center" 
+                                                       FontSize="18" 
+                                                       Margin="20" 
+                                                       FontStyle="Italic"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </TabItem>
         </TabControl>
     </Grid>

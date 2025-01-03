@@ -24,20 +24,42 @@
                 <TextBlock Text="{DynamicResource DateOfBirth}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
                 <TextBlock Text="{Binding SelectedEmployeeDetails.DateOfBirth, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource ParameterTextSyle}"/>
             </StackPanel>
-           
         </StackPanel>
 
-        <!-- Employment History Table -->
-        <DataGrid Grid.Row="1" ItemsSource="{Binding EmploymentHistory}" AutoGenerateColumns="False" 
-                  CanUserAddRows="False" Margin="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" Binding="{Binding WorkPlace.Title}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource DepartmentName}" Binding="{Binding WorkPlace.Department.Name}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource EmployeedFrom}" Binding="{Binding EmployedFrom, StringFormat={}{0:dd.MM.yyyy}}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="{DynamicResource EmployeedTo}" Binding="{Binding EmployedTo, StringFormat={}{0:dd.MM.yyyy}}" IsReadOnly="True"/>
-                <!--<DataGridTextColumn Header="Employed To" Binding="{Binding EmployedTo, Converter={StaticResource NullToCurrentConverter}}" IsReadOnly="True"/>-->
-
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Employment History Table or No Data Message -->
+        <ContentControl Grid.Row="1" Margin="10">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <DataGrid ItemsSource="{Binding EmploymentHistory}" 
+                                      AutoGenerateColumns="False" 
+                                      CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="{DynamicResource WorkPlaceName}" Binding="{Binding WorkPlace.Title}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource DepartmentName}" Binding="{Binding WorkPlace.Department.Name}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource EmployeedFrom}" Binding="{Binding EmployedFrom, StringFormat={}{0:dd.MM.yyyy}}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="{DynamicResource EmployeedTo}" Binding="{Binding EmployedTo, StringFormat={}{0:dd.MM.yyyy}}" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding EmploymentHistory.Count}" Value="0">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock Text="{DynamicResource NoData}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center" 
+                                               FontSize="18" 
+                                               Margin="20" 
+                                               FontStyle="Italic"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </Window>

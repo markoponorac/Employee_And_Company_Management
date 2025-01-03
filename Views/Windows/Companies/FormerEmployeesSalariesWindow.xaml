@@ -12,29 +12,52 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" 
-                  ItemsSource="{Binding Salaries}" 
-                  AutoGenerateColumns="False" 
-                  CanUserAddRows="False"
-                  Margin="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{DynamicResource Year}" 
-                                    Binding="{Binding ForYear}" 
-                                    IsReadOnly="True"
-                                    Width="Auto"/>
-                <DataGridTextColumn Header="{DynamicResource Month}" 
-                                    Binding="{Binding ForMonth}" 
-                                    IsReadOnly="True"
-                                    Width="Auto"/>
-                <DataGridTextColumn Header="{DynamicResource PaymentDate}" 
-                                    Binding="{Binding PaymentDate,  StringFormat={}{0:dd.MM.yyyy}}" 
-                                    IsReadOnly="True"
-                                    Width="Auto"/>
-                <DataGridTextColumn Header="{DynamicResource SalaryAmount}" 
-                                    Binding="{Binding Amount}" 
-                                    IsReadOnly="True"
-                                    Width="Auto"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DataGrid or No Data Message -->
+        <ContentControl Grid.Row="0" Margin="10">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <DataGrid ItemsSource="{Binding Salaries}" 
+                                      AutoGenerateColumns="False" 
+                                      CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="{DynamicResource Year}" 
+                                                        Binding="{Binding ForYear}" 
+                                                        IsReadOnly="True"
+                                                        Width="Auto"/>
+                                    <DataGridTextColumn Header="{DynamicResource Month}" 
+                                                        Binding="{Binding ForMonth}" 
+                                                        IsReadOnly="True"
+                                                        Width="Auto"/>
+                                    <DataGridTextColumn Header="{DynamicResource PaymentDate}" 
+                                                        Binding="{Binding PaymentDate, StringFormat={}{0:dd.MM.yyyy}}" 
+                                                        IsReadOnly="True"
+                                                        Width="Auto"/>
+                                    <DataGridTextColumn Header="{DynamicResource SalaryAmount}" 
+                                                        Binding="{Binding Amount}" 
+                                                        IsReadOnly="True"
+                                                        Width="Auto"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Salaries.Count}" Value="0">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock Text="{DynamicResource NoData}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center" 
+                                               FontSize="18" 
+                                               Margin="20" 
+                                               FontStyle="Italic"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </Window>
