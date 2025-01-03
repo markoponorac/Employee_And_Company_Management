@@ -329,5 +329,24 @@ U pregledu obrisanih radnih mjesta korisnik ima mogućnost obnove tj. poništava
 
 ### Podešavanja naloga zaposlenog
 
-Zaposleni ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu adrese kompanije. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
+Zaposleni ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu imena i prezimena. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
 
+![image](https://github.com/user-attachments/assets/14cc67af-e26d-444c-a63b-fbeb74a88bad)
+
+U slučaju da zaposleni ne unese oba podatka, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni podataka.
+
+### Rad sa zaposlenjima
+
+Nakon prijave na sistem, zaposlenom se prikazuje prozor aplikacije koji se sastoji iz dva dijela, vertikalni meni za izbor odgovarajuće stranice i sam sadržaj stranice. Klikom na odgovarajuću stavku menija prikazuje se sadržaj vezan za tu stavku.
+
+Nakon prijave na sistem, zaposlenom se prikazuje dio za rad sa zaposlenjima. Ova stranica se sastoji od tabele koja omogućava pregled svih zaposlenja tog korisnika.
+
+![image](https://github.com/user-attachments/assets/f34e7a84-152d-4dae-adba-78b41618e5e8)
+
+Pored pregleda podataka zaposleni ima mogućnost pretrage zaposlenja po nazivu kompanije, nazivu radnog mjesta ili nazivu odjeljenja. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
+
+![image](https://github.com/user-attachments/assets/41aca41b-c88d-4300-bb42-3bcccd78674a)
+
+Pored pregleda zaposlenja je moguće pregledati i sve plate koje su vezane za svako pojedinačno zaposlenje. Klikom na dugme _Plate_ otvara se prozor u kome se prikazuju plate za izabrano zaposlenje.
+
+![image](https://github.com/user-attachments/assets/8641b499-8059-4876-865b-966f594322db)
