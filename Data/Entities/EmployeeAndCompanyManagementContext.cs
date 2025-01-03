@@ -179,8 +179,6 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
 
             entity.ToTable("person");
 
-            entity.HasIndex(e => e.Jmb, "JMB_UNIQUE").IsUnique();
-
             entity.HasIndex(e => e.ProfileId, "fk_PERSON_PROFILE1_idx");
 
             entity.Property(e => e.ProfileId)

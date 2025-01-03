@@ -137,19 +137,26 @@ namespace Employee_And_Company_Management.Services
 
         public async Task<bool> AddEmployee(Employee employee)
         {
-            using (var context = new EmployeeAndCompanyManagementContext())
+            try
             {
-                if (employee != null)
+                using (var context = new EmployeeAndCompanyManagementContext())
                 {
-                    Employee temp = await context.Employees.FirstOrDefaultAsync(i => i.PersonProfile.Jmb.Equals(employee.PersonProfile.Jmb));
-                    if (temp != null)
+                    if (employee != null)
                     {
-                        return false;
+                        Employee temp = await context.Employees.FirstOrDefaultAsync(i => i.PersonProfile.Jmb.Equals(employee.PersonProfile.Jmb) && !i.PersonProfile.Profile.IsDeleted);
+                        if (temp != null)
+                        {
+                            return false;
+                        }
+                        context.Employees.Add(employee);
+                        await context.SaveChangesAsync();
+                        return true;
                     }
-                    context.Employees.Add(employee);
-                    await context.SaveChangesAsync();
-                    return true;
+                    return false;
                 }
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }
