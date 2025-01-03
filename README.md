@@ -126,3 +126,4 @@ Prikaz detalja o zaposlenom se vrši klikom na dugme _Detalji_ posle čega se ot
 
 ![image](https://github.com/user-attachments/assets/2289e946-10ad-4332-853d-8276f2be1fa4)
 
+![Screenshot 2025-01-03 190424](https://github.com/user-attachments/assets/0448d459-a04e-49c0-ba8c-9921d0a3ac18)
