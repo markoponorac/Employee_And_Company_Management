@@ -223,4 +223,111 @@ Nakon prijave na sistem, korisniku sa ulogom kompanije se prikazuje prozor aplik
 
 Nakon prijave na sistem, korisniku sa ulogom kompanije se prvo prikzuje dio za rad sa zaposlenima. Ova stranica se sastoji od dva taba koji omogućavaju pregled trenutno zposlenih radnika i bivših zaposlenih u toj kompaniji. Podrazumjevano je otvoren tab za prikaz trenutno zaposlenih radnika.
 
-![image](https://github.com/user-attachments/assets/28f751a6-24f9-40d6-85b2-bac4c8dc6fa2)
+![image](https://github.com/user-attachments/assets/421b6387-9833-4fee-b80d-c744b0d398a2)
+
+Pored pregleda podataka korisnik sa ulogom kompanije ima mogućnost pretrage zaposlenih po imenu, prezimenu ili korisničkom imenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
+
+Korisniku sa ulogom kompanije ima mogućnost zapošljavanja (dodavanja) novog zaposlenog, otpuštanje zaposlenog, pregled detalja te upravljanje platama zaposlenog.
+
+U prikazu bivših zaposlenih je moguće vidjeti sve bivše zaposlene u kompaniji te vijedjeti detalje o njihovim zaposlenjima i platama koje su imali tokom zaposlenja.
+
+#### Dodavanje novog zaposlenog
+
+Dodavanje novog zaposlenog se vrši klikom na dugme _Dodaj zaposlenog_ nakon čega se prikazuje prozor za dodavanje novog zaposlenog.
+
+![image](https://github.com/user-attachments/assets/612f59c8-8279-481d-b84e-a24f1aab9dc5)
+
+U ovom przoru se prikazuju svi radnici koji mogu biti zaposleni te klikom na dugme zaposli otvara se prozor za zapošljavanje konkretnog radnika. Pored pregleda podataka moguće je vršiti pretragu zaposlenih po imenu ili prezimenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
+
+![image](https://github.com/user-attachments/assets/bf254649-a1c9-482f-b137-5a4d7ce75bc2)
+
+Od korisnika se zahtjeva unos svih potrebnih podataka, te se klikom na dugme _Sačuvaj_ vrši zapošljavanje radnika pri čemu korisnik dobija obavještenje o uspješnom zapošljavanju radnika. Ukoliko postoji problem pri zapošljavanju radnika prikazuje se odgovarajuće obavještenje.
+
+#### Otpuštanje zaposlenog
+
+Otpuštanje zaposlenog se vrši klikom na dugme _Otpusti zaposlenog_ pri čemu se prikazuje poruka za potvrdu otpuštanja.
+
+![image](https://github.com/user-attachments/assets/6eacf155-52d4-439d-a7e0-850b6885a03d)
+
+Samo ako korisnik klikne na dugme _Da_ zaposleni će biti otpušten.
+
+#### Pregled detalja zaposlenog
+
+Klikom na dugme _Detalji_ se otvara prozor sa prikazom osnovnoh podataka o zaposlenom i o njegovim zaposlenjima u okviru date kompanije. 
+
+![image](https://github.com/user-attachments/assets/39667016-3e0f-48e3-becb-b50a3ebfdaae)
+
+#### Upravljanje platama zaposlenog
+
+Klikom na dugme _Plate_ se otvara prozor u kome su prikazane sve plate datog radnika za izabrano zaposlenje gdje je moguće dodati platu za zaposlenog.
+
+![image](https://github.com/user-attachments/assets/d6fa97c0-c591-4785-a8f4-32178ec5da92)
+
+Klikom na dugme _Dodaj platu_ se otvara prozor za dodavanje nove plate.
+
+![image](https://github.com/user-attachments/assets/b1a4176c-27cc-4cda-a951-9b627dae3b4c)
+
+Od korisnika se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje nove plate i korisniku se prikazuje obavještenje o uspješno dodatoj plati. Ukoliko nije moguće dodati platu prikazuje se odgovarajuće obavještenje.
+
+### Rad sa odjeljenjima kompanije
+
+Klikom na stavku menija _Odjeljenja_, korisniku sa ulogom kompanije se prikzuje dio za rad sa odjeljenjima kompanije. Ova stranica se sastoji od dva taba koji omogućavaju pregled aktivnih i obrisanih odjeljenja kompanije kao i manipulaciju odjeljenjima kompanije. Podrazumjevano je otvoren tab za prikaz aktivnih odjeljenja.
+
+![image](https://github.com/user-attachments/assets/030ea944-4f08-482f-8a1e-05a77e64a6e6)
+
+Pored pregleda podataka korisnik sa ulogom kompanije ima mogućnost pretrage odjeljenja po nazivu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
+
+#### Dodavanje odjeljenja
+
+Klikom na dugme _Dodaj odjeljenje_ se otvara prozor za dodavanje novog odjeljenja kompanije.
+
+![image](https://github.com/user-attachments/assets/e73ff765-4368-4ef5-b402-df04bb1f4a31)
+
+Od korisnika se zahtjeva da unese potrebne podatke te se klikom na dugme _Sačuvaj_ odjeljenje dodaje a korisniku se prikazuje odgovarajuće obavještenje. U slučaju da nije moguće dodati odjeljenje korisniku se prikazuje odgovarajuća poruka.
+
+#### Brisanje i obnavljanje odjeljenja
+
+Korisnik ima mogućnost brisanja odjeljenja klikom na dugme _Obriši_ pri čemu se prikauzuje poruka za potvrdu brisanja.
+
+![image](https://github.com/user-attachments/assets/9b492d11-0947-45a9-b656-d8499af0c2ee)
+
+Samo ako korisnik klikne na dugme _Da_ dato odjeljenje se briše.
+
+Korisnik iz pregleda obrisanih odjeljenja ima mogućnost obnove odjeljanj tj. ponistavanja aktivnosti brisanja.
+
+![image](https://github.com/user-attachments/assets/2e23cb24-1551-4a56-8318-405ee6f720b8)
+
+Klikom na dugme obnovi korisniku se prikazuje poruka za potvrdu obnove i ako korisnik klikne na dugme _Da_ odjeljenje će biti obnovljeno.
+
+### Rad sa radnim mjestima u kompaniji
+
+Klikom na stavku menija _Radna mjesta_, korisniku sa ulogom kompanije se prikzuje dio za rad sa radnim mjestima u kompaniji. Ova stranica se sastoji od dva taba koji omogućavaju pregled aktivnih i obrisanih radnih mjesta u kompaniji kao i manipulaciju istim. Podrazumjevano je otvoren tab za prikaz aktivnih radnih mjesta.
+
+![image](https://github.com/user-attachments/assets/cb382442-4e74-4af4-a608-5582f3472bbb)
+
+Korisnik ima mogućnost izbora odjeljenja za koje zeli da pregleda radna mjesta što se radi pomoću padjuće liste odjeljenja u gornjem dijelu forme. U listi su prikazana sva trenutno aktivna odjeljenja komapanije.
+
+![image](https://github.com/user-attachments/assets/b0866612-3a92-4002-9535-fa76db7cb2a2)
+
+Pored pregleda podataka korisnik ima mogućnost pretrage radnih mjesta po nazivu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
+
+#### Dodavanje radnih mjesta
+
+Klikom na dugme _Dodaj radno mjesto_ se otvara prozor za kreiranje novog radnog mjesta u kompaniji.
+
+![image](https://github.com/user-attachments/assets/6229bf7f-6799-4973-a07d-58b9298c3ae6)
+
+Od korisnika se zahtjeva da izabere odjeljenje kome će da pripada radno mjesto, te naziv radnog mjesta i opis koji je opcion. Klikom na dugme _Sačuvaj_ radno mjesto se dodaje a korisniku se prikazuje obavještenje o uspjesnom dodavanju radnog mjesta. U slučaju da nije moguće dodati radno mjesto korisniku se prikazuje odgovarajuće obavještenje.
+
+#### Brisanje i obnavljanje radnih mjesta
+
+U pregledu aktivnih radnih mjesta korisnik ima mogućnost brisanja radnog mjesta klikom na dugme _Obriši_ pri čemu se prikazuje odgovarajuća poruka za potvrdu brisanja. Ukoliko korisnik potvrdi brisanje, dato radno mjesto se briše.
+
+U pregledu obrisanih radnih mjesta korisnik ima mogućnost obnove tj. poništavanja brisanja radnog mjesta klikom na dugme _Obnovi_  pri čemu se prikazuje odgovarajuća poruka za potvrdu obnove. Ukoliko korisnik potvrdi obnovu, dato radno mjesto se aktivira.
+
+## Nalog zaposlenog
+
+### Podešavanja naloga zaposlenog
+
+Zaposleni ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu adrese kompanije. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
+
