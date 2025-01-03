@@ -74,7 +74,7 @@ U slučaju da je korisnik unio netačnu staru lozinku ili ako se ne poklapaju no
 
 ### Podešavanja administratorskog naloga
 
-Administrator ima mogućnost da izvrši podešavanja svoj profila što uključuje promjenu imena i prezimena administratora. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
+Administrator ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu imena i prezimena administratora. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se administrator obavještava o uspješnoj promjeni podataka. 
 
 ![image](https://github.com/user-attachments/assets/49b36d8a-c14b-4a59-9d04-7c5fc008ec9c)
 
@@ -206,3 +206,21 @@ Dodavanje nove stručne spreme se vrši klikom na dugme _Dodaj stručnu spremu n
 ![image](https://github.com/user-attachments/assets/eb7c53b5-5c7c-41e2-81ef-8e9ad53051bf)
 
 Od administratora se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje nove stručne spreme nakon čega se prikazuje poruka o uspješnom dodavanju kompanije, a u spurotnom se prikazuje odgovarajuća poruka o neuspješnom dodavanju stručne spreme.
+
+## Nolog kompanije
+
+### Podešavanja naloga kompanije
+
+Kompanija ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu adrese kompanije. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
+
+![image](https://github.com/user-attachments/assets/bfeb2583-44f5-4dd4-83b7-e0b59d986849)
+
+U slučaju da administrator ne unese podatke, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni podataka.
+
+### Rad sa zaposlenima
+
+Nakon prijave na sistem, korisniku sa ulogom kompanije se prikazuje prozor aplikacije koji se sastoji iz dva dijela, vertikalni meni za izbor odgovarajuće stranice i sam sadržaj stranice. Klikom na odgovarajuću stavku menija prikazuje se sadržaj vezan za tu stavku.
+
+Nakon prijave na sistem, korisniku sa ulogom kompanije se prvo prikzuje dio za rad sa zaposlenima. Ova stranica se sastoji od dva taba koji omogućavaju pregled trenutno zposlenih radnika i bivših zaposlenih u toj kompaniji. Podrazumjevano je otvoren tab za prikaz trenutno zaposlenih radnika.
+
+![image](https://github.com/user-attachments/assets/28f751a6-24f9-40d6-85b2-bac4c8dc6fa2)
