@@ -261,7 +261,7 @@ Klikom na dugme _Detalji_ se otvara prozor sa prikazom osnovnoh podataka o zapos
 
 Klikom na dugme _Plate_ se otvara prozor u kome su prikazane sve plate datog radnika za izabrano zaposlenje gdje je moguće dodati platu za zaposlenog.
 
-![image](https://github.com/user-attachments/assets/d6fa97c0-c591-4785-a8f4-32178ec5da92)
+![image](https://github.com/user-attachments/assets/9530f703-199d-4fc3-852f-34cfadb2535d)
 
 Klikom na dugme _Dodaj platu_ se otvara prozor za dodavanje nove plate.
 
@@ -349,4 +349,4 @@ Pored pregleda podataka zaposleni ima mogućnost pretrage zaposlenja po nazivu k
 
 Pored pregleda zaposlenja je moguće pregledati i sve plate koje su vezane za svako pojedinačno zaposlenje. Klikom na dugme _Plate_ otvara se prozor u kome se prikazuju plate za izabrano zaposlenje.
 
-![image](https://github.com/user-attachments/assets/8641b499-8059-4876-865b-966f594322db)
+![image](https://github.com/user-attachments/assets/c362ebc5-be40-41fb-8b64-e4e021524ba3)
