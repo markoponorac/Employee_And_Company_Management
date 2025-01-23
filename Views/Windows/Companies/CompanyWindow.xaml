@@ -28,12 +28,41 @@
                         <!-- This row will only take the height of the settings button -->
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                        <Button Content="{DynamicResource Employees}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}"/>
-                        <Button Content="{DynamicResource Departments}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}"/>
-                        <Button Content="{DynamicResource WrokPlaces}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}"/>
+                        <ToggleButton Style="{StaticResource MenuButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}" IsChecked="{Binding IsEmployeesSelected}">
+                            <ToggleButton.Content>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Accounts" Width="24" Height="24" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{DynamicResource Employees}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+                        <ToggleButton Style="{StaticResource MenuButtonStyle}" Margin="10" Command="{Binding NavigateToDepartmentsCommand}" IsChecked="{Binding IsDepartmentsSelected}">
+                            <ToggleButton.Content>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Business" Width="24" Height="24" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{DynamicResource Departments}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+                        <ToggleButton Style="{StaticResource MenuButtonStyle}" Margin="10" Command="{Binding NavigateToWrokPlacesCommand}" IsChecked="{Binding IsWorkPlacesSelected}">
+                            <ToggleButton.Content>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Work" Width="24" Height="24" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{DynamicResource WrokPlaces}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+                    
                     </StackPanel>
 
-                    <Button Grid.Row="1" Content="{DynamicResource Settings}" Style="{StaticResource ButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}"/>
+                    <ToggleButton  Grid.Row="1" Style="{StaticResource MenuButtonStyle}" Margin="10" Command="{Binding NavigateToSettingsCommand}" IsChecked="{Binding IsSettingSelected}">
+                        <ToggleButton.Content>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Settings" Width="24" Height="24" Margin="0,0,10,0"/>
+                                <TextBlock Text="{DynamicResource Settings}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
                 </Grid>
             </Border>
 

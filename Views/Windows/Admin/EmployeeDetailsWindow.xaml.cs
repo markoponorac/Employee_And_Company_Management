@@ -23,12 +23,12 @@ namespace Employee_And_Company_Management.Views.Windows
         public EmployeeDetailsWindow(Employee employee)
         {
             InitializeComponent();
-            FirstNameTextBlock.Text = employee.PersonProfile.FirstName;
-            LastNameTextBlock.Text = employee.PersonProfile.LastName;
-            UsernameTextBlock.Text = employee.PersonProfile.Profile.Username;
-            DateOfBirthTextBlock.Text = employee.DateOfBirth.ToString();
-            QualificationTextBlock.Text = employee.QualificationLevel.Title;
-            JmbTextBlock.Text = employee.PersonProfile.Jmb;
+            UsernameTextBox.Text = employee.PersonProfile.Profile.Username;
+            FirstNameTextBox.Text = employee.PersonProfile.FirstName;
+            LastNameTextBox.Text = employee.PersonProfile.LastName;
+            DateOfBirthTextBox.Text = employee.DateOfBirth.ToString("dd.MM.yyyy.");
+            JmbTextBox.Text = employee.PersonProfile.Jmb;
+            QualificationTextBox.Text = employee.QualificationLevel.Title;
         }
     }
 }

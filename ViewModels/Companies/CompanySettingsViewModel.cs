@@ -61,6 +61,18 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             set => SetProperty(ref _jib, value);
         }
         public LoginDTO LoginDTO { get; set; }
+        public void reload()
+        {
+            if (flag)
+            {
+                Address = LoginDTO.Address;
+                OldPassword = String.Empty;
+                NewPassword = String.Empty;
+                NewConfirmedPassword = String.Empty;
+            }
+        }
+
+        private bool flag = false;
 
         public CompanySettingsViewModel(LoginDTO loginDTO)
         {
@@ -76,7 +88,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             Jib = loginDTO.Jib;
             Address = loginDTO.Address;
             DateOfEstablish = loginDTO.DateOfEstablish.ToString();
-
+            flag = true;
         }
 
 
@@ -105,6 +117,11 @@ namespace Employee_And_Company_Management.ViewModels.Companies
                 CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
+            if (Address.Length >= 255)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("MaxLen255"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                return;
+            }
             var company = new Company()
             {
                 ProfileId = LoginDTO.ProfileId,
@@ -121,7 +138,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
-           
+            reload();
         }
 
 
@@ -161,6 +178,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
+            reload();
         }
 
     }

@@ -75,7 +75,7 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
             entity.Property(e => e.ProfileId)
                 .ValueGeneratedNever()
                 .HasColumnName("PROFILE_ID");
-            entity.Property(e => e.Address).HasMaxLength(45);
+            entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.DateOfEstablishment).HasColumnName("Date_of_establishment");
             entity.Property(e => e.Jib)
                 .HasMaxLength(12)
@@ -258,7 +258,7 @@ public partial class EmployeeAndCompanyManagementContext : DbContext
             entity.ToTable("work_place");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Description).HasMaxLength(45);
+            entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.Title).HasMaxLength(45);
 
             entity.HasOne(wp => wp.Department)

@@ -4,22 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Admin"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="{DynamicResource AddQualification}" Height="250" Width="450"
+        Title="{DynamicResource AddQualification}" Height="270" Width="450"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="{DynamicResource BackgroundBrush}">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Name}" Style="{DynamicResource ParameterTextSyle}" Width="200"/>
-                <TextBox x:Name="TitleTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black"  Width="200" Text="{Binding QualificationTitle}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource QualificationCode}" Style="{DynamicResource ParameterTextSyle}" Width="200"/>
-                <TextBox x:Name="CodeTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding QualificationCode}" />
-            </StackPanel>
 
-            <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding SaveQualification}" />
-        </StackPanel>
-    </Grid>
+
+    <Border  Background="{DynamicResource BackgroundBrush}" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:PackIcon Kind="ClipboardText" Width="24" Height="24" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="TitleTextBlock"
+               Grid.Row="0" Grid.Column="1"
+               materialDesign:HintAssist.Hint="{DynamicResource Name}"
+               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+               IsReadOnly="False"
+               Text="{Binding QualificationTitle, UpdateSourceTrigger=PropertyChanged}"
+               Margin="0,10"/>
+
+            <materialDesign:PackIcon Kind="Label" Width="24" Height="24" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="CodeTextBlock"
+               Grid.Row="1" Grid.Column="1"
+               materialDesign:HintAssist.Hint="{DynamicResource QualificationCode}"
+               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+               IsReadOnly="False"
+               Text="{Binding QualificationCode, UpdateSourceTrigger=PropertyChanged}"
+               Margin="0,10"/>
+
+            <Button Command="{Binding SaveQualification}"  
+            Style="{StaticResource SubbmitButton}" 
+            Margin="0,30,10,0" 
+            Grid.Row="2" 
+            Grid.Column="1">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="ContentSaveOutline" Width="24" Height="24" Margin="0,0,10,0"/>
+                        <TextBlock Text="{DynamicResource Save}"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+    </Border>
 </Window>

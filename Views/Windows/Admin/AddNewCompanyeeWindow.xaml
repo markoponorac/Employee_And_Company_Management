@@ -4,42 +4,121 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows"
+                 xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="{DynamicResource AddCompany}" Height="520" Width="430"
+        Title="{DynamicResource AddCompany}" Height="530" Width="430"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    
-    <Grid Background="{DynamicResource BackgroundBrush}">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Username}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
-                <TextBox x:Name="UsernameTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black"  Width="200" Text="{Binding Username}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Name}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
-                <TextBox x:Name="FirstNameTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding Name}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource DateOfEstablish}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
-                <DatePicker x:Name="DateOfEstablishmentPicker" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" SelectedDate="{Binding DateOfEstablish}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Jib}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
-                <TextBox x:Name="JmbTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding Jib}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Address}" Style="{DynamicResource ParameterTextSyle}" Width="150"/>
-                <TextBox x:Name="AddresTextBlock" Style="{DynamicResource InputStyle}" Foreground="Black" Width="200" Text="{Binding Address}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource Password}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
-                <PasswordBox x:Name="UserPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserPasswordBox_PasswordChanged" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{DynamicResource ParameterTextSyle}" Width="145"/>
-                <PasswordBox x:Name="UserAgainPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" Foreground="Black" Width="200" PasswordChanged="UserAgainPasswordBox_PasswordChanged" />
-            </StackPanel>
-            <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding SaveCommand}" />
-        </StackPanel>
-    </Grid>
+
+    <Border  Background="{DynamicResource BackgroundBrush}" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <md:PackIcon Kind="AccountCircle" Width="24" Height="24" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="UsernameTextBox"
+              Grid.Row="0" Grid.Column="1"
+              md:HintAssist.Hint="{DynamicResource Username}"
+              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+              IsReadOnly="False"
+              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+              Margin="0,10"/>
+
+            <md:PackIcon Kind="AccountBox" Width="24" Height="24" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="FirstNameTextBox"
+              Grid.Row="1" Grid.Column="1"
+              md:HintAssist.Hint="{DynamicResource Name}"
+              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+              IsReadOnly="False"
+              Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+              Margin="0,10"/>
+
+            <md:PackIcon Kind="Calendar" Width="24" Height="24" Margin="5" Grid.Row="2" VerticalAlignment="Center" />
+            <DatePicker x:Name="DateOfEstablishmentPicker" DisplayDateEnd="{x:Static sys:DateTime.Now}" 
+                    Grid.Row="2" Grid.Column="1"
+                    md:HintAssist.Hint="{DynamicResource DateOfEstablish}"
+                    SelectedDate="{Binding DateOfEstablish, UpdateSourceTrigger=PropertyChanged}"
+                            Background="{DynamicResource BackgroundBrush}"
+                    Margin="0,10">
+                                    <DatePicker.Resources>
+                                        <Style TargetType="DatePickerTextBox">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Style>
+                                        <Style TargetType="Calendar">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Style>
+                                    </DatePicker.Resources>
+                                </DatePicker>
+
+            <md:PackIcon Kind="CardAccountDetails" Width="24" Height="24" Margin="5" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="JibTextBox"
+             Grid.Row="3" Grid.Column="1"
+             md:HintAssist.Hint="{DynamicResource Jib}"
+             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+             IsReadOnly="False"
+             Text="{Binding Jib, UpdateSourceTrigger=PropertyChanged}"
+             Margin="0,10"/>
+
+            <md:PackIcon Kind="AddressMarker" Width="24" Height="24" Margin="5" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="AddressTextBox"
+                 Grid.Row="4" Grid.Column="1"
+                 md:HintAssist.Hint="{DynamicResource Address}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 IsReadOnly="False"
+                 Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,10"/>
+
+
+            <md:PackIcon Kind="Lock" Width="24" Height="24" Margin="5" Grid.Row="5" VerticalAlignment="Center" />
+            <PasswordBox x:Name="UserPasswordBox"
+                Grid.Row="5" Grid.Column="1"
+                md:HintAssist.Hint="{DynamicResource Password}"
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                Foreground="Black"
+                PasswordChanged="UserPasswordBox_PasswordChanged"
+                Margin="0,10"/>
+
+                            <md:PackIcon Kind="LockCheck" Width="24" Height="24" Margin="5" Grid.Row="6" VerticalAlignment="Center" />
+                            <PasswordBox x:Name="UserAgainPasswordBox"
+                Grid.Row="6" Grid.Column="1"
+                md:HintAssist.Hint="{DynamicResource ConfirmPassword}"
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                Foreground="Black"
+                PasswordChanged="UserAgainPasswordBox_PasswordChanged"
+                Margin="0,10"/>
+
+            <Button Command="{Binding SaveCommand}"  
+                Style="{StaticResource SubbmitButton}" 
+                Margin="0,30,10,0" 
+                Grid.Row="7" 
+                Grid.Column="1">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <md:PackIcon Kind="ContentSaveOutline" Width="24" Height="24" Margin="0,0,10,0"/>
+                                        <TextBlock Text="{DynamicResource Save}"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+
+        </Grid>
+    </Border>
 </Window>

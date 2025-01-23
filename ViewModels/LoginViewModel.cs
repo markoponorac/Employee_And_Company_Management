@@ -48,7 +48,11 @@ namespace Employee_And_Company_Management.ViewModels
             try
             {
                 IsLoading = true;
-                var responseLoginDTO = await Task.Run(() => _loginService.LoginAsync(Username, Password));
+                LoginDTO responseLoginDTO = null;
+                if (!string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password))
+                {
+                   responseLoginDTO = await Task.Run(() => _loginService.LoginAsync(Username, Password));
+                }
 
                 if (responseLoginDTO!=null && responseLoginDTO.Success)
                 {
@@ -99,6 +103,7 @@ namespace Employee_And_Company_Management.ViewModels
             finally
             {
                 IsLoading = false;
+                
             }
         }
     }

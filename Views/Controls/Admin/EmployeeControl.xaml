@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -46,9 +47,15 @@
                        Opacity="0.5"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <Button Content="{DynamicResource AddEmployee}" 
-                        Command="{Binding AddEmployeeCommand}" 
-                        Style="{StaticResource ButtonStyle}" Margin="0" />
+
+                <Button Style="{StaticResource ButtonStyle}" Margin="0" Command="{Binding AddEmployeeCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Add" Width="24" Height="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="{DynamicResource AddEmployee}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
 
@@ -68,8 +75,32 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
-                                                            <Button Content="{DynamicResource Block}" Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Command="{Binding DataContext.BlockCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                                CommandParameter="{Binding}" 
+                                                                Style="{StaticResource ButtonStyle}" 
+                                                                Margin="0,0,10,0" 
+                                                                Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Block" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Block}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+
+                                                            <Button Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                                 CommandParameter="{Binding}" 
+                                                                 Style="{StaticResource ButtonStyle}" 
+                                                                 Margin="0,0,10,0" 
+                                                                 Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Show" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Details}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
@@ -106,8 +137,29 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="{DynamicResource Active}" Command="{Binding DataContext.ActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                                            <Button Content="{DynamicResource Delete}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Command="{Binding DataContext.ActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                                 CommandParameter="{Binding}" 
+                                                                 Style="{StaticResource ButtonStyle}" 
+                                                                 Margin="0,0,10,0" 
+                                                                 Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Check" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Active}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+
+
+                                                            <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Delete" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Delete}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
@@ -144,7 +196,15 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
-                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Show" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Details}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>

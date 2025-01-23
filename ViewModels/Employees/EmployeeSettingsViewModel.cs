@@ -62,7 +62,19 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             set => SetProperty(ref _qualification, value);
         }
         public LoginDTO LoginDTO { get; set; }
+        public void reload()
+        {
+            if (flag)
+            {
+                FirstName = LoginDTO.Firstname;
+                LastName = LoginDTO.Lastname;
+                OldPassword = String.Empty;
+                NewPassword = String.Empty;
+                NewConfirmedPassword = String.Empty;
+            }
+        }
 
+        private bool flag = false;
         public EmployeeSettingsViewModel(LoginDTO loginDTO)
         {
             LoginDTO = loginDTO;
@@ -78,6 +90,7 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             LastName = loginDTO.Lastname;
             DateOfBirth = loginDTO.DateOfEstablish.ToString();
             Qualification = loginDTO.Qualification;
+            flag = true;
         }
 
 
@@ -107,6 +120,11 @@ namespace Employee_And_Company_Management.ViewModels.Employees
                 CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
+            if (FirstName.Length >= 45 || LastName.Length >= 45)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("MaxLen45"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                return;
+            }
             var employee = new Employee()
             {
                 PersonProfileId = LoginDTO.ProfileId,
@@ -126,10 +144,8 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             else
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
-                FirstName = LoginDTO.Firstname;
-                LastName = LoginDTO.Lastname;
             }
-
+            reload();
         }
 
 
@@ -169,6 +185,7 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("WrongPassword"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
+            reload();
         }
     }
 }

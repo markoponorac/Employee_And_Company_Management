@@ -252,6 +252,20 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                 CustomMessageBox.Show(LanguageUtil.Translate("JmbIncorect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
+            if(DateOfBirth > DateTime.Now)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("DateIncorrect"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                return;
+            }
+
+            string temp = DateOfBirth.Value.ToString();
+            temp = temp.Remove(4, 1);
+
+            if (!Jmb.StartsWith(temp))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("JMBAndDofBMissmetch"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                return;
+            }
             Employee employee = new Employee()
             {
                 DateOfBirth = (DateOnly)DateConverter.ConvertToDateOnly(DateOfBirth),

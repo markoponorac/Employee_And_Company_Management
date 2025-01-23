@@ -38,6 +38,8 @@
     <system:String x:Key="NewPassword">New Password</system:String>
     <system:String x:Key="ConfirmPassword">Confirm Password</system:String>
     <system:String x:Key="AllFieldsRequired">All fields are required!</system:String>
+    <system:String x:Key="MaxLen45">The entry must not be longer than 45 characters!</system:String>
+    <system:String x:Key="MaxLen255">The entry must not be longer than 255 characters!</system:String>
     <system:String x:Key="PasswordToShort">Password must have at least 8 characters!</system:String>
     <system:String x:Key="PasswordsEquals">The old and new password must be different!</system:String>
     <system:String x:Key="NewPasswordsNotEquals">Passwords do not match!</system:String>
@@ -161,5 +163,8 @@
     <system:String x:Key="EmployeePanel">Employee</system:String>
     <system:String x:Key="CompanyDetails">Company details</system:String>
     <system:String x:Key="DissmisCofirm">Dissmis confirm</system:String>
+    <system:String x:Key="ShowPassword">Show password</system:String>
+    <system:String x:Key="DateIncorrect">Date is incorrect</system:String>
+    <system:String x:Key="JMBAndDofBMissmetch">UID and date of birth must match</system:String>
 
 </ResourceDictionary>

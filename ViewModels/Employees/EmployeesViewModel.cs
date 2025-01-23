@@ -19,6 +19,19 @@ namespace Employee_And_Company_Management.ViewModels.Employees
             get => _currentPage;
             set => SetProperty(ref _currentPage, value);
         }
+        private bool _isEmployeesSelected;
+        public bool IsEmployeesSelected
+        {
+            get => _isEmployeesSelected;
+            set => SetProperty(ref _isEmployeesSelected, value);
+        }
+
+        private bool _isSettingSelected;
+        public bool IsSettingSelected
+        {
+            get => _isSettingSelected;
+            set => SetProperty(ref _isSettingSelected, value);
+        }
 
         public ICommand NavigateToSettingsCommand { get; set; }
         public ICommand NavigateToEmploymentsCommand { get; set; }
@@ -43,11 +56,15 @@ namespace Employee_And_Company_Management.ViewModels.Employees
 
         private void ExecuteNavigateToSettings(object obj)
         {
+            IsEmployeesSelected = false;
+            IsSettingSelected = true;
             CurrentPage = new EmployeeSettingsControl(_loginDTO);
         }
 
         private void ExecuteNavigateToEmployments(object obj)
         {
+            IsEmployeesSelected = true;
+            IsSettingSelected = false;
             CurrentPage = new EmploymentsControl(_loginDTO);
         }
     }

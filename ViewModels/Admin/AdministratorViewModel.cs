@@ -16,6 +16,34 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             get => _currentPage;
             set => SetProperty(ref _currentPage, value);
         }
+        private bool _isEmployeesSelected;
+        public bool IsEmployeesSelected
+        {
+            get => _isEmployeesSelected;
+            set => SetProperty(ref _isEmployeesSelected, value);
+        }
+
+        private bool _isCompaniesSelected;
+        public bool IsCompaniesSelected
+        {
+            get => _isCompaniesSelected;
+            set => SetProperty(ref _isCompaniesSelected, value);
+        }
+
+        private bool _isQualificationSelected;
+        public bool IsQualificationSelected
+        {
+            get => _isQualificationSelected;
+            set => SetProperty(ref _isQualificationSelected, value);
+        }
+        private bool _isSettingSelected;
+        public bool IsSettingSelected
+        {
+            get => _isSettingSelected;
+            set => SetProperty(ref _isSettingSelected, value);
+        }
+
+
 
         public ICommand NavigateToSettingsCommand { get; set; }
         public ICommand NavigateToEmployeesCommand { get; set; }
@@ -44,18 +72,34 @@ namespace Employee_And_Company_Management.ViewModels.Admin
 
         private void ExecuteNavigateToSettings(object obj)
         {
+            IsEmployeesSelected = false;
+            IsCompaniesSelected = false;
+            IsQualificationSelected = false;
+            IsSettingSelected = true;
             CurrentPage = new AdministratorSettingsControl(LoginDTO);
         }
         private void ExecuteNavigateToEmployees(object obj)
         {
+            IsEmployeesSelected = true;
+            IsCompaniesSelected = false;
+            IsQualificationSelected = false;
+            IsSettingSelected = false;
             CurrentPage = new EmployeeControl();
         }
         private void ExecuteNavigateToCompanies(object obj)
         {
+            IsEmployeesSelected = false;
+            IsCompaniesSelected = true;
+            IsQualificationSelected = false;
+            IsSettingSelected = false;
             CurrentPage = new CompaniesControl();
         }
         private void ExecuteNavigateToQualification(object obj)
         {
+            IsEmployeesSelected = false;
+            IsCompaniesSelected = false;
+            IsQualificationSelected = true;
+            IsSettingSelected= false;
             CurrentPage = new QualificationControl();
         }
     }

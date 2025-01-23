@@ -1,5 +1,6 @@
 ﻿
 using Employee_And_Company_Management.Models;
+using Employee_And_Company_Management.ViewModels.Admin;
 using Employee_And_Company_Management.ViewModels.Employees;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,5 +42,17 @@ namespace Employee_And_Company_Management.Views.Controls.Employees
                 viewModel.NewPassword = (sender as PasswordBox)?.Password;
             }
         }
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is EmployeeSettingsViewModel viewModel)
+            {
+                viewModel.reload();
+                UserPasswordBox.Password = String.Empty;
+                UserNewPasswordBox.Password = String.Empty;
+                UserNewAgainPasswordBox.Password = String.Empty;
+
+            }
+        }
+
     }
 }

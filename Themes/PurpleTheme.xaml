@@ -150,9 +150,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-
-
-    <!--<Style x:Key="MenuButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+    
+    <Style x:Key="MenuButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
         <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBrush}"/>
@@ -160,29 +159,30 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="Margin" Value="0,20,0,0"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
-                    <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="2" 
-                        CornerRadius="10">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        -->
-    <!-- Aktivno stanje -->
-    <!--
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
+
+        <Style.Triggers>
+            <!-- Aktivno stanje (selektovano dugme) -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+
+            <!-- Fokusirano dugme -->
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+
+            <!-- Hover stanje -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
 
 

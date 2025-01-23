@@ -38,6 +38,8 @@
     <system:String x:Key="NewPassword">Nova lozinka</system:String>
     <system:String x:Key="ConfirmPassword">Potvrda lozinke</system:String>
     <system:String x:Key="AllFieldsRequired">Sva polja su obavezna!</system:String>
+    <system:String x:Key="MaxLen45">Unos ne smije biti duži od 45 znakova!</system:String>
+    <system:String x:Key="MaxLen255">Unos ne smije biti duži od 255 znakova!</system:String>
     <system:String x:Key="PasswordToShort">Lozinka mora imati najmanje 8 karaktera!</system:String>
     <system:String x:Key="PasswordsEquals">Stara i nova lozinka moraju biti različite!</system:String>
     <system:String x:Key="NewPasswordsNotEquals">Lozinke se ne poklapaju!</system:String>
@@ -161,6 +163,8 @@
     <system:String x:Key="EmployeePanel">Zaposleni</system:String>
     <system:String x:Key="CompanyDetails">Detalji o kompaniji</system:String>
     <system:String x:Key="DissmisCofirm">Potvrda otpuštanja</system:String>
-
+    <system:String x:Key="ShowPassword">Prikaž</system:String>
+    <system:String x:Key="DateIncorrect">Datum nije korektan</system:String>
+    <system:String x:Key="JMBAndDofBMissmetch">JMB i datum rođenja moraju biti usaglašeni</system:String>
 
 </ResourceDictionary>

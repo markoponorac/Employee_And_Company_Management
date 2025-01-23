@@ -26,6 +26,33 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         public ICommand NavigateToDepartmentsCommand { get; set; }
         public ICommand NavigateToWrokPlacesCommand { get; set; }
 
+        private bool _isEmployeesSelected;
+        public bool IsEmployeesSelected
+        {
+            get => _isEmployeesSelected;
+            set => SetProperty(ref _isEmployeesSelected, value);
+        }
+
+        private bool _isDepartmentsSelected;
+        public bool IsDepartmentsSelected
+        {
+            get => _isDepartmentsSelected;
+            set => SetProperty(ref _isDepartmentsSelected, value);
+        }
+
+        private bool _isWorkPlacesSelected;
+        public bool IsWorkPlacesSelected
+        {
+            get => _isWorkPlacesSelected;
+            set => SetProperty(ref _isWorkPlacesSelected, value);
+        }
+        private bool _isSettingSelected;
+        public bool IsSettingSelected
+        {
+            get => _isSettingSelected;
+            set => SetProperty(ref _isSettingSelected, value);
+        }
+
         public LoginDTO LoginDTO { get; set; }
 
         public CompanyViewModel(LoginDTO loginDTO)
@@ -49,19 +76,35 @@ namespace Employee_And_Company_Management.ViewModels.Companies
 
         private void ExecuteNavigateToSettings(object obj)
         {
+            IsEmployeesSelected = false;
+            IsDepartmentsSelected = false;
+            IsWorkPlacesSelected = false;
+            IsSettingSelected = true;
             CurrentPage = new CompanySettingsControl(LoginDTO);
         }
 
         private void ExecuteNavigateToEmployees(object obj)
         {
+            IsEmployeesSelected = true;
+            IsDepartmentsSelected = false;
+            IsWorkPlacesSelected = false;
+            IsSettingSelected = false;
             CurrentPage = new EmployeeCompanyControl(LoginDTO);
         }
         private void ExecuteNavigateToDepartments(object obj)
         {
+            IsEmployeesSelected = false;
+            IsDepartmentsSelected = true;
+            IsWorkPlacesSelected = false;
+            IsSettingSelected = false;
             CurrentPage = new DepartmentsCompanyControl(LoginDTO);
         }
         private void ExecuteNavigateToWorkPlaces(object obj)
         {
+            IsEmployeesSelected = false;
+            IsDepartmentsSelected = false;
+            IsWorkPlacesSelected = true;
+            IsSettingSelected = false;
             CurrentPage = new WorkPlacesCompanyControl(LoginDTO);
         }
 

@@ -109,6 +109,8 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             }
             window.Close();
             window = null;
+            QualificationTitle = string.Empty;
+            QualificationCode = string.Empty;
         }
 
         private async void LoadQualifications()

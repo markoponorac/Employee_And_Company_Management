@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Companies"
              mc:Ignorable="d" 
               d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl>
-            <!-- General Settings Tab -->
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+        
             <TabItem Header="{DynamicResource GeneralSetting}" >
                 <StackPanel Margin="10">
 
-                    <!-- Theme Settings -->
                     <TextBlock Text="{DynamicResource ChangeTheme}" Style="{DynamicResource TitleTextStyle}" Margin="10,0,0,5"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Button Content="{DynamicResource BlueTheme}" Style="{StaticResource ButtonStyle}"   Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="BlueTheme"/>
@@ -21,7 +21,6 @@
                         <Button Content="{DynamicResource PurpleTheme}" Style="{StaticResource ButtonStyle}"  Margin="5" Command="{Binding ChangeThemeCommand}" CommandParameter="PurpleTheme"/>
                     </StackPanel>
 
-                    <!-- Language Settings -->
                     <TextBlock Text="{DynamicResource ChangeLanguage}" Style="{DynamicResource TitleTextStyle}" Margin="10,20,0,5"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,5">
                         <Button x:Name="SerbianButton" Style="{StaticResource FlagButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="sr-Latn-RS">
@@ -34,7 +33,6 @@
                 </StackPanel>
             </TabItem>
 
-            <!-- Administrator Specific Settings Tab -->
             <TabItem Header="{DynamicResource CompanySettings}">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal">
@@ -62,7 +60,14 @@
                         Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
                     </StackPanel>
 
-                    <Button Content="{DynamicResource Save}" Style="{StaticResource SubbmitButton}" Command="{Binding UpdateProfileCommand}" />
+                    <Button Style="{StaticResource SubbmitButton}" Command="{Binding UpdateProfileCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="ContentSaveOutline" Width="24" Height="24" Margin="0,0,10,0"/>
+                                <TextBlock Text="{DynamicResource Save}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
 
                 </StackPanel>
             </TabItem>
@@ -84,7 +89,14 @@
                         <PasswordBox x:Name="UserNewAgainPasswordBox" Style="{StaticResource CustomPasswordBoxStyle}" PasswordChanged="UserNewAgainPasswordBox_PasswordChanged"/>
                     </StackPanel>
 
-                    <Button Content="{DynamicResource SavePassword}" Style="{StaticResource SubbmitButton}" Command="{Binding ChangePasswordCommand}" />
+                    <Button Style="{StaticResource SubbmitButton}" Command="{Binding ChangePasswordCommand}" >
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="ContentSaveOutline" Width="24" Height="24" Margin="0,0,10,0"/>
+                                <TextBlock Text="{DynamicResource SavePassword}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
             </TabItem>
         </TabControl>

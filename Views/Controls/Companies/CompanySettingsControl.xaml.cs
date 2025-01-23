@@ -47,7 +47,17 @@ namespace Employee_And_Company_Management.Views.Controls.Companies
                 viewModel.NewPassword = (sender as PasswordBox)?.Password;
             }
         }
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is CompanySettingsViewModel viewModel)
+            {
+                viewModel.reload();
+                UserPasswordBox.Password = String.Empty;
+                UserNewPasswordBox.Password = String.Empty;
+                UserNewAgainPasswordBox.Password = String.Empty;
 
+            }
+        }
 
     }
 }

@@ -211,6 +211,13 @@ namespace Employee_And_Company_Management.ViewModels.Admin
 
             windowAddCompany.Close();
             windowAddCompany = null;
+            Username = string.Empty;
+            Password = string.Empty;
+            Name = string.Empty;
+            Jib= string.Empty;
+            ConfirmedPassword = string.Empty;
+            DateOfEstablish = null;
+            Address = string.Empty;
         }
         private bool CanModifyCompanye(object parameter) => true;
 

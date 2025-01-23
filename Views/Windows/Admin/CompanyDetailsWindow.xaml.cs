@@ -23,11 +23,11 @@ namespace Employee_And_Company_Management.Views.Windows
         public CompanyDetailsWindow(Company company)
         {
             InitializeComponent();
-            UsernameTextBlock.Text = company.Profile.Username;
-            NameTextBlock.Text= company.Name;
-            DateOfEstablishTextBlock.Text = company.DateOfEstablishment.ToString();
-            JibTextBlock.Text = company.Jib;
-            AddressTextBlock.Text = company.Address;
+            UsernameTextBox.Text = company.Profile.Username;
+            NameTextBox.Text= company.Name;
+            DateOfEstablishTextBox.Text = company.DateOfEstablishment.ToString("dd.MM.yyyy.");
+            JibTextBox.Text = company.Jib;
+            AddressTextBox.Text = company.Address;
         }
     }
 }

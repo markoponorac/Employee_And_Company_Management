@@ -50,6 +50,20 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         }
         public LoginDTO LoginDTO { get; set; }
 
+        public void reload()
+        {
+            if (flag)
+            {
+                Firstname = LoginDTO.Firstname;
+                Lastname = LoginDTO.Lastname;
+                OldPassword = String.Empty;
+                NewPassword = String.Empty;
+                NewConfirmedPassword = String.Empty;
+            }
+        }
+
+        private bool flag = false;
+
         public AdministratorSettingsViewModel(LoginDTO loginDTO)
         {
             ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage, CanExecuteChangeLanguage);
@@ -63,6 +77,7 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             Firstname = loginDTO.Firstname;
             Lastname = loginDTO.Lastname;
             Jmb = loginDTO.Jmb;
+            flag = true;
         }
 
         private bool CanExecuteChangeLanguage(object obj) => true;
@@ -89,6 +104,11 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                 CustomMessageBox.Show(LanguageUtil.Translate("AllFieldsRequired"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
                 return;
             }
+            if (Firstname.Length>=45 || Lastname.Length>=45)
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("MaxLen45"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                return;
+            }
             var admin = new Administrator()
             {
                 PersonProfileId = LoginDTO.ProfileId,
@@ -111,6 +131,7 @@ namespace Employee_And_Company_Management.ViewModels.Admin
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
+            reload();
            
         }
         private async void ExecuteChangeTheme(object obj)

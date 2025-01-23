@@ -112,6 +112,41 @@
         <Setter Property="Margin" Value="0,20,0,0"/>
     </Style>
 
+    <Style x:Key="MenuButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
+        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="0,20,0,0"/>
+
+        <Style.Triggers>
+            <!-- Aktivno stanje (selektovano dugme) -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+
+            <!-- Fokusirano dugme -->
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+
+            <!-- Hover stanje -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
     <Style x:Key="SubbmitButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
         <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
