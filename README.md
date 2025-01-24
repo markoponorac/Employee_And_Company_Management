@@ -40,33 +40,31 @@ Svi korisnici u meniju imaju stavku _Podešavanja_ te se klikom na nju prikazuje
 
 Svi korisnici imaju mogućnost da personalizuju aplikaciju prema svojim potrebama. Korisnici imaju mogućnost izbora jedne od četiri različite definisane teme u aplikaciji. Izbor teme se vrši klikom na dugme. Pored toga korisnici mogu i da izaberu jedan od dva definisana jezika: srpski i engleski. Sva izabrana podešavanja se čuvaju za svakog korisnika tako da se prilikom sledeceg pristupa svakog korisnika primjenjuju izabrana podešavanja. Sama forma za opšta podešavanja je prikazana na sledećoj slici:
 
-![image](https://github.com/user-attachments/assets/66877d7b-3bdd-4c52-85df-20fa80dd1aca)
+![image](https://github.com/user-attachments/assets/4591f49e-1808-4013-8671-6fa26256e351)
 
 Primjer izgleda aplikacije u zavisnosti od izabrane teme:
 
 * Plava tema:
 
-![image](https://github.com/user-attachments/assets/a7acabe6-ab4a-4c88-9d30-8b68500c830d)
+![image](https://github.com/user-attachments/assets/1496597c-b039-41d7-bbf9-ab65af2e37dd)
 
 * Zelena tema:
 
-![image](https://github.com/user-attachments/assets/625fb09c-8400-4166-85f7-5519980a6c17)
+![image](https://github.com/user-attachments/assets/0a7c816a-d8e6-4b9c-806c-92a5468b3dd2)
 
 * Narandžasta tema:
 
-![image](https://github.com/user-attachments/assets/1188b39e-375c-4554-a9d8-47e540497924)
+![image](https://github.com/user-attachments/assets/4194e110-6c0f-4007-9c5b-d2244b995e2d)
 
 * Ljubičasta tema:
 
-![image](https://github.com/user-attachments/assets/6a04ff13-e59b-4219-9c08-35fb159be91e)
+![image](https://github.com/user-attachments/assets/c2463f17-1bf9-4557-a461-74146b6641ae)
 
 ### Promjena lozinke
 
 Svi korisnici aplikacije imaju mogućnost promjene svoje lozinke. Korisnici su dužni unijeti staru lozinku, radi potvrde autentičnosti, novu lozinku koju žele da postave te potvrditi novu lozinku kako bi bili sigurni da su unijeli lozinku koju žele. Nova lozinka se postavlja klikom na dugme _Sačuvaj lozinku_, nakon čega se korisnik obavještava o uspješnoj promijeni lozinke.
 
-
-
-![image](https://github.com/user-attachments/assets/b675021d-d2a9-4a89-8d7c-b4183f2ddb6f)
+![image](https://github.com/user-attachments/assets/ab7dc16c-3127-4983-8a78-5e869d932217)
 
 U slučaju da je korisnik unio netačnu staru lozinku ili ako se ne poklapaju nove lozinke ili ako je nova i stara lozinka ista ili ako nova lozinka ima manje od osam karaktera, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni lozinke.
 
@@ -76,7 +74,7 @@ U slučaju da je korisnik unio netačnu staru lozinku ili ako se ne poklapaju no
 
 Administrator ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu imena i prezimena administratora. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se administrator obavještava o uspješnoj promjeni podataka. 
 
-![image](https://github.com/user-attachments/assets/49b36d8a-c14b-4a59-9d04-7c5fc008ec9c)
+![image](https://github.com/user-attachments/assets/5179b457-59bd-4bf0-84f0-37a7897040b6)
 
 U slučaju da administrator ne unese oba podatka, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni podataka.
 
@@ -88,11 +86,11 @@ Nakon prijave na sistem, administratoru se prikazuje prozor aplikacije koji se s
 
 Nakon prijave na sistem, administratoru se prvo prikzuje dio za rad sa zaposlenima. Ova stranica se sastoji od tri taba koji omogućavaju pregled zaposlenih u zavisnosti od statusa njihovog profila (aktivni, blokirani i obrisani). Podrazumjevano je otvoren tab za prikaz aktivnih kompanija.
 
-![image](https://github.com/user-attachments/assets/dc36f011-afec-40f8-a7bb-8bfe24e79c34)
+![image](https://github.com/user-attachments/assets/41bbe368-156b-4b7a-ad16-141a035cdbc5)
 
 Pored pregleda podataka administrator ima mogućnost pretrage zaposlenih po imenu, prezimenu ili korisničkom imenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
-![image](https://github.com/user-attachments/assets/4b056e84-ab7d-4644-b9ea-cd259a57ef40)
+![image](https://github.com/user-attachments/assets/f1230374-0646-474f-8f75-1c716dba35f1)
 
 Administrator ima mogućnost manipulacije zaposlenima što uključuje blokiranje, aktiviranje, brisanje naloga zaposlenih kao i pregled detalja o zaposlenom te dodavanje novog zaposlenog u sistem.
 
@@ -100,7 +98,7 @@ Administrator ima mogućnost manipulacije zaposlenima što uključuje blokiranje
 
 Dodavanje novog zaposlenog se vrši klikom na dugme _Dodaj zaposlenog_ nakon čega se prikazuje prozor za dodavanje novog zaposlenog.
 
-![image](https://github.com/user-attachments/assets/ee200303-37dd-4bd8-9a88-2623456985cf)
+![image](https://github.com/user-attachments/assets/cb5098e5-0514-46ee-9f6d-4ae404feb047)
 
 Od administratora se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje novog zaposlenog nakon čega se prikazuje poruka o uspješnom dodavanju zaposlenog, a u spurotnom se prikazuje odgovarajuća poruka o neuspješnom dodavanju zaposlenog.
 
@@ -114,7 +112,7 @@ Samo u slučaju da administrator klikne na dugme _Da_ zaposleni će biti blokira
 
 U tabu za prikaz blokiranih zaposlenih se prikazuju svi nalozi zaposlenih koji su blokirani gdje administrator ima mogućnost aktivacije ili brisanja naloga.
 
-![image](https://github.com/user-attachments/assets/f923b8ce-c9fc-4a81-a60b-a630c762bf10)
+![image](https://github.com/user-attachments/assets/f76aca5d-6ffa-418f-b98d-df9eb8ac8765)
 
 Aktiviranje zaposlenog se vrši klikom na dugme _Aktiviraj_ pri čemu se prikazuje poruka za potvrdu aktivacije.
 
@@ -130,21 +128,21 @@ Samo u slučaju da administrator klikne na dugme _Da_ zaposleni će biti obrisan
 
 U tabu za prikaz obrisanih zaposlenih se prikazuju svi nalozi zaposlenih koji su obrisani gdje administrator ima mogućnost pregleda detalja o zaposlenom. Detalje o zaposlenom administrator može da pregleda na isti način i iz pregleda aktivnih zaposlenih.
 
-![image](https://github.com/user-attachments/assets/8eacb06b-95f2-43c1-879a-9aabe1823219)
+![image](https://github.com/user-attachments/assets/dda5d125-3dcb-48f6-b278-3d49a28f4885)
 
 Prikaz detalja o zaposlenom se vrši klikom na dugme _Detalji_ posle čega se otvara prozor za prikaz detalja o izabranom zaposlenom.
 
-![image](https://github.com/user-attachments/assets/2289e946-10ad-4332-853d-8276f2be1fa4)
+![image](https://github.com/user-attachments/assets/e1580240-15ae-4485-9a53-e3c15ae79607)
 
 ### Rad sa kompanijama
 
 Klikom na stavku menija _Kompanije_, administratoru se prikzuje dio za rad sa kompanijama. Ova stranica se sastoji od tri taba koji omogućavaju pregled kompanija u zavisnosti od njihovog status (aktivne kompanije, blokirane kompanije i obrisane kompanije). Podrazumjevano je otvoren tab za prikaz aktivnih kompanija. 
 
-![image](https://github.com/user-attachments/assets/d4cd19fc-6402-4bd3-b620-78ed954e2188)
+![image](https://github.com/user-attachments/assets/246aafb1-6573-43c8-88bb-e17903bb8c9d)
 
 Pored pregleda podataka administrator ima mogućnost pretrage kompanija po nazivu ili korisničkom imenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
-![image](https://github.com/user-attachments/assets/6a896942-cedf-4c60-bd25-8029a69dd4f4)
+![image](https://github.com/user-attachments/assets/87670fac-9b37-4b05-a537-aa5296739eee)
 
 Administrator ima mogućnost manipulacije kompanijama što uključuje blokiranje, aktiviranje, brisanje naloga kompanija kao i pregled detalja o kompaniji te dodavanje nove kompanije u sistem.
 
@@ -152,7 +150,7 @@ Administrator ima mogućnost manipulacije kompanijama što uključuje blokiranje
 
 Dodavanje nove kompanije se vrši klikom na dugme _Dodaj kompaniju_ nakon čega se prikazuje prozor za dodavanje nove kompanije.
 
-![image](https://github.com/user-attachments/assets/3b0d35af-686a-49dc-b047-953eb1383fb3)
+![image](https://github.com/user-attachments/assets/617fe682-c85e-42a8-9869-17eaf6219068)
 
 Od administratora se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje nove kompanije nakon čega se prikazuje poruka o uspješnom dodavanju kompanije, a u spurotnom se prikazuje odgovarajuća poruka o neuspješnom dodavanju kompanije.
 
@@ -166,7 +164,7 @@ Samo u slučaju da administrator klikne na dugme _Da_ kompanija će biti blokira
 
 U tabu za prikaz blokiranih kompanija se prikazuju svi nalozi kompanija koji su blokirani gdje administrator ima mogućnost aktivacije ili brisanja naloga.
 
-![image](https://github.com/user-attachments/assets/4a465f7c-1360-4a21-9be9-796bc5f525ef)
+![image](https://github.com/user-attachments/assets/811f799b-acef-4b78-934a-5a14d6919690)
 
 Aktiviranje kompanije se vrši klikom na dugme _Aktiviraj_ pri čemu se prikazuje poruka za potvrdu aktivacije.
 
@@ -182,28 +180,27 @@ Samo u slučaju da administrator klikne na dugme _Da_ kompanija će biti obrisan
 
 U tabu za prikaz obrisanih kompanija se prikazuju svi nalozi kompanija koji su obrisani gdje administrator ima mogućnost pregleda detalja o kompaniji. Detalje o kompaniji administrator može da pregleda na isti način i iz pregleda aktivnih kompanija.
 
-![image](https://github.com/user-attachments/assets/374d891d-70bb-4983-a006-d66f34a9d84e)
+![image](https://github.com/user-attachments/assets/59f6c003-9359-4d38-a0ea-90678f285157)
 
 Prikaz detalja o kompaniji se vrši klikom na dugme _Detalji_ posle čega se otvara prozor za prikaz detalja o izabranoj kompaniji.
 
-![image](https://github.com/user-attachments/assets/91eb3a98-a723-4cdf-aeae-64df7be066d0)
+![image](https://github.com/user-attachments/assets/085d37a6-f550-4518-835c-3e7c5c35b692)
 
 ### Rad sa stručnim spremama
 
 Klikom na stavku menija _Stručne spreme_, administratoru se prikzuje dio za rad sa stručnim spremama. Ova stranica omogućava pregled stručnih sprema te dodavanje nove stručne spreme.
 
-![image](https://github.com/user-attachments/assets/9c162a35-fd82-4d5a-8a36-74be483aa4e2)
+![image](https://github.com/user-attachments/assets/fc16e4d0-ff0e-41dd-bf2f-737470501027)
 
 Pored pregleda podataka administrator ima mogućnost pretrage stručnih sprema po nazivu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
-![image](https://github.com/user-attachments/assets/6a3b3068-4e87-4f50-b254-953978d10ea4)
-
+![image](https://github.com/user-attachments/assets/38a60236-4e9b-41ec-a3e3-989de8744064)
 
 #### Dodavanje nove stručne spreme
 
 Dodavanje nove stručne spreme se vrši klikom na dugme _Dodaj stručnu spremu nakon čega se prikazuje prozor za dodavanje nove stručne spreme.
 
-![image](https://github.com/user-attachments/assets/eb7c53b5-5c7c-41e2-81ef-8e9ad53051bf)
+![image](https://github.com/user-attachments/assets/3872be45-d65d-4432-b167-fade8e5897ae)
 
 Od administratora se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje nove stručne spreme nakon čega se prikazuje poruka o uspješnom dodavanju kompanije, a u spurotnom se prikazuje odgovarajuća poruka o neuspješnom dodavanju stručne spreme.
 
@@ -213,7 +210,7 @@ Od administratora se zahtjeva da unese sve potrebne podatke te klikom na dugme _
 
 Kompanija ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu adrese kompanije. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
 
-![image](https://github.com/user-attachments/assets/bfeb2583-44f5-4dd4-83b7-e0b59d986849)
+![image](https://github.com/user-attachments/assets/f012e4a7-ddc7-41ea-92a2-660cfbbd8dd5)
 
 U slučaju da administrator ne unese podatke, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni podataka.
 
@@ -223,7 +220,7 @@ Nakon prijave na sistem, korisniku sa ulogom kompanije se prikazuje prozor aplik
 
 Nakon prijave na sistem, korisniku sa ulogom kompanije se prvo prikzuje dio za rad sa zaposlenima. Ova stranica se sastoji od dva taba koji omogućavaju pregled trenutno zposlenih radnika i bivših zaposlenih u toj kompaniji. Podrazumjevano je otvoren tab za prikaz trenutno zaposlenih radnika.
 
-![image](https://github.com/user-attachments/assets/421b6387-9833-4fee-b80d-c744b0d398a2)
+![image](https://github.com/user-attachments/assets/de93ab26-b0bc-427c-84d1-b7255434405d)
 
 Pored pregleda podataka korisnik sa ulogom kompanije ima mogućnost pretrage zaposlenih po imenu, prezimenu ili korisničkom imenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
@@ -235,17 +232,21 @@ U prikazu bivših zaposlenih je moguće vidjeti sve bivše zaposlene u kompaniji
 
 Dodavanje novog zaposlenog se vrši klikom na dugme _Dodaj zaposlenog_ nakon čega se prikazuje prozor za dodavanje novog zaposlenog.
 
-![image](https://github.com/user-attachments/assets/612f59c8-8279-481d-b84e-a24f1aab9dc5)
+![image](https://github.com/user-attachments/assets/26e1daa7-0100-49b2-bcc5-4d78572b5001)
 
 U ovom przoru se prikazuju svi radnici koji mogu biti zaposleni te klikom na dugme zaposli otvara se prozor za zapošljavanje konkretnog radnika. Pored pregleda podataka moguće je vršiti pretragu zaposlenih po imenu ili prezimenu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
-![image](https://github.com/user-attachments/assets/bf254649-a1c9-482f-b137-5a4d7ce75bc2)
+![image](https://github.com/user-attachments/assets/98ae1a52-cffb-49e6-8beb-2439196af518)
 
 Od korisnika se zahtjeva unos svih potrebnih podataka, te se klikom na dugme _Sačuvaj_ vrši zapošljavanje radnika pri čemu korisnik dobija obavještenje o uspješnom zapošljavanju radnika. Ukoliko postoji problem pri zapošljavanju radnika prikazuje se odgovarajuće obavještenje.
 
 #### Otpuštanje zaposlenog
 
-Otpuštanje zaposlenog se vrši klikom na dugme _Otpusti zaposlenog_ pri čemu se prikazuje poruka za potvrdu otpuštanja.
+Otpuštanje zaposlenog se vrši klikom na dugme _Otpusti zaposlenog_ pri čemu se otvara prozor za unos datuma otpuštanja.
+
+![image](https://github.com/user-attachments/assets/687e6d26-eda3-48e1-aa01-09c9bf32080a)
+
+Naokn unosa datuma klikom na dugme _Otpusti zaposlenog_ se prikazuje poruka za potvrdu brisanja.
 
 ![image](https://github.com/user-attachments/assets/6eacf155-52d4-439d-a7e0-850b6885a03d)
 
@@ -255,17 +256,17 @@ Samo ako korisnik klikne na dugme _Da_ zaposleni će biti otpušten.
 
 Klikom na dugme _Detalji_ se otvara prozor sa prikazom osnovnoh podataka o zaposlenom i o njegovim zaposlenjima u okviru date kompanije. 
 
-![image](https://github.com/user-attachments/assets/39667016-3e0f-48e3-becb-b50a3ebfdaae)
+![image](https://github.com/user-attachments/assets/b576e2b3-7dda-43be-b0fa-30e1e8b2b71e)
 
 #### Upravljanje platama zaposlenog
 
 Klikom na dugme _Plate_ se otvara prozor u kome su prikazane sve plate datog radnika za izabrano zaposlenje gdje je moguće dodati platu za zaposlenog.
 
-![image](https://github.com/user-attachments/assets/9530f703-199d-4fc3-852f-34cfadb2535d)
+![image](https://github.com/user-attachments/assets/046e30ea-5f73-46a7-9e7d-3ec2658be08b)
 
 Klikom na dugme _Dodaj platu_ se otvara prozor za dodavanje nove plate.
 
-![image](https://github.com/user-attachments/assets/b1a4176c-27cc-4cda-a951-9b627dae3b4c)
+![image](https://github.com/user-attachments/assets/25d6dc3d-e332-4c69-ad91-f752e4e8e253)
 
 Od korisnika se zahtjeva da unese sve potrebne podatke te klikom na dugme _Sačuvaj_ se vrši dodavanje nove plate i korisniku se prikazuje obavještenje o uspješno dodatoj plati. Ukoliko nije moguće dodati platu prikazuje se odgovarajuće obavještenje.
 
@@ -273,7 +274,7 @@ Od korisnika se zahtjeva da unese sve potrebne podatke te klikom na dugme _Saču
 
 Klikom na stavku menija _Odjeljenja_, korisniku sa ulogom kompanije se prikzuje dio za rad sa odjeljenjima kompanije. Ova stranica se sastoji od dva taba koji omogućavaju pregled aktivnih i obrisanih odjeljenja kompanije kao i manipulaciju odjeljenjima kompanije. Podrazumjevano je otvoren tab za prikaz aktivnih odjeljenja.
 
-![image](https://github.com/user-attachments/assets/030ea944-4f08-482f-8a1e-05a77e64a6e6)
+![image](https://github.com/user-attachments/assets/b0897f88-56bb-4969-ab93-275c6781a8af)
 
 Pored pregleda podataka korisnik sa ulogom kompanije ima mogućnost pretrage odjeljenja po nazivu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
@@ -281,7 +282,7 @@ Pored pregleda podataka korisnik sa ulogom kompanije ima mogućnost pretrage odj
 
 Klikom na dugme _Dodaj odjeljenje_ se otvara prozor za dodavanje novog odjeljenja kompanije.
 
-![image](https://github.com/user-attachments/assets/e73ff765-4368-4ef5-b402-df04bb1f4a31)
+![image](https://github.com/user-attachments/assets/75b198ec-4c56-4a20-a73c-c685c0ae330f)
 
 Od korisnika se zahtjeva da unese potrebne podatke te se klikom na dugme _Sačuvaj_ odjeljenje dodaje a korisniku se prikazuje odgovarajuće obavještenje. U slučaju da nije moguće dodati odjeljenje korisniku se prikazuje odgovarajuća poruka.
 
@@ -295,7 +296,7 @@ Samo ako korisnik klikne na dugme _Da_ dato odjeljenje se briše.
 
 Korisnik iz pregleda obrisanih odjeljenja ima mogućnost obnove odjeljanj tj. ponistavanja aktivnosti brisanja.
 
-![image](https://github.com/user-attachments/assets/2e23cb24-1551-4a56-8318-405ee6f720b8)
+![image](https://github.com/user-attachments/assets/f5726645-1c61-439c-9edb-6d9476af9cae)
 
 Klikom na dugme obnovi korisniku se prikazuje poruka za potvrdu obnove i ako korisnik klikne na dugme _Da_ odjeljenje će biti obnovljeno.
 
@@ -303,11 +304,11 @@ Klikom na dugme obnovi korisniku se prikazuje poruka za potvrdu obnove i ako kor
 
 Klikom na stavku menija _Radna mjesta_, korisniku sa ulogom kompanije se prikzuje dio za rad sa radnim mjestima u kompaniji. Ova stranica se sastoji od dva taba koji omogućavaju pregled aktivnih i obrisanih radnih mjesta u kompaniji kao i manipulaciju istim. Podrazumjevano je otvoren tab za prikaz aktivnih radnih mjesta.
 
-![image](https://github.com/user-attachments/assets/cb382442-4e74-4af4-a608-5582f3472bbb)
+![image](https://github.com/user-attachments/assets/cd21bfd1-85e0-4923-a553-e017fcec8c29)
 
 Korisnik ima mogućnost izbora odjeljenja za koje zeli da pregleda radna mjesta što se radi pomoću padjuće liste odjeljenja u gornjem dijelu forme. U listi su prikazana sva trenutno aktivna odjeljenja komapanije.
 
-![image](https://github.com/user-attachments/assets/b0866612-3a92-4002-9535-fa76db7cb2a2)
+![image](https://github.com/user-attachments/assets/221acb58-729d-4f78-a0ea-8e6d0f9ccaed)
 
 Pored pregleda podataka korisnik ima mogućnost pretrage radnih mjesta po nazivu. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
@@ -315,7 +316,7 @@ Pored pregleda podataka korisnik ima mogućnost pretrage radnih mjesta po nazivu
 
 Klikom na dugme _Dodaj radno mjesto_ se otvara prozor za kreiranje novog radnog mjesta u kompaniji.
 
-![image](https://github.com/user-attachments/assets/6229bf7f-6799-4973-a07d-58b9298c3ae6)
+![image](https://github.com/user-attachments/assets/c7ce7ee7-9910-427c-85a9-aa6989b630c2)
 
 Od korisnika se zahtjeva da izabere odjeljenje kome će da pripada radno mjesto, te naziv radnog mjesta i opis koji je opcion. Klikom na dugme _Sačuvaj_ radno mjesto se dodaje a korisniku se prikazuje obavještenje o uspjesnom dodavanju radnog mjesta. U slučaju da nije moguće dodati radno mjesto korisniku se prikazuje odgovarajuće obavještenje.
 
@@ -331,7 +332,7 @@ U pregledu obrisanih radnih mjesta korisnik ima mogućnost obnove tj. poništava
 
 Zaposleni ima mogućnost da izvrši podešavanja svog profila što uključuje promjenu imena i prezimena. Izmjenjeni podaci se čuvaju klikom na dugme _Sačuvaj_, nakon čega se korisnik obavještava o uspješnoj promjeni podataka. 
 
-![image](https://github.com/user-attachments/assets/14cc67af-e26d-444c-a63b-fbeb74a88bad)
+![image](https://github.com/user-attachments/assets/aba78679-50fa-4d67-b3c3-6905adc11fda)
 
 U slučaju da zaposleni ne unese oba podatka, prikazuje se odgovarajuće obavještenje o neuspješnoj promjeni podataka.
 
@@ -341,12 +342,12 @@ Nakon prijave na sistem, zaposlenom se prikazuje prozor aplikacije koji se sasto
 
 Nakon prijave na sistem, zaposlenom se prikazuje dio za rad sa zaposlenjima. Ova stranica se sastoji od tabele koja omogućava pregled svih zaposlenja tog korisnika.
 
-![image](https://github.com/user-attachments/assets/f34e7a84-152d-4dae-adba-78b41618e5e8)
+![image](https://github.com/user-attachments/assets/79b727e4-4c72-4b37-92b2-10720df88f01)
 
 Pored pregleda podataka zaposleni ima mogućnost pretrage zaposlenja po nazivu kompanije, nazivu radnog mjesta ili nazivu odjeljenja. Tekst za pretragu se unosu u _textbox-u_ u gornjoj sekciji forme, pri čemu su rezultati pretrage trenutno vidljivi u tabeli.
 
-![image](https://github.com/user-attachments/assets/41aca41b-c88d-4300-bb42-3bcccd78674a)
+![image](https://github.com/user-attachments/assets/efc71e28-0ba7-426d-8c7c-7e24116d4ef7)
 
 Pored pregleda zaposlenja je moguće pregledati i sve plate koje su vezane za svako pojedinačno zaposlenje. Klikom na dugme _Plate_ otvara se prozor u kome se prikazuju plate za izabrano zaposlenje.
 
-![image](https://github.com/user-attachments/assets/c362ebc5-be40-41fb-8b64-e4e021524ba3)
+![image](https://github.com/user-attachments/assets/ffbff9e4-da82-4571-bef5-eff84f0f6856)
