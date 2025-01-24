@@ -223,6 +223,7 @@ namespace Employee_And_Company_Management.ViewModels.Admin
         Window window;
         private void AddEmployee(object parameter)
         {
+            reload();
             window = new AddNewEmployeeWindow(this);
             window.ShowDialog();
         }
@@ -258,9 +259,9 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                 return;
             }
 
-            string temp = DateOfBirth.Value.ToString();
+            string temp = DateOfBirth.Value.ToString("ddMMyyyy");
             temp = temp.Remove(4, 1);
-
+            MessageBox.Show(temp);
             if (!Jmb.StartsWith(temp))
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("JMBAndDofBMissmetch"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
@@ -288,26 +289,39 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                 }
             };
 
-            bool result = await _employeeService.AddEmployee(employee);
-            if (result)
+            string result = await _employeeService.AddEmployee(employee);
+            if (result.Equals(ServiceOperationStatus.SUCCESS))
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("EmployeeAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
+                await ReloadEmployeesAsync();
+            }
+            else if (result.Equals(ServiceOperationStatus.ALREADY_EXISTS))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("EmployeeAlreadyExists"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
+                await ReloadEmployeesAsync();
+            }
+            else if (result.Equals(ServiceOperationStatus.ERROR))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("AddError"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadEmployeesAsync();
             }
             else
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("EmployeeNotAdded"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
+            reload();
+            window.Close();
+            window = null;
+        }
+        private void reload()
+        {
             Username = string.Empty;
             FirstName = string.Empty;
             LastName = string.Empty;
             DateOfBirth = null;
             Jmb = string.Empty;
             SelectedQualificationId = 0;
-            window.Close();
-            window = null;
         }
-
         private bool CanModifyEmployee(object parameter) => true;
         private bool CanSaveNewEmployee(object parameter)
         {

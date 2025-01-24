@@ -166,5 +166,14 @@
     <system:String x:Key="ShowPassword">Prikaž</system:String>
     <system:String x:Key="DateIncorrect">Datum nije korektan</system:String>
     <system:String x:Key="JMBAndDofBMissmetch">JMB i datum rođenja moraju biti usaglašeni</system:String>
+    <system:String x:Key="CompanyAlreadyExists">Kompanija već postoji</system:String>
+    <system:String x:Key="SalaryBefore">Plata se ne može dodjeliti za period prije zaposlenja.</system:String>
+    <system:String x:Key="SalaryAlreadyExists">Plata je već dodjeljena</system:String>
+    <system:String x:Key="EmployeeAlreadyExists">Zaposleni već postoji</system:String>
+    <system:String x:Key="AddError">Greška pri dodavanju</system:String>
+    <system:String x:Key="UpdateError">Greška pri ažuriranju</system:String>
+    <system:String x:Key="Date">Datum</system:String>
+    <system:String x:Key="DismisBefore">Datum otpuštanja ne smije biti prije datuma zaposlenja.</system:String>
+    <system:String x:Key="ErrorDissmis">Greška pri otpuštanju.</system:String>
 
 </ResourceDictionary>

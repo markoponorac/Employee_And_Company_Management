@@ -3,58 +3,68 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
         mc:Ignorable="d"
-        Title="{DynamicResource AddWorkPlace}" Height="450" Width="500"
+        Title="{DynamicResource AddWorkPlace}" Height="350" Width="500"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
+    <Border  Background="{DynamicResource BackgroundBrush}" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid Background="{DynamicResource BackgroundBrush}">
-        <StackPanel Margin="20">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock Text="{DynamicResource SelectDepartment}" 
-                           Style="{DynamicResource ParameterTextSyle}" 
-                           Width="200"/>
-                <ComboBox x:Name="DepartmentComboBox" 
-                         
-                          Width="200" 
-                          ItemsSource="{Binding Departments}"
-                          DisplayMemberPath="Name"
-                          SelectedItem="{Binding SelectedDepartmentAdd}"/>
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock Text="{DynamicResource WorkPlaceName}" 
-                           Style="{DynamicResource ParameterTextSyle}" 
-                           Width="200"/>
-                <TextBox x:Name="WorkPlaceNameTextBox" 
-                         Style="{DynamicResource InputStyle}" 
-                         Foreground="Black"  
-                         Width="200" 
-                         Text="{Binding WorkPlaceName}" />
-            </StackPanel>
+            <md:PackIcon Kind="Domain" Width="24" Height="24" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="DepartmentComboBox"
+                Grid.Row="0" Grid.Column="1"
+                md:HintAssist.Hint="{DynamicResource SelectDepartment}"
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                Foreground="Black"
+                ItemsSource="{Binding Departments}"
+                SelectedItem="{Binding SelectedDepartmentAdd}"
+                SelectedValuePath="Id"
+                DisplayMemberPath="Name"
+                Margin="0,10"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock Text="{DynamicResource WorkPlaceDescription}" 
-                           Style="{DynamicResource ParameterTextSyle}" 
-                           Width="200"
-                           VerticalAlignment="Top"/>
-                <TextBox x:Name="WorkPlaceDescriptionTextBox" 
-                         Style="{DynamicResource InputStyle}" 
-                         Foreground="Black"  
-                         Width="200" 
-                         Height="100"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         VerticalScrollBarVisibility="Auto"
-                         Text="{Binding WorkPlaceDescription}" />
-            </StackPanel>
+            <md:PackIcon Kind="Work" Width="24" Height="24" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="WorkPlaceNameTextBox"
+                Grid.Row="1" Grid.Column="1"
+                md:HintAssist.Hint="{DynamicResource WorkPlaceName}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                IsReadOnly="False"
+                Text="{Binding WorkPlaceName, UpdateSourceTrigger=PropertyChanged}"
+                Margin="0,10"/>
 
-            <Button Content="{DynamicResource Save}" 
-                    Style="{StaticResource ButtonStyle}" 
-                    Command="{Binding SaveWorkPlaceCommand}" 
-                    HorizontalAlignment="Center"
-                    Width="150"/>
-        </StackPanel>
-    </Grid>
+            <md:PackIcon Kind="Text" Width="24" Height="24" Margin="5" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="WorkPlaceDescriptionTextBox"
+                Grid.Row="2" Grid.Column="1"
+                md:HintAssist.Hint="{DynamicResource WorkPlaceDescription}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                IsReadOnly="False"
+                Text="{Binding WorkPlaceDescription, UpdateSourceTrigger=PropertyChanged}"
+                Margin="0,10"/>
+
+            <Button Command="{Binding SaveWorkPlaceCommand}"  
+                Style="{StaticResource SubbmitButton}" 
+                Margin="0,30,10,0" 
+                Grid.Row="5" 
+                Grid.Column="1">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="ContentSaveOutline" Width="24" Height="24" Margin="0,0,10,0"/>
+                        <TextBlock Text="{DynamicResource Save}"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </Border>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using Employee_And_Company_Management.Data.Entities;
+using Employee_And_Company_Management.Helpers.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace Employee_And_Company_Management.Services
@@ -135,7 +136,7 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task<bool> AddEmployee(Employee employee)
+        public async Task<string> AddEmployee(Employee employee)
         {
             try
             {
@@ -146,18 +147,18 @@ namespace Employee_And_Company_Management.Services
                         Employee temp = await context.Employees.FirstOrDefaultAsync(i => i.PersonProfile.Jmb.Equals(employee.PersonProfile.Jmb) && !i.PersonProfile.Profile.IsDeleted);
                         if (temp != null)
                         {
-                            return false;
+                            return ServiceOperationStatus.ALREADY_EXISTS;
                         }
                         context.Employees.Add(employee);
                         await context.SaveChangesAsync();
-                        return true;
+                        return ServiceOperationStatus.SUCCESS;
                     }
-                    return false;
+                    return ServiceOperationStatus.FAILURE;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return ServiceOperationStatus.ERROR;
             }
         }
 

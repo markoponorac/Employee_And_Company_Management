@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="{DynamicResource Company}" Height="600" Width="1000"
+        Title="{DynamicResource Company}" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
@@ -17,15 +17,11 @@
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <!-- Left Panel -->
             <Border Grid.Column="0" Style="{StaticResource MenuStyle}">
                 <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <!-- This row will take all the remaining space -->
                         <RowDefinition Height="Auto"/>
-                        <!-- This row will only take the height of the settings button -->
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
                         <ToggleButton Style="{StaticResource MenuButtonStyle}" Margin="10" Command="{Binding NavigateToEmployeesCommand}" IsChecked="{Binding IsEmployeesSelected}">
@@ -66,14 +62,8 @@
                 </Grid>
             </Border>
 
-            <!-- Right Panel -->
             <Border Grid.Column="1" Style="{StaticResource RightPanel}">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <!-- Main Content Area -->
                     <ContentControl x:Name="MainContentControl" Grid.Row="0" Margin="20" Content="{Binding CurrentPage}"/>
                 </Grid>
             </Border>

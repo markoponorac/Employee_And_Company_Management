@@ -1,4 +1,5 @@
 ﻿using Employee_And_Company_Management.Data.Entities;
+using Employee_And_Company_Management.Helpers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task<bool> EndEmployment(Employee employee)
+        public async Task<string> EndEmployment(Employee employee, DateTime date)
         {
             try
             {
@@ -48,7 +49,15 @@ namespace Employee_And_Company_Management.Services
                 {
                     Employment employment = await contex.Employments.FirstOrDefaultAsync(i => i.EmployeePersonProfileId == employee.PersonProfileId && i.EmployedTo == null);
 
-                    employment.EmployedTo = DateOnly.FromDateTime(DateTime.Now);
+                    DateOnly temp = DateOnly.FromDateTime(date); ;
+
+                    if (employment.EmployedFrom >= temp)
+                    {
+                        return ServiceOperationStatus.DISMIS_BEFORE;
+                    }
+
+                    employment.EmployedTo = temp;
+
 
                     Employee tempEmployee = await contex.Employees.FirstOrDefaultAsync(i => i.PersonProfileId == employee.PersonProfileId);
                     if (tempEmployee != null)
@@ -57,12 +66,12 @@ namespace Employee_And_Company_Management.Services
                     }
 
                     await contex.SaveChangesAsync();
-                    return true;
+                    return ServiceOperationStatus.SUCCESS;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return ServiceOperationStatus.ERROR;
             }
         }
 

@@ -13,7 +13,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Search and Add Section -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -65,7 +64,6 @@
             </StackPanel>
         </Grid>
 
-        <!-- TabControl Section -->
         <TabControl Grid.Row="1">
             <TabItem Header="{DynamicResource Qualification}">
                 <ContentControl>
@@ -75,7 +73,7 @@
                                 <Setter.Value>
                                     <DataGrid ItemsSource="{Binding Qualifications}" 
                                               AutoGenerateColumns="False" 
-                                              CanUserAddRows="False">
+                                              CanUserAddRows="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="{DynamicResource Name}" 
                                                                 Binding="{Binding Title}" 

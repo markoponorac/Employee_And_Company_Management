@@ -166,5 +166,14 @@
     <system:String x:Key="ShowPassword">Show password</system:String>
     <system:String x:Key="DateIncorrect">Date is incorrect</system:String>
     <system:String x:Key="JMBAndDofBMissmetch">UID and date of birth must match</system:String>
+    <system:String x:Key="CompanyAlreadyExists">Company already exists</system:String>
+    <system:String x:Key="SalaryAlreadyExists">Salary already exists</system:String>
+    <system:String x:Key="SalaryBefore">Salary cannot be assigned for a date before employment.</system:String>
+    <system:String x:Key="EmployeeAlreadyExists">Employee already exists</system:String>
+    <system:String x:Key="AddError">Error while adding</system:String>
+    <system:String x:Key="UpdateError">Error while updating</system:String>
+    <system:String x:Key="Date">Date</system:String>
+    <system:String x:Key="DismisBefore">The date of dismissal must not be before the date of employment.</system:String>
+    <system:String x:Key="ErrorDissmis">Error while firing.</system:String>
 
 </ResourceDictionary>

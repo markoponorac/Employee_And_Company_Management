@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Companies"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -48,10 +49,17 @@
                        Opacity="0.5"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <Button Content="{DynamicResource AddDepartment}" 
+                <Button 
                         Command="{Binding AddDepartmentCommand}" 
                         Style="{StaticResource ButtonStyle}" 
-                        Margin="0"/>
+                        Margin="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Add" Width="24" Height="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="{DynamicResource AddDepartment}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
 
@@ -75,12 +83,20 @@
                                                         <StackPanel Orientation="Horizontal" 
                                                                     Background="Transparent" 
                                                                     HorizontalAlignment="Right">
-                                                            <Button Content="{DynamicResource Delete}" 
+                                                            <Button
                                                                     Command="{Binding DataContext.DeleteDepartmentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                                     CommandParameter="{Binding}" 
                                                                     Style="{StaticResource ButtonStyle}" 
                                                                     Margin="0,0,10,0" 
-                                                                    Height="30"/>
+                                                                    Height="30">
+
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Block" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Delete}" VerticalAlignment="Center"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
@@ -127,12 +143,19 @@
                                                         <StackPanel Orientation="Horizontal" 
                                                                     Background="Transparent" 
                                                                     HorizontalAlignment="Right">
-                                                            <Button Content="{DynamicResource Restore}" 
+                                                            <Button 
                                                                     Command="{Binding DataContext.RestoreDepartmentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                                     CommandParameter="{Binding}" 
                                                                     Style="{StaticResource ButtonStyle}" 
                                                                     Margin="0,0,10,0" 
-                                                                    Height="30"/>
+                                                                    Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Restore" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Restore}" VerticalAlignment="Center"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>

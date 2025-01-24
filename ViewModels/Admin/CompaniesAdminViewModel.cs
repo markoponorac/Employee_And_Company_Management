@@ -5,12 +5,7 @@ using Employee_And_Company_Management.Helpers;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
 using Employee_And_Company_Management.Views.Windows;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Employee_And_Company_Management.Data.Entities;
@@ -198,11 +193,19 @@ namespace Employee_And_Company_Management.ViewModels.Admin
                 }
             };
 
-            bool result = await _companyService.AddCompany(company);
-            if (result)
+            string result = await _companyService.AddCompany(company);
+            if (result.Equals(ServiceOperationStatus.SUCCESS))
             {
                 CustomMessageBox.Show(LanguageUtil.Translate("CompanyAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
                 await ReloadCompaniesAsync();
+            }
+            else if (result.Equals(ServiceOperationStatus.ALREADY_EXISTS))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("CompanyAlreadyExists"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
+            else if (result.Equals(ServiceOperationStatus.ERROR))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("AddError"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else
             {

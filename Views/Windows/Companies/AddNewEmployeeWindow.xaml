@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
+        
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="{DynamicResource AddEmployee}" Height="600" Width="800"
+        Title="{DynamicResource AddEmployee}" 
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
@@ -13,7 +15,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Search Section -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -50,7 +51,6 @@
                        Opacity="0.5"/>
         </Grid>
 
-        <!-- DataGrid or No Data Message -->
         <ContentControl Grid.Row="1" Margin="10">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -58,7 +58,7 @@
                         <Setter.Value>
                             <DataGrid ItemsSource="{Binding AvailableEmployees}" 
                                       AutoGenerateColumns="False" 
-                                      CanUserAddRows="False">
+                                      CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource FirstName}" 
                                                         Binding="{Binding PersonProfile.FirstName}" 
@@ -79,14 +79,21 @@
                                     <DataGridTemplateColumn Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="{DynamicResource Hire}" 
+                                                <Button
                                                         Command="{Binding DataContext.OpenHireWindowCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
                                                         CommandParameter="{Binding}"
                                                         Style="{StaticResource ButtonStyle}" 
                                                         Margin="5" 
                                                         Padding="10,5"
                                                         Width="120"
-                                                        HorizontalAlignment="Right"/>
+                                                        HorizontalAlignment="Right">
+                                                    <Button.Content>
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <materialDesign:PackIcon Kind="Add" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                            <TextBlock Text="{DynamicResource Hire}"/>
+                                                        </StackPanel>
+                                                    </Button.Content>
+                                                </Button>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

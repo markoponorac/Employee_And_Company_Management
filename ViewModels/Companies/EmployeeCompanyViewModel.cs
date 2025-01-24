@@ -1,6 +1,7 @@
 ﻿using Employee_And_Company_Management.Commands;
 using Employee_And_Company_Management.Data.Entities;
 using Employee_And_Company_Management.Helpers;
+using Employee_And_Company_Management.Helpers.Constants;
 using Employee_And_Company_Management.Models;
 using Employee_And_Company_Management.Services;
 using Employee_And_Company_Management.Util;
@@ -135,7 +136,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         private int _selectedMonthInt;
         private int _year;
         private double _amount;
-        private DateOnly _paymentDate = DateOnly.FromDateTime(DateTime.Now);
+        private DateTime _paymentDate = DateTime.Now;
 
         public List<string> Months { get; } = MonthUtil.Months;
 
@@ -160,10 +161,18 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             set => SetProperty(ref _amount, value);
         }
 
-        public DateOnly PaymentDate
+        public DateTime PaymentDate
         {
             get => _paymentDate;
             set => SetProperty(ref _paymentDate, value);
+        }
+
+        private Employee employeeForDissmis;
+
+        public Employee EmployeeForDissmis
+        {
+            get => employeeForDissmis;
+            set => SetProperty(ref employeeForDissmis, value);
         }
 
 
@@ -185,6 +194,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         public ICommand OpenHireWindowCommand { get; set; }
         public ICommand ConfirmHireCommand { get; set; }
         public ICommand DismissCommand { get; set; }
+        public ICommand DismissCommandConfirm { get; set; }
         public ICommand ViewSalariesCommand { get; set; }
         public ICommand ViewFormerEmployeeSalariesCommand { get; set; }
         public ICommand AddNewSalaryCommand { get; set; }
@@ -193,11 +203,21 @@ namespace Employee_And_Company_Management.ViewModels.Companies
         private LoginDTO loginDTO;
 
         private Window window;
+        private Window windowDismis;
         private Window salariesWindow;
         private Window addSalariesWindow;
 
 
         private Company company;
+
+
+        private DateTime dissmisDate = DateTime.Now;
+
+        public DateTime DismissDate
+        {
+            get => dissmisDate;
+            set => SetProperty(ref dissmisDate, value);
+        }
 
         public EmployeeCompanyViewModel(LoginDTO loginDTO)
         {
@@ -213,6 +233,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             ConfirmHireCommand = new RelayCommand(ConfirmHire, CanModifyEmployee);
             ViewDetailsCommand = new RelayCommand(OpenDetailsWindow, CanModifyEmployee);
             DismissCommand = new RelayCommand(DissmisEmployment, CanModifyEmployee);
+            DismissCommandConfirm = new RelayCommand(DissmisEmploymentConfirm, CanModifyEmployee);
             ViewSalariesCommand = new RelayCommand(OpenSalariesWindow, CanModifyEmployee);
             ViewFormerEmployeeSalariesCommand = new RelayCommand(OpenFormerEmployeeSalariesWindow, CanModifyEmployee);
             AddNewSalaryCommand = new RelayCommand(OpenAddSalariesWindow, CanModifyEmployee);
@@ -341,8 +362,6 @@ namespace Employee_And_Company_Management.ViewModels.Companies
 
         }
 
-
-
         private async void SaveNewSalary(object parameter)
         {
             if (Amount <= 0.0 || PaymentDate == null || _selectedMonthInt < 1 || _selectedMonthInt > 12 || Year > DateTime.Now.Year || Year == 0)
@@ -354,16 +373,28 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             Salary salary = new Salary()
             {
                 Amount = (decimal)Amount,
-                PaymentDate = PaymentDate,
+                PaymentDate = new DateOnly(PaymentDate.Year, PaymentDate.Month, PaymentDate.Day),
                 ForMonth = _selectedMonthInt,
                 ForYear = Year
             };
 
-            bool result = await salariesService.AddSalaryForEmployeeAndCompany(salary, selectedEmployee.PersonProfileId, loginDTO.ProfileId);
-            if (result) {
+            string result = await salariesService.AddSalaryForEmployeeAndCompany(salary, selectedEmployee.PersonProfileId, loginDTO.ProfileId);
+            if (result.Equals(ServiceOperationStatus.SUCCESS)) {
                 CustomMessageBox.Show(LanguageUtil.Translate("SalaryAdded"), LanguageUtil.Translate("Information"), MessageBoxButton.OK);
 
                 LoadSalaries();
+            }
+            else if (result.Equals(ServiceOperationStatus.ALREADY_EXISTS))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("SalaryAlreadyExists"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
+            else if (result.Equals(ServiceOperationStatus.ERROR))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("AddError"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+            }
+            else if (result.Equals(ServiceOperationStatus.SALRY_BEFORE))
+            {
+                CustomMessageBox.Show(LanguageUtil.Translate("SalaryBefore"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             else
             {
@@ -393,20 +424,57 @@ namespace Employee_And_Company_Management.ViewModels.Companies
 
         private async void DissmisEmployment(object parameter)
         {
-            if (parameter is Employee employee)
+            if (EmployeeForDissmis != null)
             {
-                SelectedEmployeeDetails = employee;
+                SelectedEmployeeDetails = EmployeeForDissmis;
                 var result = CustomMessageBox.Show(LanguageUtil.Translate("DeleteEmploymentCofirmMessage"), LanguageUtil.Translate("DissmisCofirm"), MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Yes)
                 {
-                    await employmentService.EndEmployment(SelectedEmployeeDetails);
-                    await LoadWorkPlaces();
-                    await LoadEmployees();
+                    string temp =  await employmentService.EndEmployment(SelectedEmployeeDetails, DismissDate);
+                    if (temp.Equals(ServiceOperationStatus.SUCCESS))
+                    {
+                        await LoadWorkPlaces();
+                        await LoadEmployees();
+                    }
+                    else if (temp.Equals(ServiceOperationStatus.DISMIS_BEFORE))
+                    {
+                        CustomMessageBox.Show(LanguageUtil.Translate("DismisBefore"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                    }
+                    else
+                    {
+                        CustomMessageBox.Show(LanguageUtil.Translate("ErrorDissmis"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                    }
+
                 }
-              
+
+                EmployeeForDissmis = null;
+                windowDismis.Close();
+
             }
 
 
+        }
+        private async void DissmisEmploymentConfirm(object parameter)
+        {
+            if (parameter is Employee employee)
+            {
+               
+                EmployeeForDissmis = employee;
+
+                windowDismis = new DissmisEmploymentWindow(this);
+                windowDismis.ShowDialog();
+
+            }
+
+        }
+
+        public void reaload()
+        {
+            SelectedDepartment = null;
+            SelectedWorkPlace = null;
+            HireDate = null;
+            HourlyRate = 0;
+            VacationDays = 0;
         }
 
         private async void ConfirmHire(object parameter)
@@ -445,7 +513,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
                 CustomMessageBox.Show(LanguageUtil.Translate("EmployeeNotEmployed"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
 
-
+            reaload();
 
             window.Close();
             window = null;

@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Controls.Companies"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="850">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -48,9 +49,16 @@
                 Opacity="0.5"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <Button Content="{DynamicResource AddEmployee}" 
+                <Button
                   Command="{Binding AddEmployeeCommand}" 
-                  Style="{StaticResource ButtonStyle}" Margin="0" />
+                  Style="{StaticResource ButtonStyle}" Margin="0" >
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Add" Width="24" Height="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="{DynamicResource AddEmployee}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
         <TabControl Grid.Row="1">
@@ -60,7 +68,7 @@
                         <Style TargetType="ContentControl">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <DataGrid ItemsSource="{Binding CurrentlyEmployed}" AutoGenerateColumns="False" CanUserAddRows="False">
+                                    <DataGrid ItemsSource="{Binding CurrentlyEmployed}" AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
                                             <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}" IsReadOnly="True"/>
@@ -69,9 +77,33 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" >
-                                                            <Button Content="{DynamicResource Dismiss}" Command="{Binding DataContext.DismissCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                                            <Button Content="{DynamicResource Salaries}" Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Command="{Binding DataContext.DismissCommandConfirm, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Block" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Dismiss}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+                                                            <Button Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Show" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Details}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+                                                            <Button Command="{Binding DataContext.ViewSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Cash" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Salaries}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
 
                                                         </StackPanel>
                                                     </DataTemplate>
@@ -100,7 +132,7 @@
                         <Style TargetType="ContentControl">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <DataGrid ItemsSource="{Binding FormerEmployees}" AutoGenerateColumns="False" CanUserAddRows="False">
+                                    <DataGrid ItemsSource="{Binding FormerEmployees}" AutoGenerateColumns="False" CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="{DynamicResource FirstName}" Binding="{Binding PersonProfile.FirstName}" IsReadOnly="True"/>
                                             <DataGridTextColumn Header="{DynamicResource LastName}" Binding="{Binding PersonProfile.LastName}"  IsReadOnly="True"/>
@@ -110,8 +142,25 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="{DynamicResource Details}" Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
-                                                            <Button Content="{DynamicResource Salaries}" Command="{Binding DataContext.ViewFormerEmployeeSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30"/>
+                                                            <Button Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Show" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Details}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+                                                            </Button>
+                                                            <Button  Command="{Binding DataContext.ViewFormerEmployeeSalariesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                                    CommandParameter="{Binding}" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Height="30">
+                                                                <Button.Content>
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                        <materialDesign:PackIcon Kind="Cash" Width="24" Height="24" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{DynamicResource Salaries}"/>
+                                                                    </StackPanel>
+                                                                </Button.Content>
+
+                                                            </Button>
 
                                                         </StackPanel>
                                                     </DataTemplate>

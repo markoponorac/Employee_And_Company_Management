@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Employee_And_Company_Management.Helpers.Constants;
 
 namespace Employee_And_Company_Management.Services
 {
@@ -89,7 +90,7 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task<bool> AddCompany(Company company)
+        public async Task<string> AddCompany(Company company)
         {
             try
             {
@@ -100,18 +101,18 @@ namespace Employee_And_Company_Management.Services
                         Company temp = await context.Companies.FirstOrDefaultAsync(i => i.Jib.Equals(company.Jib));
                         if (temp != null)
                         {
-                            return false;
+                            return ServiceOperationStatus.ALREADY_EXISTS;
                         }
                         context.Companies.Add(company);
                         await context.SaveChangesAsync();
-                        return true;
+                        return ServiceOperationStatus.SUCCESS;
                     }
-                    return false;
+                    return ServiceOperationStatus.FAILURE;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return ServiceOperationStatus.ERROR;
             }
         }
 

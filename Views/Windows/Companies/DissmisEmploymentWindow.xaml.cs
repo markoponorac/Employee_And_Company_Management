@@ -16,15 +16,14 @@ using System.Windows.Shapes;
 namespace Employee_And_Company_Management.Views.Windows.Companies
 {
     /// <summary>
-    /// Interaction logic for HireEmployeeWindow.xaml
+    /// Interaction logic for DissmisEmploymentWindow.xaml
     /// </summary>
-    public partial class HireEmployeeWindow : Window
+    public partial class DissmisEmploymentWindow : Window
     {
-        public HireEmployeeWindow(EmployeeCompanyViewModel viewModel)
+        public DissmisEmploymentWindow(EmployeeCompanyViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
-            viewModel.reaload();
         }
     }
 }

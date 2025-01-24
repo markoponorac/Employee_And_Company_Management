@@ -1,4 +1,5 @@
 ﻿using Employee_And_Company_Management.Data.Entities;
+using Employee_And_Company_Management.Helpers.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +46,10 @@ namespace Employee_And_Company_Management.Services
             }
         }
 
-        public async Task<bool> AddSalaryForEmployeeAndCompany(Salary salary, int employeeId, int companyId)
+        public async Task<string> AddSalaryForEmployeeAndCompany(Salary salary, int employeeId, int companyId)
         {
-            try
-            {
+            //try
+            //{
                 using (var context = new EmployeeAndCompanyManagementContext())
                 {
                     Employment employment = context.Employments.FirstOrDefault(i => i.CompanyProfileId == companyId && i.EmployeePersonProfileId == employeeId && i.EmployedTo == null);
@@ -62,24 +63,38 @@ namespace Employee_And_Company_Management.Services
 
                         if (salaryExists)
                         {
-                            return false;
+                            return ServiceOperationStatus.ALREADY_EXISTS;
                         }
+
+                        DateOnly fromDate = employment.EmployedFrom;
+
+                        int numOfDayes = DateTime.DaysInMonth(salary.ForYear, salary.ForMonth);
+
+                        DateOnly temDate = new DateOnly(salary.ForYear, salary.ForMonth, numOfDayes);
+
+                        if(fromDate > temDate)
+                        {
+                            return ServiceOperationStatus.SALRY_BEFORE;
+                        }
+
+
+                        
                         salary.Employment = employment;
                         context.Salaries.Add(salary);
                         await context.SaveChangesAsync();
-                        return true;
+                        return ServiceOperationStatus.SUCCESS;
                     }
                     else
                     {
 
-                        return false;
+                        return ServiceOperationStatus.FAILURE;
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    return ServiceOperationStatus.ERROR;
+            //}
         }
 
     }

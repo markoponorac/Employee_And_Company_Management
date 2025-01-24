@@ -8,7 +8,6 @@
         Title="{DynamicResource EmployeeSalaries}" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource BackgroundBrush}">
-        <!-- DataGrid or No Data Message -->
         <ContentControl Margin="10">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -16,7 +15,7 @@
                         <Setter.Value>
                             <DataGrid ItemsSource="{Binding Salaries}" 
                                       AutoGenerateColumns="False" 
-                                      CanUserAddRows="False">
+                                      CanUserAddRows="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Year}" 
                                                         Binding="{Binding ForYear}" 

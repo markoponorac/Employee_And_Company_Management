@@ -48,14 +48,8 @@
             </Border>
         
 
-            <!-- Right Panel -->
             <Border Grid.Column="1" Style="{StaticResource RightPanel}">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <!-- Main Content Area -->
                     <ContentControl x:Name="MainContentControl" Grid.Row="0" Margin="20" Content="{Binding CurrentPage}"/>
                 </Grid>
             </Border>

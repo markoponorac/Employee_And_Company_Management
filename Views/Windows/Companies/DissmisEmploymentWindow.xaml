@@ -1,0 +1,62 @@
+﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Companies.DissmisEmploymentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+           Title="{DynamicResource Dismiss}" Height="250" Width="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen">
+
+    <Border  Background="{DynamicResource BackgroundBrush}" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <md:PackIcon Kind="Calendar" Width="24" Height="24" Margin="5" Grid.Row="0" VerticalAlignment="Center" />
+            <DatePicker x:Name="DateOfEstablishmentPicker" DisplayDateEnd="{x:Static sys:DateTime.Now}" 
+        Grid.Row="0" Grid.Column="1"
+        md:HintAssist.Hint="{DynamicResource Date}"
+        SelectedDate="{Binding DismissDate, UpdateSourceTrigger=PropertyChanged}"
+                Background="{DynamicResource BackgroundBrush}"
+        Margin="0,10">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                    <Style TargetType="Calendar">
+                        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <Button Command="{Binding DismissCommand}"  
+     Style="{StaticResource SubbmitButton}" 
+     Margin="0,30,10,0" 
+     Grid.Row="1" 
+     Grid.Column="1" Width="250">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="Block" Width="24" Height="24" Margin="0,0,10,0"/>
+                        <TextBlock Text="{DynamicResource Dismiss}"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+    </Border>
+</Window>

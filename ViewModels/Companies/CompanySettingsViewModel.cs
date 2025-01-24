@@ -136,7 +136,7 @@ namespace Employee_And_Company_Management.ViewModels.Companies
             }
             else
             {
-                CustomMessageBox.Show(LanguageUtil.Translate("UpdateNotSuccess"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
+                CustomMessageBox.Show(LanguageUtil.Translate("UpdateError"), LanguageUtil.Translate("Warning"), MessageBoxButton.OK);
             }
             reload();
         }
