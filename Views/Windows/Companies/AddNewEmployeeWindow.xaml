@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employee_And_Company_Management.Views.Windows.Companies"
         
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Width="800"
         mc:Ignorable="d"
         Title="{DynamicResource AddEmployee}" 
         WindowStartupLocation="CenterScreen">

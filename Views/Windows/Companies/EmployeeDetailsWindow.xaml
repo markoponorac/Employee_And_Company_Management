@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Employee_And_Company_Management.Views.Windows.Companies.EmployeeDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource EmployeeDetails}" Height="600" Width="800"
+        Title="{DynamicResource EmployeeDetails}" Height="450" Width="530"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource BackgroundBrush}">
