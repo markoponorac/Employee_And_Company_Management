@@ -14,11 +14,11 @@ Sama aplikacija Employee And Company Management je osmišljena tako da podržava
 
 * Zaposleni su korisnici aplikacije koji imaju pristup informacijama vezanim za njihovo radno angažovanje. Oni mogu pregledati istoriju svojih zaposlenja i pregledati evidenciju isplaćenih plata uz dodatne mogućnosti filtriranja i sortiranja. Njihova uloga je ograničena na lične podatke, čime se osigurava sigurnost i zaštita informacija unutar sistema.
 
-## Korisničko upustvo
+## Korisničko uputstvo
 
 ### Prijava na aplikaciju
 
-Prilikom otvaranja aplikacije, korisniku se prikayuje početni ekran za prijavu u samu aplikaciju. Prijava je ista za sve tipove korisnika.
+Prilikom otvaranja aplikacije, korisniku se prikazuje početni ekran za prijavu u samu aplikaciju. Prijava je ista za sve tipove korisnika.
 
 ![image](https://github.com/user-attachments/assets/51daedf6-e418-4ce0-8df8-912532b70952)
 
