@@ -2,17 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <!-- Base colors -->
     <Color x:Key="PrimaryColor">#FF9A5700</Color>
     <Color x:Key="SecondaryColor">#FFD67D00</Color>
     <Color x:Key="BackgroundColor">#FFFAF3E8</Color>
 
-    <!-- Brushes based on colors -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource PrimaryColor}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource SecondaryColor}"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
 
-    <!-- Common styles -->
     <Style x:Key="WindowCardStyle" TargetType="materialDesign:Card">
         <Setter Property="UniformCornerRadius" Value="15"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -62,7 +59,6 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
     </Style>
 
-    <!-- Text Styles -->
     <Style x:Key="WelcomeTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="24"/>
@@ -96,7 +92,6 @@
         <Setter Property="Margin" Value="10,10,10,10"/>
     </Style>
 
-    <!-- Control Styles -->
     <Style x:Key="InputStyle" TargetType="Control">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="0,10"/>
@@ -141,7 +136,6 @@
 
 
     <Style x:Key="CustomPasswordBoxStyle" TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-        <!--<Setter Property="materialDesign:HintAssist.Hint" Value="{DynamicResource OldPassword}"/>-->
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Width" Value="180"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -161,20 +155,17 @@
         <Setter Property="Margin" Value="0,20,0,0"/>
 
         <Style.Triggers>
-            <!-- Aktivno stanje (selektovano dugme) -->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
 
-            <!-- Fokusirano dugme -->
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
 
-            <!-- Hover stanje -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
